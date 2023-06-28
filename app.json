@@ -3,7 +3,6 @@
     "name": "cronos-appV1",
     "slug": "cronos-appV1",
     "version": "1.0.0",
-    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
