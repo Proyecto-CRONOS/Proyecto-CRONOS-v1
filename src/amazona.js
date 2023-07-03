@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image, Dimensions, useWindowDimensions, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 const data = [
   {
@@ -35,7 +37,7 @@ const data = [
   },
 ];
 
-export default function amazona() {
+export default function Amazona() {
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
   const [isHorizontal, setIsHorizontal] = useState(false);
@@ -46,45 +48,52 @@ export default function amazona() {
       setIsHorizontal(width > height);
     };
 
-    Dimensions.addEventListener('change', updateOrientation);
-    return () => Dimensions.removeEventListener('change', updateOrientation);
+    const subscription = Dimensions.addEventListener('change', updateOrientation);
+    return () => subscription.remove();
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.Text2}>CRONOS </Text>
-      {isHorizontal ? (
-        <ScrollView horizontal contentContainerStyle={styles.scrollViewContainer} showsHorizontalScrollIndicator={false}>
-          {data.map((item) => (
-            <View key={item.id} style={styles.itemContainer}>
-              <View style={styles.imageContainer}>
-                <Image source={item.imageUrl} style={styles.image} resizeMode="cover" />
+    <LinearGradient
+      colors={['rgb(219,226,133)', 'rgb(61,111,140)']}
+      style={styles.gradientContainer}
+    >
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.Text2}>CRONOS </Text>
+        {isHorizontal ? (
+          <ScrollView horizontal contentContainerStyle={styles.scrollViewContainer} showsHorizontalScrollIndicator={false}>
+            {data.map((item) => (
+              <View key={item.id} style={styles.itemContainer}>
+                <View style={styles.imageContainer}>
+                  <Image source={item.imageUrl} style={styles.image} resizeMode="cover" />
+                </View>
+                <Text style={styles.Text}>{item.title}</Text>
               </View>
-              <Text style={styles.Text}>{item.title}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      ) : (
-        <ScrollView contentContainerStyle={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
-          {data.map((item) => (
-            <View key={item.id} style={styles.itemContainer}>
-              <View style={styles.imageContainer}>
-                <Image source={item.imageUrl} style={styles.image} resizeMode="cover" />
+            ))}
+          </ScrollView>
+        ) : (
+          <ScrollView contentContainerStyle={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
+            {data.map((item) => (
+              <View key={item.id} style={styles.itemContainer}>
+                <View style={styles.imageContainer}>
+                  <Image source={item.imageUrl} style={styles.image} resizeMode="cover" />
+                </View>
+                <Text style={styles.Text}>{item.title}</Text>
               </View>
-              <Text style={styles.Text}>{item.title}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      )}
-      <StatusBar style="auto" />
-    </SafeAreaView>
+            ))}
+          </ScrollView>
+        )}
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradientContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: "#000",
     marginTop: StatusBar.currentHeight || 0,
   },
   scrollViewContainer: {
@@ -129,6 +138,8 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
 });
+
+
 
 
 
