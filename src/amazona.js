@@ -1,8 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View, Image, Dimensions, useWindowDimensions, SafeAreaView } from 'react-native';
+import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
+import { ScrollView, StyleSheet, Text, View, Image, Dimensions, useWindowDimensions, SafeAreaView, StatusBar } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import { useFonts } from 'expo-font';
 
 const data = [
   {
@@ -52,6 +52,14 @@ export default function Amazona() {
     return () => subscription.remove();
   }, []);
 
+  const [fontsLoaded] = useFonts({
+    'Roboto': require('../assets/fonts/Roboto/Roboto-Regular.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <LinearGradient
       colors={['rgb(219,226,133)', 'rgb(61,111,140)']}
@@ -66,7 +74,12 @@ export default function Amazona() {
                 <View style={styles.imageContainer}>
                   <Image source={item.imageUrl} style={styles.image} resizeMode="cover" />
                 </View>
-                <Text style={styles.Text}>{item.title}</Text>
+                <LinearGradient
+                  colors={['rgb(61,111,140)', 'rgb(165,199,61)']}
+                  style={styles.textContainer}
+                >
+                  <Text style={styles.Text}>{item.title}</Text>
+                </LinearGradient>
               </View>
             ))}
           </ScrollView>
@@ -77,7 +90,12 @@ export default function Amazona() {
                 <View style={styles.imageContainer}>
                   <Image source={item.imageUrl} style={styles.image} resizeMode="cover" />
                 </View>
-                <Text style={styles.Text}>{item.title}</Text>
+                <LinearGradient
+                  colors={['rgb(219,226,133)', 'rgb(61,111,140)']}
+                  style={styles.textContainer}
+                >
+                  <Text style={styles.Text}>{item.title}</Text>
+                </LinearGradient>
               </View>
             ))}
           </ScrollView>
@@ -94,7 +112,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop:StatusBar.currentHeight,
   },
   scrollViewContainer: {
     alignItems: 'flex-start',
@@ -127,22 +145,25 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  textContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+  },
   Text: {
+    fontFamily: 'Roboto',
     fontSize: 25,
-    paddingTop: 6,
+    color: '#fff',
   },
   Text2: {
+    fontFamily: 'Roboto',
     fontSize: 25,
-    paddingTop: 6,
+    paddingTop: 1,
     color: "#f1f2f6",
     display: 'flex',
+    
   },
 });
-
-
-
-
-
-
-
-

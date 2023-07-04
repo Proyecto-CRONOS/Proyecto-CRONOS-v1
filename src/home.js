@@ -2,10 +2,12 @@ import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+
 const Home = ({ navigation }) => {
   const handleImagePress = () => {
     navigation.navigate('Amazona');
   };
+
 
   return (
     <View style={styles.container}>
