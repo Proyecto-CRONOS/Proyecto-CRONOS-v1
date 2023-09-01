@@ -8,32 +8,32 @@ const data = [
   {
     id: 1,
     title: "Aro",
-    imageUrl: require('../assets/ARO.jpg'),
+    imageUrl: require('../assets/images/ARO.jpg'),
   },
   {
     id: 2,
     title: "Broches",
-    imageUrl: require('../assets/BROCHES.jpg'),
+    imageUrl: require('../assets/images/BROCHES.jpg'),
   },
   {
     id: 3,
     title: "Burbujas ",
-    imageUrl: require('../assets/BURBUJAS.jpg'),
+    imageUrl: require('../assets/images/BURBUJAS.jpg'),
   },
   {
     id: 4,
     title: "Caballo ",
-    imageUrl: require('../assets/CABALLO.png'),
+    imageUrl: require('../assets/images/CABALLO.png'),
   },
   {
     id: 5,
     title: "Pasto ",
-    imageUrl: require('../assets/PASTO.jpg'),
+    imageUrl: require('../assets/images/PASTO.jpg'),
   },
   {
     id: 6,
     title: "Tarima ",
-    imageUrl: require('../assets/TARIMA.jpg'),
+    imageUrl: require('../assets/images/TARIMA.jpg'),
   },
 ];
 
@@ -66,7 +66,6 @@ export default function Amazona() {
       style={styles.gradientContainer}
     >
       <SafeAreaView style={styles.container}>
-        <Text style={styles.Text2}>CRONOS </Text>
         {isHorizontal ? (
           <ScrollView horizontal contentContainerStyle={styles.scrollViewContainer} showsHorizontalScrollIndicator={false}>
             {data.map((item) => (
@@ -107,7 +106,7 @@ export default function Amazona() {
 }
 
 const styles = StyleSheet.create({
-  gradientContainer: {
+  /* gradientContainer: {
     flex: 1,
   },
   container: {
@@ -165,5 +164,5 @@ const styles = StyleSheet.create({
     color: "#f1f2f6",
     display: 'flex',
     
-  },
+  }, */
 });

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Aro",
+    "imageUrl": "../assets/images/ARO.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Broches",
+    "imageUrl": "../assets/images/BROCHES.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Burbujas",
+    "imageUrl": "../assets/images/BURBUJAS.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Caballo",
+    "imageUrl": "../assets/images/CABALLO.png"
+  },
+  {
+    "id": 5,
+    "title": "Pasto",
+    "imageUrl": "../assets/images/PASTO.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Tarima",
+    "imageUrl": "../assets/images/TARIMA.jpg"
+  }
+]
