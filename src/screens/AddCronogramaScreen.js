@@ -1,10 +1,11 @@
-import { StyleSheet, Text, SafeAreaView } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
+import NewAmazona from '../components/NewAmazona'
 
 export default function AddCronogramaScreen() {
   return (
     <SafeAreaView>
-      <Text>AddCronogramaScreen</Text>
+      <NewAmazona/>
     </SafeAreaView>
   )
 }
