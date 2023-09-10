@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Navigation from './src/navigation/Navigation';
+import 'react-native-gesture-handler';
+import { StartStack } from './src/navigation/StartStack';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Navigation/>
+      <StartStack/>
     </NavigationContainer>
   );
 }

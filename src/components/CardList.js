@@ -37,7 +37,7 @@ const data = [
   },
 ];
 
-export default function Amazona() {
+export default function CardList() {
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
   const [isHorizontal, setIsHorizontal] = useState(false);

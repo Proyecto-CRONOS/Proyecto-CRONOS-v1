@@ -1,18 +1,18 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CronogramasScreen from '../screens/CronogramasScreen';
-import AddCronogramaScreen from '../screens/AddCronogramaScreen';
-import CardsScreen from '../screens/CardsScreen';
-import AddCardScreen from '../screens/AddCardScreen';
+import AllCronogramas from '../screens/AllCronogramas';
+import AddCronograma from '../screens/AddCronograma';
+import AllCards from '../screens/AllCards';
+import AddCard from '../screens/AddCard';
 
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
   return (
     <Tab.Navigator>
-        <Tab.Screen name="Cronogramas" component={CronogramasScreen} />
-        <Tab.Screen name="Agregar Paciente" component={AddCronogramaScreen} />
-        <Tab.Screen name="Tarjetas" component={CardsScreen} />
-        <Tab.Screen name="Agregar Tarjeta" component={AddCardScreen} />
+        <Tab.Screen name="Cronogramas" component={AllCronogramas} />
+        <Tab.Screen name="Crear Cronograma" component={AddCronograma} />
+        <Tab.Screen name="Tarjetas" component={AllCards} />
+        <Tab.Screen name="Crear Tarjeta" component={AddCard} />
     </Tab.Navigator>
   );
 }

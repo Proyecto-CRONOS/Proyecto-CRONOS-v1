@@ -1,11 +1,10 @@
 import { StyleSheet, Text, SafeAreaView } from 'react-native'
 import React from 'react'
-import Amazona from '../components/Amazona'
 
-export default function CardsScreen() {
+export default function AddCronograma() {
   return (
     <SafeAreaView>
-      <Amazona/>
+      <Text>AddCronograma</Text>
     </SafeAreaView>
   )
 }
