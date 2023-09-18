@@ -1,13 +1,9 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-const Home = ({ navigation }) => {
-  const handleImagePress = () => {
-    navigation.navigate('Amazona');
-  };
-
+export default function Home ({ navigation }) {
 
   return (
     <View style={styles.container}>
@@ -16,13 +12,19 @@ const Home = ({ navigation }) => {
         style={styles.gradientContainer}
       >
         <Text style={styles.text}>BIENVENIDX</Text>
-        <TouchableOpacity onPress={handleImagePress}>
           <Image
-            source={require('../assets/LOGOcronos.png')}
+            source={require('../assets/images/identidad/icon-blue.png')}
             style={styles.image}
             resizeMode="cover"
           />
-        </TouchableOpacity>
+          <Button
+            title="Ingresar"
+            onPress={() => navigation.navigate('Cronos')}
+          />
+          <Button
+            title="Tutorial"
+            onPress={() => navigation.navigate('Tutorial')}
+          />
       </LinearGradient>
     </View>
   );
@@ -51,6 +53,4 @@ const styles = StyleSheet.create({
     height: 400,
   },
 });
-
-export default Home;
 
