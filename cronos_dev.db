@@ -1,0 +1,31 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "schedule" (
+	"profile_name"	TEXT NOT NULL,
+	"birth_date"	TEXT NOT NULL,
+	"methodology"	TEXT NOT NULL,
+	"horse"	TEXT NOT NULL,
+	"equipment"	TEXT NOT NULL,
+	"considerations"	TEXT NOT NULL,
+	"date"	NUMERIC NOT NULL,
+	"profile_id"	INTEGER NOT NULL,
+	PRIMARY KEY("profile_id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "card" (
+	"card_id"	INTEGER NOT NULL,
+	"profile_id"	INTEGER NOT NULL,
+	"title"	TEXT NOT NULL,
+	"description"	TEXT NOT NULL,
+	"audio"	TEXT NOT NULL,
+	"image"	TEXT NOT NULL,
+	FOREIGN KEY("profile_id") REFERENCES "card",
+	PRIMARY KEY("card_id" AUTOINCREMENT)
+);
+INSERT INTO "schedule" ("profile_name","birth_date","methodology","horse","equipment","considerations","date","profile_id") VALUES ('Amazona_ejemplo','27/12/1998','Hipoterapia','Tordillo','Montura','Algo','19/09/2023',1);
+INSERT INTO "card" ("card_id","profile_id","title","description","audio","image") VALUES (1,1,'Aro','Estructura de 1,5 metros de alto, con aro de red en la parte superior que permite embocar pelotas (tanto desde arriba como abajo del caballo).
+
+','aro.ogg','aro,jpg'),
+ (2,1,'Broches','Elemento plástico, de tamaño pequeño, que al presionar con los dedos índice y pulgar se abre y permite colgarlo (por ejemplo a las crines del caballo), o enganchar hojas, telas.
+
+','broches.odd','broches,jog'),
+ (3,1,'Burbujas','Globos de aire, transparentes, brillosos y de diferentes tamaños, que se generan al mojar una estructura circular previamente mojada en una mezcla de agua y detergente.','burbujas.odd','burbujas.jpg');
+COMMIT;
