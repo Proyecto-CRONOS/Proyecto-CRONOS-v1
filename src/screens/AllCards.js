@@ -1,13 +1,14 @@
-import { StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native'
+
 import CardList from '../components/CardList'
 
-export default function Cards() {
+function Cards() {
   return (
     <SafeAreaView>
-      <CardList/>
+      <CardList />
     </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({})
+export default Cards

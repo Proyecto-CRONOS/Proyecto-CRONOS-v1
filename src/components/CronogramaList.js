@@ -1,13 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Cronograma from './Cronograma'
+import React, { useState, useEffect } from 'react'
+import { View } from 'react-native'
 
-export default function CronogramaList({navigation}) {
+import Cronograma from './Cronograma'
+import { openDatabase, getSchedules } from '../model'
+
+function CronogramaList({ navigation }) {
+  const [schedules, setSchedules] = useState([])
+
+  useEffect(() => {
+    const db = openDatabase()
+    getSchedules(db, 1, setSchedules) // FIXME: profileId should be dynamic
+  }, [])
+
   return (
     <View>
-      <Cronograma name={"Juan Perez"} navigation={navigation} />
+      {schedules.map((schedule, index) => (
+        <Cronograma key={index} navigation={navigation} {...schedule} />
+      ))}
     </View>
   )
 }
 
-const styles = StyleSheet.create({})
+export default CronogramaList
