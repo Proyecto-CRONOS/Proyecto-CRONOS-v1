@@ -1,8 +1,9 @@
-import { StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native'
+
 import CronogramaList from '../components/CronogramaList'
 
-export default function Cronogramas({navigation}) {
+function Cronogramas({ navigation }) {
   return (
     <SafeAreaView>
       <CronogramaList navigation={navigation} />
@@ -10,4 +11,4 @@ export default function Cronogramas({navigation}) {
   )
 }
 
-const styles = StyleSheet.create({})
+export default Cronogramas

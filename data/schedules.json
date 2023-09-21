@@ -1,0 +1,12 @@
+[
+    {
+        "profile_id": 1,
+        "profile_name": "Amazona_ejemplo",
+        "birth_date": "27/12/1998",
+        "methodology": "Hipoterapia",
+        "horse": "Tordillo",
+        "equipment": "Montura",
+        "considerations": "Algo",
+        "date": "19/09/2023"
+    }
+]
