@@ -1,5 +1,7 @@
 # Proyecto CRONOS
 
+[![Lint](https://github.com/SrHuevardo/Proyecto-CRONOS-v1/actions/workflows/lint.yaml/badge.svg)](https://github.com/SrHuevardo/Proyecto-CRONOS-v1/actions/workflows/lint.yaml)
+
 This README provides instructions on how to set up, install, and run a React Native application. Please follow the steps below to get started.
 
 ## Requirements
