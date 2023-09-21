@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 
 function Cronograma({ name, navigation }) {
+  // TODO: Editar and Trabajar could go to a i19n file
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
@@ -9,13 +10,11 @@ function Cronograma({ name, navigation }) {
         <Button
           title="Editar"
           onPress={() => navigation.navigate('Editar')}
-        />{' '}
-        // TODO: This could go to a i19n file
+        />
         <Button
           title="Ver"
           onPress={() => navigation.navigate('Trabajar')}
-        />{' '}
-        // TODO: This could go to a i19n file
+        />
       </View>
     </View>
   )

@@ -7,7 +7,6 @@ function Card({ cardId, title, image, isHorizontal, navigation }) {
   if (isHorizontal) {
     colors = [colors[1], colors[2]]
   }
-  console.log('Image', image)
   return (
     <View key={cardId} style={styles.itemContainer}>
       <View style={styles.imageContainer}>
