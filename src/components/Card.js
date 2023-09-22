@@ -1,14 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 
-function Card({ cardId, title, image, isHorizontal, navigation }) {
+
+function Card({ id, title, image, isHorizontal }) {
   let colors = ['rgb(61,111,140)', 'rgb(165,199,61)']
   if (isHorizontal) {
     colors = [colors[1], colors[2]]
   }
   return (
-    <View key={cardId} style={styles.itemContainer}>
+    <View key={id} style={styles.itemContainer}>
       <View style={styles.imageContainer}>
         <Image uri={image} style={styles.image} resizeMode="cover" />
       </View>
@@ -17,6 +19,13 @@ function Card({ cardId, title, image, isHorizontal, navigation }) {
       </LinearGradient>
     </View>
   )
+}
+
+Card.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  isHorizontal: PropTypes.bool.isRequired,
 }
 
 const styles = StyleSheet.create({

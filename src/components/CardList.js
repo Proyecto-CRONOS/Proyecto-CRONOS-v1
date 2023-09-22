@@ -13,7 +13,7 @@ function CardList() {
   useEffect(() => {
     const db = openDatabase()
     // FIXME: profileId should be dynamic
-    getCards(db, 1, setCards)
+    getCards(db, setCards)
   }, [])
 
   const [fontsLoaded] = useFonts({
@@ -22,7 +22,6 @@ function CardList() {
   if (!fontsLoaded) {
     return null
   }
-
   return (
     <LinearGradient
       colors={['rgb(219,226,133)', 'rgb(61,111,140)']}
