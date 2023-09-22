@@ -4,27 +4,30 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function Home ({ navigation }) {
-
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={['rgb(219,226,133)', 'rgb(61,111,140)']}
+        colors={['rgb(207,226,136)', 'rgb(45,105,129)']}
         style={styles.gradientContainer}
       >
-        <Text style={styles.text}>BIENVENIDX</Text>
           <Image
-            source={require('../assets/images/identidad/icon-blue.png')}
+            source={require('../assets/images/identidad/logo.png')}
             style={styles.image}
             resizeMode="cover"
           />
-          <Button
-            title="Ingresar"
-            onPress={() => navigation.navigate('Cronos')}
-          />
-          <Button
-            title="Tutorial"
-            onPress={() => navigation.navigate('Tutorial')}
-          />
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Ingresar"
+              color="#2D6981"
+              accessibilityLabel="Learn more about this purple button"
+              onPress={() => navigation.navigate('Cronos')}
+           />
+            <Button
+              title="Tutorial"
+              color="#2D6981"
+              onPress={() => navigation.navigate('Tutorial')}
+            />
+          </View>
       </LinearGradient>
     </View>
   );
@@ -50,7 +53,11 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 300,
-    height: 400,
+    height: 600,
+  },
+  buttonContainer: {
+    flexDirection: 'row', 
+    marginTop: 50,
   },
 });
 
