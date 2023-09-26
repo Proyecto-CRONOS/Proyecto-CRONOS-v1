@@ -7,6 +7,8 @@
 #### New Features and Enhancements:
 - CardImage component implemented.
 - Card component with image integration.
+- Linter fixes.
+- Save card with image upload.
 
 ### September 22, 2023
 

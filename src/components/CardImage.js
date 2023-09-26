@@ -24,8 +24,14 @@ const images = {
 }
 
 function CardImage({ name, style }) {
-  const source = images[name]
+  let source = null
+  if (name.startsWith('file://')) {
+    source = { uri: name }
+  } else {
+    source = images[name]
+  }
   return <Image source={source} style={style} />
+  
 }
 
 CardImage.propTypes = {

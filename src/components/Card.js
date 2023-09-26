@@ -31,9 +31,10 @@ Card.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  imageContainer: {
+  image: {
     width: 100,
     height: 50,
+    
   },
   /*image: {
     width: '100%',
