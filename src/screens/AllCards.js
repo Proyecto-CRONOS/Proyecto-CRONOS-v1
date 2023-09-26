@@ -6,7 +6,7 @@ import CardList from '../components/CardList'
 function Cards() {
   return (
     <SafeAreaView>
-      <CardList />
+      <CardList profileId={1} />
     </SafeAreaView>
   )
 }

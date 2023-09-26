@@ -1,19 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 
-function Cronograma({ name, navigation }) {
+function Cronograma({ name, navigation, profileId }) {
   // TODO: Editar and Trabajar could go to a i19n file
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
-        <Text>{name}</Text>
+        <Text>{profileId}{name}</Text>
         <Button
           title="Editar"
-          onPress={() => navigation.navigate('Editar')}
+          onPress={() => navigation.navigate('Editar',{ profileId })}
         />
         <Button
           title="Ver"
-          onPress={() => navigation.navigate('Trabajar')}
+          onPress={() => navigation.navigate('Trabajar',{ profileId })}
         />
       </View>
     </View>

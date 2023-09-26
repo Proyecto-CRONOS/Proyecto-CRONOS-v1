@@ -6,7 +6,7 @@ import CronogramaList from '../components/CronogramaList'
 function Cronogramas({ navigation }) {
   return (
     <SafeAreaView>
-      <CronogramaList navigation={navigation} />
+      <CronogramaList navigation={navigation} profileId={1} />
     </SafeAreaView>
   )
 }

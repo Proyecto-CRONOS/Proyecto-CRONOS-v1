@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, SafeAreaView, StatusBar } from 'react-native'
+import { ScrollView, StyleSheet, SafeAreaView, StatusBar, Text } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useFonts } from 'expo-font'
 
@@ -28,6 +28,7 @@ function CardList() {
       style={styles.gradientContainer}
     >
       <SafeAreaView style={styles.container}>
+        <Text>Lista Cartas del perfil ID: {profileId}</Text>
         <ScrollView
           horizontal={isHorizontal}
           contentContainerStyle={styles.scrollViewContainer}

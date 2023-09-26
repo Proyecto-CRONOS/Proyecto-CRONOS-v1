@@ -9,13 +9,15 @@ function Card({ id, title, image, isHorizontal }) {
   if (isHorizontal) {
     colors = [colors[1], colors[2]]
   }
+  
   return (
     <View key={id} style={styles.itemContainer}>
-      <View style={styles.imageContainer}>
-        <Image uri={image} style={styles.image} resizeMode="cover" />
-      </View>
       <LinearGradient colors={colors} style={styles.textContainer}>
         <Text style={styles.text}>{title}</Text>
+        <View style={styles.imageContainer}>
+          <Image uri={image} style={styles.image} resizeMode="cover" />
+        </View>
+        <Text style={styles.text}>{image}</Text>
       </LinearGradient>
     </View>
   )
@@ -29,6 +31,10 @@ Card.propTypes = {
 }
 
 const styles = StyleSheet.create({
+  imageContainer:{
+    width: 100,
+    height: 50
+  }
   /*image: {
     width: '100%',
     height: '100%',
