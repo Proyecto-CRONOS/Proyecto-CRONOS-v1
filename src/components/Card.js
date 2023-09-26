@@ -1,7 +1,8 @@
 import React from 'react'
+import { StyleSheet, Text, View} from 'react-native'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View, Image } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+
 import CardImage from '../components/CardImage'
 
 
@@ -10,7 +11,6 @@ function Card({ id, title, image, isHorizontal }) {
   if (isHorizontal) {
     colors = [colors[1], colors[2]]
   }
-  
   return (
     <View key={id} style={styles.itemContainer}>
       <LinearGradient colors={colors} style={styles.textContainer}>

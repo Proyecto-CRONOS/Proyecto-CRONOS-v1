@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, SafeAreaView, StatusBar, Text } from 'react-native'
+import { ScrollView, StyleSheet, SafeAreaView, StatusBar } from 'react-native'
+import PropTypes from 'prop-types'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useFonts } from 'expo-font'
 
-import { openDatabase, getCards } from '../model'
+import { openDatabase, getCards, getScheduleCards } from '../model'
 import Card from './Card'
 
-function CardList() {
+function CardList({scheduleId}) {
   const [cards, setCards] = useState([])
-  const [isHorizontal, setIsHorizontal] = useState(false)
+  const [isHorizontal, setIsHorizontal] = useState(false) // FIXME: Where setIsHorizontal is used?
 
   useEffect(() => {
     const db = openDatabase()
-    // FIXME: profileId should be dynamic
-    getCards(db, setCards)
+    if (scheduleId) {
+      getScheduleCards(db, scheduleId, setCards)
+    } else {
+      getCards(db, setCards)
+    }
   }, [])
-
   const [fontsLoaded] = useFonts({
     Roboto: require('../assets/fonts/Roboto/Roboto-Regular.ttf'), // FIXME: A better way yo handle this constant
   })
@@ -28,7 +31,6 @@ function CardList() {
       style={styles.gradientContainer}
     >
       <SafeAreaView style={styles.container}>
-        <Text>Lista Cartas del perfil ID: {profileId}</Text>
         <ScrollView
           horizontal={isHorizontal}
           contentContainerStyle={styles.scrollViewContainer}
@@ -43,6 +45,10 @@ function CardList() {
       </SafeAreaView>
     </LinearGradient>
   )
+}
+
+CardList.propTypes = {
+  scheduleId: PropTypes.number,
 }
 
 const styles = StyleSheet.create({
