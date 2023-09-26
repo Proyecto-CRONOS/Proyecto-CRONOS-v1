@@ -7,9 +7,17 @@ function Cronograma({ id, name, navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
-        <Text>{id} {name}</Text>
-        <Button title="Editar" onPress={() => navigation.navigate('Editar', { id })} />
-        <Button title="Ver" onPress={() => navigation.navigate('Trabajar', { id })} />
+        <Text>
+          {id} {name}
+        </Text>
+        <Button
+          title="Editar"
+          onPress={() => navigation.navigate('Editar', { id })}
+        />
+        <Button
+          title="Ver"
+          onPress={() => navigation.navigate('Trabajar', { id })}
+        />
       </View>
     </View>
   )

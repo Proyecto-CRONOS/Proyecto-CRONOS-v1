@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { Text, View } from 'react-native'
 
-export default function EditCronograma() {
+function EditCronograma() {
   return (
     <View>
       <Text>EditCronograma</Text>
@@ -9,4 +9,4 @@ export default function EditCronograma() {
   )
 }
 
-const styles = StyleSheet.create({})
+export default EditCronograma

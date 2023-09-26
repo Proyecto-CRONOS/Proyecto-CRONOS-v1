@@ -1,7 +1,7 @@
-import { StyleSheet, Text, SafeAreaView } from 'react-native'
 import React from 'react'
+import { Text, SafeAreaView } from 'react-native'
 
-export default function AddCronograma() {
+function AddCronograma() {
   return (
     <SafeAreaView>
       <Text>AddCronograma</Text>
@@ -9,4 +9,4 @@ export default function AddCronograma() {
   )
 }
 
-const styles = StyleSheet.create({})
+export default AddCronograma

@@ -1,10 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View} from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import PropTypes from 'prop-types'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import CardImage from '../components/CardImage'
-
 
 function Card({ id, title, image, isHorizontal }) {
   let colors = ['rgb(61,111,140)', 'rgb(165,199,61)']
@@ -32,10 +31,10 @@ Card.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  imageContainer:{
+  imageContainer: {
     width: 100,
-    height: 50
-  }
+    height: 50,
+  },
   /*image: {
     width: '100%',
     height: '100%',

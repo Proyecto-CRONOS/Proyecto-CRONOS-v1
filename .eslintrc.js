@@ -11,6 +11,9 @@ module.exports = {
   ],
   'settings': {
     'import/ignore': ['react-native'],
+    'react': {
+      'version': 'detect',
+    }
   },
   /* FIXME
   'import/order': [
@@ -70,6 +73,7 @@ module.exports = {
     'semi': [
       'error',
       'never',
-    ]
-  }
+    ],
+    'react/react-in-jsx-scope': 'off',
+  },
 }

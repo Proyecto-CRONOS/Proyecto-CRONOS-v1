@@ -4,15 +4,17 @@ import PropTypes from 'prop-types'
 
 import CardList from '../components/CardList'
 
-function WorkView({navigation , route}) {
-
+function WorkView({ navigation, route }) {
   const { id } = route.params
 
   return (
     <View>
       <Text>Perfil ID: {id}</Text>
       <CardList scheduleId={id} />
-      <Button title="Ayuda" onPress={() => navigation.navigate('Informacion')} />
+      <Button
+        title="Ayuda"
+        onPress={() => navigation.navigate('Informacion')}
+      />
     </View>
   )
 }

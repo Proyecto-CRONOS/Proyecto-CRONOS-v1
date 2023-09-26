@@ -5,7 +5,7 @@ import { StartStack } from './src/navigation/StartStack'
 
 import { initializeDatabase, openDatabase } from './src/model'
 
-export default function App() {
+function App() {
   useEffect(() => {
     const db = openDatabase()
     initializeDatabase(db)
@@ -17,3 +17,5 @@ export default function App() {
     </NavigationContainer>
   )
 }
+
+export default App

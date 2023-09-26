@@ -1,12 +1,12 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from '../screens/Home';
-import Navigation from './Navigation';
-import Tutorial from '../screens/Tutorial';
-import EditCronograma from '../screens/EditCronograma';
-import WorkView from '../screens/WorkView';
-import DetailCronograma from '../screens/DetailCronograma';
+import { createStackNavigator } from '@react-navigation/stack'
+import Home from '../screens/Home'
+import Navigation from './Navigation'
+import Tutorial from '../screens/Tutorial'
+import EditCronograma from '../screens/EditCronograma'
+import WorkView from '../screens/WorkView'
+import DetailCronograma from '../screens/DetailCronograma'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 function StartStack() {
   return (
@@ -18,7 +18,7 @@ function StartStack() {
       <Stack.Screen name="Trabajar" component={WorkView} />
       <Stack.Screen name="Informacion" component={DetailCronograma} />
     </Stack.Navigator>
-  );
+  )
 }
 
-export {StartStack}
+export { StartStack }

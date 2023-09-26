@@ -7,9 +7,10 @@ import { useFonts } from 'expo-font'
 import { openDatabase, getCards, getScheduleCards } from '../model'
 import Card from './Card'
 
-function CardList({scheduleId}) {
+function CardList({ scheduleId }) {
   const [cards, setCards] = useState([])
-  const [isHorizontal, setIsHorizontal] = useState(false) // FIXME: Where setIsHorizontal is used?
+  // const [isHorizontal, setIsHorizontal] = useState(false) // FIXME: Where setIsHorizontal is used?
+  const isHorizontal = false // FIXME: Above line is commented, so this line is added
 
   useEffect(() => {
     const db = openDatabase()

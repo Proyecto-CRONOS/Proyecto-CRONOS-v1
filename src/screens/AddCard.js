@@ -1,7 +1,7 @@
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
-import React from 'react';
+import React from 'react'
+import { Text, SafeAreaView } from 'react-native'
 
-export default function AddCard() {
+function AddCard() {
   return (
     <SafeAreaView>
       <Text>AddCard</Text>
@@ -9,4 +9,4 @@ export default function AddCard() {
   )
 }
 
-const styles = StyleSheet.create({})
+export default AddCard
