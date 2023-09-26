@@ -1,47 +1,41 @@
 [
     {
-      "card_id": 1,
-      "profile_id": 1,
+      "id": 1,
       "title": "Aro",
       "description": "Estructura de 1,5 metros de alto, con aro de red en la parte superior que permite embocar pelotas (tanto desde arriba como abajo del caballo).",
       "audio": "aro.ogg",
       "image": "../assets/images/ARO.jpg"
     },
     {
-      "card_id": 2,
-      "profile_id": 1,
+      "id": 2,
       "title": "Broches",
       "description": "Elemento plástico, de tamaño pequeño, que al presionar con los dedos índice y pulgar se abre y permite colgarlo (por ejemplo a las crines del caballo), o enganchar hojas, telas.",
       "audio": "broches.ogg",
       "image": "../assets/images/BROCHES.jpg"
     },
     {
-      "card_id": 3,
-      "profile_id": 1,
+      "id": 3,
       "title": "Burbujas",
       "description": "Globos de aire, transparentes, brillosos y de diferentes tamaños, que se generan al mojar una estructura circular previamente mojada en una mezcla de agua y detergente.",
       "audio": "burbujas.ogg",
       "image": "../assets/images/BURBUJAS.jpg"
     },
     {
-      "card_id": 4,
-      "profile_id": 1,
+      "id": 4,
       "title": "Caballo",
       "description": "El caballo (Yeguaivan) es un mamífero perisodáctilo domesticado de la familia de los équidos.",
       "audio": "caballo.ogg",
       "image": "../assets/images/CABALLO.jpg"
     },
     {
-      "card_id": 5,
-      "profile_id": 1,
+      "id": 5,
       "title": "Pasto",
       "description": "El pasto es cualquier cosa que sirve para el sustento de los animales.",
       "audio": "pasto.ogg",
       "image": "../assets/images/PASTO.jpg"
     },
     {
-      "card_id": 6,
-      "profile_id": 1,
+      "id": 6,
       "title": "Tarima",
       "description": "Plataforma, generalmente de madera, levantada a poca altura del suelo que tiene distintos usos.",
       "audio": "tarima.ogg",

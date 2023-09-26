@@ -1,5 +1,5 @@
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS "schedule" (
+CREATE TABLE IF NOT EXISTS "calendarios" (
 	"profile_name"	TEXT NOT NULL,
 	"birth_date"	TEXT NOT NULL,
 	"methodology"	TEXT NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "schedule" (
 	"equipment"	TEXT NOT NULL,
 	"considerations"	TEXT NOT NULL,
 	"date"	NUMERIC NOT NULL,
-	"profile_id"	INTEGER NOT NULL,
+	"id"	INTEGER NOT NULL,
 	PRIMARY KEY("profile_id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "card" (

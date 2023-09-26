@@ -9,7 +9,7 @@ function CronogramaList({ navigation }) {
 
   useEffect(() => {
     const db = openDatabase()
-    getSchedules(db, 1, setSchedules) // FIXME: profileId should be dynamic
+    getSchedules(db, 1, setSchedules) // FIXME: id should be dynamic
   }, [])
 
   return (

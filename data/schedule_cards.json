@@ -1,0 +1,12 @@
+[
+    {
+        "status": "OK",
+        "card_id": 1,
+        "schedule_id": 1
+    },
+    {
+        "status": "Pending",
+        "card_id": 2,
+        "schedule_id": 1
+    }
+]
