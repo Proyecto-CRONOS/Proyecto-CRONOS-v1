@@ -2,6 +2,12 @@
 
 ## Changelog
 
+### September 26, 2023
+
+#### New Features and Enhancements:
+- CardImage component implemented.
+- Card component with image integration.
+
 ### September 22, 2023
 
 #### New Features and Enhancements:

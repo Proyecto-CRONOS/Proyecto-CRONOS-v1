@@ -30,7 +30,7 @@ function serializeSchedule(data, snakeCase = false) {
 
 // NOTE: This will be replaced with typescript structure or expo-sqlite-orm
 // FIXME: Remove this function
-function serializeCard(data, snakeCase = false) {
+function serializeCard(data) {
   if (Array.isArray(data)) {
     return data.map((card) => serializeCard(card))
   }
@@ -49,7 +49,7 @@ function serializeScheduleCard(data, snakeCase = false) {
   if (Array.isArray(data)) {
     return data.map((scheduleCard) => serializeScheduleCard(scheduleCard))
   }
-  const scheduleCard = serializeCard(data, snakeCase)
+  const scheduleCard = serializeCard(data)
   scheduleCard.id = data.id
   scheduleCard.status = data.status
   if (snakeCase) {
@@ -146,14 +146,13 @@ export function initializeDatabase(db) {
   })
 }
 
-export function getSchedules(db, id, callback) {
+export function getSchedules(db, callback) {
   const query = `
     SELECT *
-    FROM ${SCHEDULE_TABLE}
-    WHERE id = ?;
+    FROM ${SCHEDULE_TABLE};
   `
   db.transaction((tx) => {
-    tx.executeSql(query, [id], (_, result) => {
+    tx.executeSql(query, null, (_, result) => {
       callback(serializeSchedule(resultSetRowLisToArray(result)))
     })
   })
@@ -255,14 +254,4 @@ export function saveScheduleCard(db, scheduleCard) {
       (_, error) => console.log(error), // TODO: Handle error
     )
   })
-
-// NOTE: Example of how to use the scheduleCard model
-/*
-  const db = openDatabase()
-  scheduleCard = {
-    status: 'done',
-    scheduleId: schedule.id,
-    cardId: card.id,
-  }
-  saveScheduleCard(db, scheduleCard)
-*/
+}

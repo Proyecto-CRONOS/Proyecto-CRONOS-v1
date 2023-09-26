@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
+import PropTypes from 'prop-types'
 
 import Cronograma from './Cronograma'
 import { openDatabase, getSchedules } from '../model'
@@ -9,7 +10,7 @@ function CronogramaList({ navigation }) {
 
   useEffect(() => {
     const db = openDatabase()
-    getSchedules(db, 1, setSchedules) // FIXME: id should be dynamic
+    getSchedules(db, setSchedules)
   }, [])
 
   return (
@@ -19,6 +20,10 @@ function CronogramaList({ navigation }) {
       ))}
     </View>
   )
+}
+
+CronogramaList.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }
 
 export default CronogramaList

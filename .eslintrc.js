@@ -9,6 +9,9 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
   ],
+  'settings': {
+    'import/ignore': ['react-native'],
+  },
   /* FIXME
   'import/order': [
     'error',

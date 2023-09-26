@@ -1,7 +1,9 @@
 import React from 'react'
+import { StyleSheet, Text, View} from 'react-native'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View, Image } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+
+import CardImage from '../components/CardImage'
 
 
 function Card({ id, title, image, isHorizontal }) {
@@ -11,11 +13,12 @@ function Card({ id, title, image, isHorizontal }) {
   }
   return (
     <View key={id} style={styles.itemContainer}>
-      <View style={styles.imageContainer}>
-        <Image uri={image} style={styles.image} resizeMode="cover" />
-      </View>
       <LinearGradient colors={colors} style={styles.textContainer}>
         <Text style={styles.text}>{title}</Text>
+        <View style={styles.imageContainer}>
+          <CardImage name={image} style={styles.image} />
+        </View>
+        <Text style={styles.text}>{image}</Text>
       </LinearGradient>
     </View>
   )
@@ -29,6 +32,10 @@ Card.propTypes = {
 }
 
 const styles = StyleSheet.create({
+  imageContainer:{
+    width: 100,
+    height: 50
+  }
   /*image: {
     width: '100%',
     height: '100%',
