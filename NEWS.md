@@ -2,6 +2,13 @@
 
 ## Changelog
 
+### September 22, 2023
+
+#### New Features and Enhancements:
+
+- Implemented ScheduleCard model.
+- Refactored Schedule and Card model and related components.
+
 ### September 21, 2023
 
 #### New Features and Enhancements:
