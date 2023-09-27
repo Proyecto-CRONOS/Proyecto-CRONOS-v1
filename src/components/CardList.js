@@ -39,7 +39,7 @@ function CardList({ scheduleId }) {
           showsVerticalScrollIndicator={isHorizontal ? false : true}
         >
           {cards.map((card, index) => (
-            <Card key={index} isHorizontal={isHorizontal} {...card} />
+            <Card key={index} {...card} />
           ))}
         </ScrollView>
         <StatusBar style="auto" />
