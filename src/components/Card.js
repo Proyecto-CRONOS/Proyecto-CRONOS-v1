@@ -36,11 +36,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 26,
-    marginTop: 10
   },
   itemContainer: {
-    margin: 20,
-    padding: 10,
+    margin: 25,
+    padding: 20,
     backgroundColor: "white",
     borderRadius: 25
   }
