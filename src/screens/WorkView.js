@@ -1,20 +1,19 @@
 import React from 'react'
-import { Text, View, Button } from 'react-native'
+import { View } from 'react-native'
 import PropTypes from 'prop-types'
 
 import CardList from '../components/CardList'
 
-function WorkView({ navigation, route }) {
+function WorkView({ route }) {
   const { id } = route.params
 
   return (
     <View>
-      <Text>Perfil ID: {id}</Text>
-      <CardList scheduleId={id} />
-      <Button
+      <CardList scheduleId={id} seCompleta={true}/>
+      {/* <Button
         title="Ayuda"
         onPress={() => navigation.navigate('Informacion')}
-      />
+      /> */}
     </View>
   )
 }

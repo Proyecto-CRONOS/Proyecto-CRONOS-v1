@@ -1,17 +1,43 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Image,
+} from 'react-native'
 import PropTypes from 'prop-types'
-
 import CardImage from '../components/CardImage'
 
-function Card({ id, title, image }) {
+function Card({ id, title, image, seCompleta }) {
+  const [marcada, setMarcada] = useState(false)
+
+  const handleClick = () => {
+    if (seCompleta) {
+      setMarcada(!marcada)
+    }
+  }
+
+  const estiloTarjeta = {
+    backgroundColor: marcada ? 'green' : 'white',
+  }
+
   return (
-    <View key={id} style={styles.itemContainer}>
-      <Text style={styles.text}>{title}</Text>
-      <View style={styles.imageContainer}>
-        <CardImage name={image} style={styles.image} />
+    <TouchableWithoutFeedback onPress={handleClick}>
+      <View key={id} style={[estiloTarjeta, styles.tarjeta]}>
+        <Text style={styles.text}>{title}</Text>
+        {marcada ? (
+          <Image
+            source={require('../assets/images/check.png')}
+            style={styles.imageDone}
+          />
+        ) : (
+          <View style={styles.imageContainer}>
+            <CardImage name={image} style={styles.image} />
+          </View>
+        )}
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -19,24 +45,31 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  seCompleta: PropTypes.bool,
 }
 
 const styles = StyleSheet.create({
   image: {
-    width: '100vw',
+    width: 300,
     height: 300,
   },
-  text:{
+  imageDone: {
+    width: 100,
+    height: 100,
+    margin: 100,
+  },
+  text: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 26,
   },
-  itemContainer: {
+  tarjeta: {
     margin: 25,
     padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 25
-  }
+    borderRadius: 25,
+    flex: 1,
+    alignItems: 'center',
+  },
 })
 
 export default Card

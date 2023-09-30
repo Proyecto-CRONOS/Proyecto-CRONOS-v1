@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 export default function Tutorial() {
   return (
     <View>
-      <Text>Tutorial</Text>
+      <Text>Manual de uso a implementar</Text>
     </View>
   )
 }

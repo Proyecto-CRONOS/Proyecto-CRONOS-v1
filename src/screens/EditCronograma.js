@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 function EditCronograma() {
   return (
     <View>
-      <Text>EditCronograma</Text>
+      <Text>Formulario para editar cronograma a implementar</Text>
     </View>
   )
 }

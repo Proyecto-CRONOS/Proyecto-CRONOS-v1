@@ -22,11 +22,11 @@ function Home({ navigation }) {
             accessibilityLabel="Learn more about this purple button"
             onPress={() => navigation.navigate('Cronos')}
           />
-          <Button
+          {/* <Button
             title="Tutorial"
             color="#2D6981"
             onPress={() => navigation.navigate('Tutorial')}
-          />
+          /> */}
         </View>
       </LinearGradient>
     </View>
