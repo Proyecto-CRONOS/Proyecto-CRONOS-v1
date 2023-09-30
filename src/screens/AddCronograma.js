@@ -1,11 +1,12 @@
 import React from 'react'
-import { Text, SafeAreaView } from 'react-native'
+import { View } from 'react-native'
+import CronogramaForm from '../components/CronogramaForm';
 
-function AddCronograma() {
+function AddCronograma({navigation}) {
   return (
-    <SafeAreaView>
-      <Text>AddCronograma</Text>
-    </SafeAreaView>
+    <View>
+      <CronogramaForm navigation={navigation}/>
+    </View>
   )
 }
 

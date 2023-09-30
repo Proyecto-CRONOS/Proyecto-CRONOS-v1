@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 
 import Cronograma from './Cronograma'
@@ -14,11 +14,11 @@ function CronogramaList({ navigation }) {
   }, [])
 
   return (
-    <View>
+    <ScrollView>
       {schedules.map((schedule, index) => (
         <Cronograma key={index} navigation={navigation} {...schedule} />
       ))}
-    </View>
+    </ScrollView>
   )
 }
 
