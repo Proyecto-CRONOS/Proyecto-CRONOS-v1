@@ -10,12 +10,12 @@ function Cronograma({ id, name, navigation }) {
         <Text>
           {id} {name}
         </Text>
-        <Button
+        {/* {<Button
           title="Editar"
           onPress={() => navigation.navigate('Editar', { id })}
-        />
+        />} */}
         <Button
-          title="Ver"
+          title="Trabajar"
           onPress={() => navigation.navigate('Trabajar', { id })}
         />
       </View>
@@ -33,6 +33,10 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 20,
+    padding: 10,
+    borderRadius: 20
   },
   rowContainer: {
     flexDirection: 'row',
