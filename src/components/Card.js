@@ -1,32 +1,40 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import PropTypes from 'prop-types';
 
-import CardImage from '../components/CardImage'
+function Card({ id, title, image, status }) {
+  const cardStyles = {
+    backgroundColor: status === 'OK' ? 'gray' : 'white',
+  };
 
-function Card({ id, title, image }) {
+  const titleStyles = {
+    ...styles.text,
+    color: status === 'OK' ? 'white' : 'black',
+  };
+
   return (
-    <View key={id} style={styles.itemContainer}>
-      <Text style={styles.text}>{title}</Text>
+    <View style={{ ...styles.itemContainer, ...cardStyles }}>
+      <Text style={{ ...titleStyles }}>{status === 'OK' ? 'Completado' : title}</Text>
       <View style={styles.imageContainer}>
-        <CardImage name={image} style={styles.image} />
+        <Image source={{ uri: image }} style={styles.image} resizeMode="contain" />
       </View>
     </View>
-  )
+  );
 }
 
 Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-}
+  status: PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
   image: {
-    width: '100vw',
+    width: '100%',
     height: 300,
   },
-  text:{
+  text: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 26,
@@ -34,9 +42,11 @@ const styles = StyleSheet.create({
   itemContainer: {
     margin: 25,
     padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 25
-  }
-})
+    borderRadius: 25,
+  },
+  imageContainer: {
+    marginTop: 10,
+  },
+});
 
-export default Card
+export default Card;
