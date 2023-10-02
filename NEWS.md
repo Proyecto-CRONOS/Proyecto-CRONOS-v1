@@ -2,6 +2,25 @@
 
 ## Changelog
 
+### October 2, 2023
+- Create Cronograma feature added.
+- Replaced navigation prop in every component to useNavigation().
+- Replaced icons in navigation tabs.
+- Reduced tab items to Calendarios and Cards.
+- Created a floating action button component
+- Floating action button added in Calendarios list and Cards list to create new entities.
+- Some files and components were renamed:
+  - AllCronogramas to CronogramasList
+  - Cronograma to CronogramaListItem
+  - AllCronogramas to CardsList
+  - Card to CardListItem
+- New design for Cronogramas list.
+- AllCronogramas and CronogramasList were merged.
+- AllCards and CardsList were merged.
+- ScrollView added in Calendarios form and list 
+- Success operation dialog after save a Calendario 
+- Created wrapper components to handle Screens.
+
 ### September 26, 2023
 
 #### New Features and Enhancements:

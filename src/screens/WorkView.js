@@ -9,7 +9,7 @@ function WorkView({ route }) {
 
   return (
     <View>
-      <CardList scheduleId={id} seCompleta={true}/>
+      <CardList scheduleId={id} seCompleta={true} />
       {/* <Button
         title="Ayuda"
         onPress={() => navigation.navigate('Informacion')}

@@ -30,8 +30,7 @@ function CardImage({ name, style }) {
   } else {
     source = images[name]
   }
-  return <Image source={source} style={style} resizeMode="contain"/>
-  
+  return <Image source={source} style={style} resizeMode="contain" />
 }
 
 CardImage.propTypes = {
