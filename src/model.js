@@ -131,7 +131,9 @@ function createTables(db) {
 export function initializeDatabase(db) {
   const schedules = serializeSchedule(require('../data/schedules.json'))
   const cards = serializeCard(require('../data/cards.json'))
-  const scheduleCards = serializeScheduleCard(require('../data/schedule_cards.json'))
+  const scheduleCards = serializeScheduleCard(
+    require('../data/schedule_cards.json'),
+  )
 
   createTables(db)
 
@@ -234,7 +236,8 @@ export function getScheduleCards(db, scheduleId, callback) {
     tx.executeSql(
       query,
       parameters,
-      (_, result) => callback(serializeScheduleCard(resultSetRowLisToArray(result))),
+      (_, result) =>
+        callback(serializeScheduleCard(resultSetRowLisToArray(result))),
       (_, error) => console.log(error), // TODO: Handle error
     )
   })
@@ -245,7 +248,11 @@ export function saveScheduleCard(db, scheduleCard) {
     INSERT OR REPLACE INTO ${SCHEDULE_CARDS_TABLE} ("status", "schedule_id", "card_id")
     VALUES (?, ?, ?)
   `
-  const parameters = [scheduleCard.status, scheduleCard.scheduleId, scheduleCard.cardId]
+  const parameters = [
+    scheduleCard.status,
+    scheduleCard.scheduleId,
+    scheduleCard.cardId,
+  ]
   db.transaction((tx) => {
     tx.executeSql(
       insertQuery,

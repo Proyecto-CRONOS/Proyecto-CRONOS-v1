@@ -39,7 +39,7 @@ function CardList({ scheduleId, seCompleta }) {
           showsVerticalScrollIndicator={isHorizontal ? false : true}
         >
           {cards.map((card, index) => (
-            <Card key={index} {...card} seCompleta={seCompleta}/>
+            <Card key={index} {...card} seCompleta={seCompleta} />
           ))}
         </ScrollView>
         <StatusBar style="auto" />
@@ -55,8 +55,8 @@ CardList.propTypes = {
 
 const styles = StyleSheet.create({
   cards: {
-    height: '100vh'
-  }
+    height: '100vh',
+  },
 })
 
 export default CardList

@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput } from 'react-native'
+import {
+  Button,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+} from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
 import PropTypes from 'prop-types'
 
 import { saveCard, openDatabase } from '../model'
 
-function AddCard({navigation}) {
+function AddCard({ navigation }) {
   const [image, setImage] = useState(null)
   const [title, setTitle] = useState(null)
   const [description, setDescription] = useState(null)
@@ -59,11 +66,27 @@ function AddCard({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Título</Text>
-      <TextInput style={styles.input} onChangeText={setTitle} value={title} placeholder='Ingrese el título de la tarjeta'/>
+      <TextInput
+        style={styles.input}
+        onChangeText={setTitle}
+        value={title}
+        placeholder="Ingrese el título de la tarjeta"
+      />
       <Text>Descripción</Text>
-      <TextInput style={styles.input} onChangeText={setDescription} value={description} placeholder='Ingrese una descripción'/>
-      <Button title="Seleccionar imagen" color="#2D6981" onPress={onPressImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+      <TextInput
+        style={styles.input}
+        onChangeText={setDescription}
+        value={description}
+        placeholder="Ingrese una descripción"
+      />
+      <Button
+        title="Seleccionar imagen"
+        color="#2D6981"
+        onPress={onPressImage}
+      />
+      {image && (
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+      )}
       <Button title="Guardar" color="#2D6981" onPress={() => onPressSave()} />
     </SafeAreaView>
   )
@@ -74,7 +97,7 @@ AddCard.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     padding: 16,
   },

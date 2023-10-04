@@ -27,11 +27,12 @@ Once you've successfully installed the dependencies, you can run the React Nativ
 
 ```bash
 npm run start
-``` 
+```
 
 ## News
+
 For the latest news and updates about our the application, please see the [NEWS.md](NEWS.md) file.
 
 ## TODO List
-For an overview of pending tasks, improvements, and future plans for the ModelSelectionGUI package, please refer to the [TODO.md](TODO.md) file.
 
+For an overview of pending tasks, improvements, and future plans for the ModelSelectionGUI package, please refer to the [TODO.md](TODO.md) file.

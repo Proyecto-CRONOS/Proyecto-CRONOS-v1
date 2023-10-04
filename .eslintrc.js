@@ -1,19 +1,19 @@
 module.exports = {
-  'env': {
-    'es2021': true,
-    'node': true,
+  env: {
+    es2021: true,
+    node: true,
   },
-  'extends': [
+  extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
   ],
-  'settings': {
+  settings: {
     'import/ignore': ['react-native'],
-    'react': {
-      'version': 'detect',
-    }
+    react: {
+      version: 'detect',
+    },
   },
   /* FIXME
   'import/order': [
@@ -36,44 +36,30 @@ module.exports = {
     }
   ],
   */
-  'overrides': [
+  overrides: [
     {
-      'env': {
-        'node': true,
+      env: {
+        node: true,
       },
-      'files': [
-        '.eslintrc.{js,cjs}',
-      ],
-      'parserOptions': {
-        'sourceType': 'script',
-      }
-    }
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
+    },
   ],
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  'plugins': [
-    'react',
-    'import',
-  ],
-  'rules': {
-    'indent': [
-      'error',
-      2,
-    ],
+  plugins: ['react', 'import'],
+  rules: {
+    indent: ['error', 2],
     // 'linebreak-style': [
     //     'error',
     //     'unix'
     // ],
-    'quotes': [
-      'error',
-      'single',
-    ],
-    'semi': [
-      'error',
-      'never',
-    ],
+    quotes: ['error', 'single'],
+    semi: ['error', 'never'],
     'react/react-in-jsx-scope': 'off',
   },
 }

@@ -1,33 +1,50 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Ionicons from '@expo/vector-icons/Ionicons'
 
-import AllCronogramas from '../screens/AllCronogramas'
-import AddCronograma from '../screens/AddCronograma'
-import AllCards from '../screens/AllCards'
-import AddCard from '../screens/AddCard'
+import {
+  PRIMARY_COLOR,
+  INACTIVE_COLOR,
+  NAVIGATION_SCHEDULES_TAB_ICON,
+  NAVIGATION_CARDS_TAB_ICON,
+} from '../styles'
+import { SCHEDULES_NAME, CARDS_NAME } from '../strings'
+
+import Cronogramas from '../screens/Cronogramas'
+import Cards from '../screens/Cards'
 
 const Tab = createBottomTabNavigator()
 
 export default function Navigation() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Cronogramas" component={AllCronogramas} />
-      <Tab.Screen name="Crear Cronograma" component={AddCronograma} />
-      <Tab.Screen name="Tarjetas" component={AllCards} />
-      <Tab.Screen name="Crear Tarjeta" component={AddCard} />
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName
+          if (route.name === SCHEDULES_NAME) {
+            iconName = focused
+              ? NAVIGATION_SCHEDULES_TAB_ICON
+              : `${NAVIGATION_SCHEDULES_TAB_ICON}-outline`
+          } else if (route.name === CARDS_NAME) {
+            iconName = focused
+              ? NAVIGATION_CARDS_TAB_ICON
+              : `${NAVIGATION_CARDS_TAB_ICON}-outline`
+          }
+          return <Ionicons name={iconName} size={size} color={color} />
+        },
+        tabBarActiveTintColor: PRIMARY_COLOR,
+        tabBarInactiveTintColor: INACTIVE_COLOR,
+      })}
+    >
+      <Tab.Screen
+        name={SCHEDULES_NAME}
+        options={{ headerShown: false }}
+        component={Cronogramas}
+      />
+      <Tab.Screen
+        name={CARDS_NAME}
+        options={{ headerShown: false }}
+        component={Cards}
+      />
     </Tab.Navigator>
   )
 }
-
-/* <SafeAreaView style={styles.container}>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-          <Stack.Screen name="Amazona" component={Amazona} options={{ headerShown: false }} />
-        </Stack.Navigator>
-      </SafeAreaView>
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-    },
-  }); */
