@@ -25,7 +25,7 @@ function Card({ id, title, image, seCompleta }) {
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <View key={id} style={[estiloTarjeta, styles.tarjeta]}>
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{title.toUpperCase()}</Text>
         {marcada ? (
           <Image
             source={require('../assets/images/check.png')}
