@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Text } from 'react-native'
 import { TextInput, Button, Divider, HelperText } from 'react-native-paper'
-
+import { LinearGradient } from 'expo-linear-gradient';
 import { PRIMARY_COLOR } from '../../styles'
 
 // NOTE: This could be better
@@ -101,6 +101,10 @@ function CronogramaForm({ onSave }) {
 
   // TODO: i18n
   return (
+    <LinearGradient
+    colors={['rgb(207,226,136)', 'rgb(45,105,129)']}
+    style={styles.container}
+  >
     <ScrollView style={styles.view}>
       <TextInput
         label="Nombre"
@@ -199,6 +203,7 @@ function CronogramaForm({ onSave }) {
       </Button>
       <Text></Text>
     </ScrollView>
+    </LinearGradient>
   )
 }
 
