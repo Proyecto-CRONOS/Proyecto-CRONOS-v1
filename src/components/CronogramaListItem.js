@@ -26,7 +26,7 @@ function CronogramaListItem({ id, name, horse, date }) {
   return (
     <List.Item
       style={syles.item}
-      title={name}
+      title={name.toUpperCase()}
       description={description({ horse, date })}
       left={(props) => <List.Icon {...props} icon="calendar" />}
       right={() => (
