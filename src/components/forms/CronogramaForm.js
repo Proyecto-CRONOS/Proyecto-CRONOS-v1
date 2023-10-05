@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Text } from 'react-native'
 import { TextInput, Button, Divider, HelperText } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient';
-import { PRIMARY_COLOR } from '../../styles'
+import { BUTTON_COLOR } from '../../styles'
 
 // NOTE: This could be better
 function todaysDate() {
@@ -107,86 +107,93 @@ function CronogramaForm({ onSave }) {
   >
     <ScrollView style={styles.view}>
       <TextInput
-        label="Nombre"
+        label="NOMBRE"
         placeholder="Juan Pérez"
         mode="outlined"
         styles={styles.input}
         value={name}
         onChangeText={(name) => setName(name)}
+        style={styles.TextInput}
       />
-      <HelperText type="error" visible={errors.name}>
+      <HelperText type="error" visible={errors.name} style={styles.errorText}>
         {errors.name}
       </HelperText>
 
       <TextInput
-        label="Fecha de nacimiento"
+        label="FECHA DE NACIMIENTO"
         placeholder="20/10/1998"
         mode="outlined"
         styles={styles.input}
         value={birthDate}
         onChangeText={(birthDate) => setBirthDate(birthDate)}
+        style={styles.TextInput}
       />
-      <HelperText type="error" visible={errors.birthDate}>
+      <HelperText type="error" visible={errors.birthDate} style={styles.errorText}>
         {errors.birthDate}
       </HelperText>
 
       <TextInput
-        label="Metodología"
+        label="METODOLIGIA"
         placeholder="Una metodología" // FIXME: A better placeholder
         mode="outlined"
         styles={styles.input}
         value={methodology}
         onChangeText={(methodology) => setMethodology(methodology)}
+        style={styles.TextInput}
       />
-      <HelperText type="error" visible={errors.methodology}>
+      <HelperText type="error" visible={errors.methodology} style={styles.errorText}>
         {errors.methodology}
       </HelperText>
 
       <TextInput
-        label="Caballo"
+        label="CABALLO"
         placeholder="Tornado"
         mode="outlined"
         styles={styles.input}
         value={horse}
         onChangeText={(horse) => setHorse(horse)}
+        style={styles.TextInput}
       />
-      <HelperText type="error" visible={errors.horse}>
+      <HelperText type="error" visible={errors.horse} style={styles.errorText}>
         {errors.horse}
       </HelperText>
 
       <TextInput
-        label="Equipo"
+        label="EQUIPO"
         placeholder="Un equipo" // FIXME: A better placeholder
         mode="outlined"
         styles={styles.input}
         value={equipment}
         onChangeText={(equipment) => setEquipment(equipment)}
+        style={styles.TextInput}
       />
-      <HelperText type="error" visible={errors.equipment}>
+      <HelperText type="error" visible={errors.equipment} style={styles.errorText}>
         {errors.equipment}
       </HelperText>
 
       <TextInput
-        label="Consideraciones"
+        label="CONSIDERACIONES"
         placeholder="Consideraciones" // FIXME: A better placeholder
         mode="outlined"
         styles={styles.input}
         value={considerations}
         onChangeText={(considerations) => setConsiderations(considerations)}
+        style={styles.TextInput}
       />
-      <HelperText type="error" visible={errors.considerations}>
+      <HelperText type="error" visible={errors.considerations} style={styles.errorText}>
         {errors.considerations}
       </HelperText>
 
       <TextInput
-        label="Fecha"
+        label="FECHA"
         placeholder={todaysDate()}
         mode="outlined"
         styles={styles.input}
         value={date}
         onChangeText={(date) => setDate(date)}
+        style={styles.TextInput}
       />
-      <HelperText type="error" visible={errors.date}>
+      <HelperText type="error" visible={errors.date} style={styles.errorText}>
         {errors.date}
       </HelperText>
 
@@ -194,12 +201,13 @@ function CronogramaForm({ onSave }) {
       <Button
         icon="content-save"
         mode="contained"
-        buttonColor={PRIMARY_COLOR}
-        style={{ opacity: isFormValid ? 1 : 0.5 }}
+        textColor='black'
+        buttonColor={BUTTON_COLOR}
+        style={{ opacity: isFormValid ? 1 : 0.9 }}
         disabled={!isFormValid}
         onPress={handleSubmit}
       >
-        Guardar
+        GUARDAR
       </Button>
       <Text></Text>
     </ScrollView>
@@ -223,6 +231,13 @@ const styles = StyleSheet.create({
   },
   divider: {
     marginBottom: 15,
+  },
+  errorText: {
+    color: 'red',
+    fontWeight: 'bold',
+  },
+  TextInput:{
+    fontWeight: 'bold',
   },
 })
 

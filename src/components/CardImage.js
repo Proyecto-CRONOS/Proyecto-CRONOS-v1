@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const images = {
   aros: require('../assets/images/AROS.jpg'),
   arreador: require('../assets/images/ARREADOR.jpg'),
-  bajo_montura: require('../assets/images/BAJO MONTURA.jpg'),
+  bajomontura: require('../assets/images/BAJOMONTURA.jpg'), // modifico nombre foto por error al mostrar la imagen
   bandera: require('../assets/images/BANDERA.jpg'),
   bozal: require('../assets/images/BOZAL.jpg'),
   broches: require('../assets/images/BROCHES.jpg'),
@@ -15,7 +15,7 @@ const images = {
   cepillo: require('../assets/images/CEPILLO.jpg'),
   conos: require('../assets/images/CONOS.jpg'),
   cuerda: require('../assets/images/CUERDA.jpg'),
-  escarba_vasos: require('../assets/images/ESCARBA VASOS.jpg'),
+  escarbavasos: require('../assets/images/ESCARBAVASOS.jpg'), // modifico nombre foto por error al mostrar la imagen
   fusta: require('../assets/images/FUSTA.jpg'),
   limpieza: require('../assets/images/LIMPIEZA.jpg'),
   matra: require('../assets/images/MATRA.jpg'),
@@ -23,10 +23,10 @@ const images = {
   monturin: require('../assets/images/MONTURIN.jpg'),
   palenque: require('../assets/images/PALENQUE.jpg'),
   pasto: require('../assets/images/PASTO.jpg'),
-  pelota_de_pato: require('../assets/images/PELOTA DE PATO.jpg'),
+  pelotadepato: require('../assets/images/PELOTADEPATO.jpg'), // modifico nombre foto por error al mostrar la imagen
   pelotas: require('../assets/images/PELOTAS.jpg'),
   picadero: require('../assets/images/PICADERO.jpg'),
-  pista_de_adiestramiento: require('../assets/images/PISTA DE ADIESTRAMIENTO.jpg'),
+  pistadeadiestramiento: require('../assets/images/PISTADEADIESTRAMIENTO.jpg'),  // modifico nombre foto por error al mostrar la imagen
   rampa: require('../assets/images/RAMPA.jpg'),
   rasqueta: require('../assets/images/RASQUETA.jpg'),
   riendas: require('../assets/images/RIENDAS.jpg'),

@@ -56,7 +56,7 @@ function AddCard({ navigation }) {
         };
         saveCard(db, card);
         // FIXME: Show something to the user
-        navigation.navigate('Tarjetas');
+        navigation.navigate('LISTADO DE TARJETAS');
         console.log('Image successfully saved');
       }
     } catch (error) {
@@ -69,29 +69,32 @@ function AddCard({ navigation }) {
       colors={['rgb(207,226,136)', 'rgb(45,105,129)']}
       style={styles.container}
     >
-      <Text>Título</Text>
+      <Text style={styles.text}>TITULO</Text>
       <TextInput
         style={styles.input}
         onChangeText={setTitle}
         value={title}
-        placeholder="Ingrese el título de la tarjeta"
+        placeholder="INGRESE EL TITULO DE LA TARJETA"
       />
-      <Text>Descripción</Text>
+      <Text style={styles.text}>DESCRIPCION</Text>
       <TextInput
         style={styles.input}
         onChangeText={setDescription}
         value={description}
-        placeholder="Ingrese una descripción"
+        placeholder="INGRESE UNA DESCRIPCION"
       />
       <Button
-        title="Seleccionar imagen"
+        title="SELECCIONAR IMAGEN"
         color="#2D6981"
         onPress={onPressImage}
       />
       {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        <Image source={{ uri: image }} style={{width: 200, height: 200 }} />
       )}
-      <Button title="Guardar" color="#2D6981" onPress={() => onPressSave()} />
+      <Button title="GUARDAR" 
+      color="#2D6981" 
+      onPress={() => onPressSave()}
+      />
     </LinearGradient>
   );
 }
@@ -110,7 +113,11 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    fontWeight: 'bold',
   },
+  text: {
+    fontWeight: 'bold',
+  }
 });
 
 export default AddCard;

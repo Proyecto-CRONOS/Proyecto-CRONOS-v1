@@ -30,13 +30,13 @@ function CronogramaListItem({ id, name, horse, date }) {
       description={description({ horse, date })}
       left={(props) => <List.Icon {...props} icon="calendar" />}
       right={() => (
-        <Tooltip title="Trabajar">
+        <Tooltip title="TRABAJAR">
           <IconButton
             icon="horse-human"
             mode="outlined"
             compact="true"
             iconColor={PRIMARY_COLOR}
-            onPress={() => navigation.navigate('Trabajar', { id })}
+            onPress={() => navigation.navigate('TRABAJAR', { id })}
           />
         </Tooltip>
       )}

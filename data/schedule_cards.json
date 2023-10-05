@@ -8,5 +8,26 @@
         "status": "Pending",
         "card_id": 2,
         "schedule_id": 1
+    },
+    {
+        "status": "OK",
+        "card_id": 3,
+        "schedule_id": 1
+    },
+    {
+        "status": "OK",
+        "card_id": 4,
+        "schedule_id": 1
+    },
+    {
+        "status": "OK",
+        "card_id": 5,
+        "schedule_id": 1
+    },
+    {
+        "status": "OK",
+        "card_id": 6,
+        "schedule_id": 1
     }
+
 ]

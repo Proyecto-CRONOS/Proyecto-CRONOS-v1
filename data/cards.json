@@ -18,7 +18,7 @@
     "title": "BAJO MONTURA",
     "description": " - ",
     "audio": "Bajo Montura.ogg",
-    "image": "bajo_montura"
+    "image": "bajomontura"
   },
   {
     "id": 4,
@@ -88,7 +88,7 @@
     "title": "ESCARBA VASOS",
     "description": " - ",
     "audio": "Escarba Vasos.ogg",
-    "image": "escarba_vasos"
+    "image": "escarbavasos"
   },
   {
     "id": 14,
@@ -144,7 +144,7 @@
     "title": "PELOTA DE PATO",
     "description": " - ",
     "audio": "Pelota de Pato.ogg",
-    "image": "pelota_de_pato"
+    "image": "pelotadepato"
   },
   {
     "id": 22,
@@ -165,7 +165,7 @@
     "title": "PISTA DE ADIESTRAMIENTO",
     "description": " - ",
     "audio": "Pista de Adiestramiento.ogg",
-    "image": "pista_de_adiestramiento"
+    "image": "pistadeadiestramiento"
   },
   {
     "id": 25,
