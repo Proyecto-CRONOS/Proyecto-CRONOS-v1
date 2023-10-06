@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text } from 'react-native'
 import { TextInput, Button, Divider, HelperText } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient';
 import { BUTTON_COLOR } from '../../styles'
+import { View } from 'native-base';
 
 // NOTE: This could be better
 function todaysDate() {
@@ -105,6 +106,7 @@ function CronogramaForm({ onSave }) {
     colors={['rgb(207,226,136)', 'rgb(45,105,129)']}
     style={styles.container}
   >
+    
     <ScrollView style={styles.view}>
       <TextInput
         label="NOMBRE"
@@ -133,7 +135,7 @@ function CronogramaForm({ onSave }) {
       </HelperText>
 
       <TextInput
-        label="METODOLIGIA"
+        label="METODOLOGIA"
         placeholder="Una metodología" // FIXME: A better placeholder
         mode="outlined"
         styles={styles.input}

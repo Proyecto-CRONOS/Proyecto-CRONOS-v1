@@ -1,12 +1,42 @@
 [
     {
         "id": 1,
-        "name": "Amazona_ejemplo",
-        "birth_date": "27/12/1998",
+        "name": "Nicolas Sacco",
+        "birth_date": "18/04/2000",
         "methodology": "Hipoterapia",
         "horse": "Tordillo",
         "equipment": "Montura",
         "considerations": "Algo",
         "date": "19/09/2023"
+    },
+    {
+        "id": 2,
+        "name": "Barbi Otero",
+        "birth_date": "27/12/1998",
+        "methodology": "Monta Terapéutica",
+        "horse": "Montaña",
+        "equipment": "Montura",
+        "considerations": "Algo",
+        "date": "02/10/2023"
+    },
+    {
+        "id": 3,
+        "name": "Mayra Orellano",
+        "birth_date": "27/12/1998",
+        "methodology": "Deporte Ecuestre Adaptado",
+        "horse": "Azabache",
+        "equipment": "Montura",
+        "considerations": "Algo",
+        "date": "29/08/2023"
+    },
+    {
+        "id": 4,
+        "name": "Adan Mauri",
+        "birth_date": "27/12/1998",
+        "methodology": "Monta gemela",
+        "horse": "Perseo",
+        "equipment": "Montura",
+        "considerations": "Algo",
+        "date": "04/04/2023"
     }
 ]
