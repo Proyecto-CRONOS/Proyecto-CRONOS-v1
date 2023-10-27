@@ -5,6 +5,7 @@ import { List, IconButton, Tooltip } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 
 import { PRIMARY_COLOR } from '../styles'
+import { SCHEDULE_DETAIL } from '../strings'
 
 function description({ horse, date }) {
   return `Fecha: ${date} - Caballo: ${horse}`
@@ -25,9 +26,10 @@ function CronogramaListItem({ id, name, horse, date }) {
     */
   return (
     <List.Item
-      style={syles.item}
+      style={styles.item}
       title={name.toUpperCase()}
       description={description({ horse, date })}
+      onPress={() => navigation.navigate(SCHEDULE_DETAIL, { id })}
       left={(props) => <List.Icon {...props} icon="calendar" />}
       right={() => (
         <Tooltip title="Trabajar">
@@ -51,7 +53,7 @@ CronogramaListItem.propTypes = {
   date: PropTypes.string.isRequired,
 }
 
-const syles = StyleSheet.create({
+const styles = StyleSheet.create({
   item: {
     backgroundColor: '#dfdfdf', // FIXME: Move to styles
     borderColor: '#ccc', // FIXME: Move to styles

@@ -1,6 +1,7 @@
 export const SCHEDULES_NAME = 'Cronogramas'
 export const SCHEDULES_LIST = 'Listado de Cronogramas'
 export const SCHEDULE_CREATE = 'Crear Cronograma'
+export const SCHEDULE_DETAIL = 'Detalle de Cronograma'
 export const CARDS_NAME = 'Tarjetas'
 export const CARDS_LIST = 'Listado de Tarjetas'
 export const CARD_CREATE = 'Crear Tarjeta'

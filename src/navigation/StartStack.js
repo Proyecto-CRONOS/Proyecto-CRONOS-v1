@@ -7,6 +7,8 @@ import WorkView from '../screens/WorkView'
 import DetailCronograma from '../screens/DetailCronograma'
 import AddCronograma from '../screens/AddCronograma'
 
+import { SCHEDULE_DETAIL } from '../strings'
+
 const Stack = createStackNavigator()
 
 function StartStack() {
@@ -17,7 +19,7 @@ function StartStack() {
       <Stack.Screen name="Tutorial" component={Tutorial} />
       <Stack.Screen name="Editar" component={EditCronograma} />
       <Stack.Screen name="Trabajar" component={WorkView} />
-      <Stack.Screen name="Informacion" component={DetailCronograma} />
+      <Stack.Screen name={SCHEDULE_DETAIL} component={DetailCronograma} />
       <Stack.Screen name="AddCronograma" component={AddCronograma} />
     </Stack.Navigator>
   )

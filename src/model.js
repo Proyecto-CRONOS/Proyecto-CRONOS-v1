@@ -62,7 +62,14 @@ function serializeScheduleCard(data, snakeCase = false) {
   return scheduleCard
 }
 
-function resultSetRowLisToArray(resultSetList) {
+function resultSetRowListToItem(resultSetList) {
+  if (!resultSetList.rows.length) {
+    return null
+  }
+  return resultSetList.rows.item(0)
+}
+
+function resultSetRowListToArray(resultSetList) {
   const resultSetArray = []
   for (let i = 0; i < resultSetList.rows.length; i++) {
     resultSetArray.push(resultSetList.rows.item(i))
@@ -155,7 +162,28 @@ export function getSchedules(db, callback) {
   `
   db.transaction((tx) => {
     tx.executeSql(query, null, (_, result) => {
-      callback(serializeSchedule(resultSetRowLisToArray(result)))
+      callback(serializeSchedule(resultSetRowListToArray(result)))
+    })
+  })
+}
+
+export function getSchedule(db, id, callback) {
+  const query = `
+    SELECT *
+    FROM ${SCHEDULE_TABLE}
+    WHERE id = ?
+    LIMIT 1;
+  `
+  const parameters = [
+    id,
+  ]
+  db.transaction((tx) => {
+    tx.executeSql(query, parameters, (_, result) => {
+      const item = resultSetRowListToItem(result)
+      if (!item) {
+        return callback(null)
+      }
+      callback(serializeSchedule(item))
     })
   })
 }
@@ -195,7 +223,7 @@ export function getCards(db, callback) {
     tx.executeSql(
       query,
       null,
-      (_, result) => callback(serializeCard(resultSetRowLisToArray(result))),
+      (_, result) => callback(serializeCard(resultSetRowListToArray(result))),
       (_, error) => console.log(error), // TODO: Handle error
     )
   })
@@ -237,7 +265,7 @@ export function getScheduleCards(db, scheduleId, callback) {
       query,
       parameters,
       (_, result) =>
-        callback(serializeScheduleCard(resultSetRowLisToArray(result))),
+        callback(serializeScheduleCard(resultSetRowListToArray(result))),
       (_, error) => console.log(error), // TODO: Handle error
     )
   })
