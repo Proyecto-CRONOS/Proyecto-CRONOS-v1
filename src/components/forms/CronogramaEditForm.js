@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
-import { useFocusEffect } from '@react-navigation/native'
+//import { useFocusEffect } from '@react-navigation/native'
 
 import { ScrollView, StyleSheet, Text } from 'react-native'
 import { TextInput, Button, Divider, HelperText } from 'react-native-paper'
