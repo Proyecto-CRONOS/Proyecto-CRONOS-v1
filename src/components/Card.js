@@ -4,16 +4,20 @@ import {
   Text,
   View,
   TouchableWithoutFeedback,
-  Image,
+  Image
 } from 'react-native'
 import PropTypes from 'prop-types'
 import CardImage from '../components/CardImage'
+import CardAudio from '../components/CardAudio'
 
 function Card({ id, title, image, seCompleta }) {
   const [marcada, setMarcada] = useState(false)
 
   const handleClick = () => {
     if (seCompleta) {
+      if (!marcada){
+        playAudio()
+      }
       setMarcada(!marcada)
     }
   }
@@ -22,6 +26,12 @@ function Card({ id, title, image, seCompleta }) {
     backgroundColor: marcada ? 'green' : 'white',
   }
 
+  const audioPlayer = CardAudio()
+
+  const playAudio = async () => {
+    await audioPlayer.playSound()
+  }
+  
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <View key={id} style={[estiloTarjeta, styles.tarjeta]}>

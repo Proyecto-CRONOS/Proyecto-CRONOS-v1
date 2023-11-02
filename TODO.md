@@ -9,4 +9,4 @@
 - Add datepickers for date inputs
 - Success banner could be a component
 - Use Tooltip in icons
-
+- Review re-rendering
