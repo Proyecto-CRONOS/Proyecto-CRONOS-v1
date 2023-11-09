@@ -8,18 +8,28 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import CardImage from '../components/CardImage'
+import CardAudio from '../components/CardAudio'
 
 function Card({ id, title, image, seCompleta }) {
   const [marcada, setMarcada] = useState(false)
 
-  const handleClick = () => {
-    if (seCompleta) {
-      setMarcada(!marcada)
+const handleClick = () => {
+  if (seCompleta) {
+    if (!marcada){
+      playAudio()
     }
+    setMarcada(!marcada)
   }
+}
 
   const estiloTarjeta = {
     backgroundColor: marcada ? 'green' : 'white',
+  }
+
+  const audioPlayer = CardAudio()
+
+  const playAudio = async () => {
+    await audioPlayer.playSound()
   }
 
   return (

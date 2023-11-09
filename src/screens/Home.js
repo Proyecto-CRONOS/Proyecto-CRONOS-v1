@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, Button } from 'react-native'
 import PropTypes from 'prop-types'
 import { LinearGradient } from 'expo-linear-gradient'
 
-function Home({ navigation }) {
+function HOME({ navigation }) {
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -20,7 +20,7 @@ function Home({ navigation }) {
             title="Ingresar"
             color="#2D6981"
             accessibilityLabel="Learn more about this purple button"
-            onPress={() => navigation.navigate('Cronos')}
+            onPress={() => navigation.navigate('CRONOS')}
           />
           {/* <Button
             title="Tutorial"
@@ -33,7 +33,7 @@ function Home({ navigation }) {
   )
 }
 
-Home.propTypes = {
+HOME.propTypes = {
   navigation: PropTypes.object.isRequired,
 }
 
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Home
+export default HOME

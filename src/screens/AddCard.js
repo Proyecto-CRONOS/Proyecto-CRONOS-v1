@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Image,
@@ -6,22 +6,23 @@ import {
   StyleSheet,
   Text,
   TextInput,
-} from 'react-native'
-import * as ImagePicker from 'expo-image-picker'
-import * as MediaLibrary from 'expo-media-library'
-import PropTypes from 'prop-types'
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
+import PropTypes from 'prop-types';
+import { LinearGradient } from 'expo-linear-gradient'; 
 
-import { saveCard, openDatabase } from '../model'
+import { saveCard, openDatabase } from '../model';
 
 function AddCard({ navigation }) {
-  const [image, setImage] = useState(null)
-  const [title, setTitle] = useState(null)
-  const [description, setDescription] = useState(null)
-  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions()
+  const [image, setImage] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
 
   useEffect(() => {
-    requestPermission()
-  }, [requestPermission])
+    requestPermission();
+  }, [requestPermission]);
 
   const onPressImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -29,42 +30,45 @@ function AddCard({ navigation }) {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-    })
+    });
     if (!result.canceled) {
-      setImage(result.assets[0].uri)
+      setImage(result.assets[0].uri);
     }
-  }
+  };
 
   const onPressSave = async () => {
     if (!permissionResponse?.granted) {
-      console.log('Sorry, we need media permissions')
-      return
+      console.log('Sorry, we need media permissions');
+      return;
     }
 
     try {
       // Request device storage access permission
-      const { status } = await MediaLibrary.requestPermissionsAsync()
+      const { status } = await MediaLibrary.requestPermissionsAsync();
       if (status === 'granted') {
-        const asset = await MediaLibrary.createAssetAsync(image)
-        const db = openDatabase()
+        const asset = await MediaLibrary.createAssetAsync(image);
+        const db = openDatabase();
         const card = {
           title: title,
           description: description,
           audio: '',
           image: asset.uri,
-        }
-        saveCard(db, card)
+        };
+        saveCard(db, card);
         // FIXME: Show something to the user
-        navigation.navigate('Tarjetas')
-        console.log('Image successfully saved')
+        navigation.navigate('Tarjetas');
+        console.log('Image successfully saved');
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <LinearGradient 
+      colors={['rgb(207,226,136)', 'rgb(45,105,129)']}
+      style={styles.container}
+    >
       <Text>Título</Text>
       <TextInput
         style={styles.input}
@@ -88,13 +92,13 @@ function AddCard({ navigation }) {
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
       <Button title="Guardar" color="#2D6981" onPress={() => onPressSave()} />
-    </SafeAreaView>
-  )
+    </LinearGradient>
+  );
 }
 
 AddCard.propTypes = {
   navigation: PropTypes.object.isRequired,
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -107,6 +111,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
-})
+});
 
-export default AddCard
+export default AddCard;
