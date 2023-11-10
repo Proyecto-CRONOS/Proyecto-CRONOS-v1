@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Button,
   Image,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -56,7 +55,7 @@ function AddCard({ navigation }) {
         };
         saveCard(db, card);
         // FIXME: Show something to the user
-        navigation.navigate('Tarjetas');
+        navigation.navigate('TARJETAS');
         console.log('Image successfully saved');
       }
     } catch (error) {
