@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-navigation'
-import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native'
+import {
+  useRoute,
+  useNavigation,
+  useFocusEffect,
+} from '@react-navigation/native'
 
 import { openDatabase, getSchedule, saveSchedule } from '../model'
-import CronogramaEditForm from '../components/forms/CronogramaEditForm'
-import { SCHEDULE_DETAIL } from '../strings'
-
+import { SCHEDULE_DETAIL } from '../screens'
+import { SCHEDULE_SAVED } from '../strings'
+import ScheduleForm from '../components/forms/ScheduleForm'
 
 function EditCronograma() {
   const [schedule, setSchedule] = useState(null)
@@ -28,7 +32,7 @@ function EditCronograma() {
         id: editedSchedule.id,
         action: {
           success: true,
-          message: 'Cronograma guardado exitosamente.',
+          message: { SCHEDULE_SAVED },
         },
       })
     } catch (error) {
@@ -36,10 +40,10 @@ function EditCronograma() {
       console.error('Error al guardar:', error)
     }
   }
-  
+
   return (
     <SafeAreaView>
-      {schedule && <CronogramaEditForm schedule={schedule} onSave={onSave} /> }
+      {schedule && <ScheduleForm schedule={schedule} onSave={onSave} />}
     </SafeAreaView>
   )
 }

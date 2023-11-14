@@ -1,40 +1,41 @@
 import React from 'react'
 import { View, Image, StyleSheet, Button } from 'react-native'
-import PropTypes from 'prop-types'
-import { LinearGradient } from 'expo-linear-gradient'
+import { useNavigation } from '@react-navigation/native'
 
-function HOME({ navigation }) {
+import { LinearGradient } from 'expo-linear-gradient'
+import { NAVIGATION } from '../screens'
+import {
+  BACKGROUND_GRADIENT_1,
+  BACKGROUND_GRADIENT_2,
+  PRIMARY_BUTTON_COLOR,
+} from '../styles'
+import { LOGIN } from '../strings'
+
+function Home() {
+  const navigation = useNavigation()
+
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={['rgb(207,226,136)', 'rgb(45,105,129)']}
+        colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}
         style={styles.gradientContainer}
       >
         <Image
-          source={require('../assets/images/identidad/logo.png')}
+          source={require('../assets/images/identidad/logo.png')} // FIXME: A better way yo handle this constant
           style={styles.image}
           resizeMode="cover"
         />
         <View style={styles.buttonContainer}>
           <Button
-            title="Ingresar"
-            color="#2D6981"
+            title={LOGIN}
+            color={PRIMARY_BUTTON_COLOR}
             accessibilityLabel="Learn more about this purple button"
-            onPress={() => navigation.navigate('CRONOS')}
+            onPress={() => navigation.navigate(NAVIGATION)}
           />
-          {/* <Button
-            title="Tutorial"
-            color="#2D6981"
-            onPress={() => navigation.navigate('Tutorial')}
-          /> */}
         </View>
       </LinearGradient>
     </View>
   )
-}
-
-HOME.propTypes = {
-  navigation: PropTypes.object.isRequired,
 }
 
 const styles = StyleSheet.create({
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default HOME
+export default Home

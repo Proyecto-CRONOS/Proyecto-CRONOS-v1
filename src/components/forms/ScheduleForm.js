@@ -1,13 +1,36 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
-import { useFocusEffect } from '@react-navigation/native'
 
 import { ScrollView, StyleSheet, Text } from 'react-native'
 import { TextInput, Button, Divider, HelperText } from 'react-native-paper'
 
+import { createSchedule } from '../../model'
 import { PRIMARY_COLOR } from '../../styles'
-
-// FIXME: Merge with CronogramaForm
+import {
+  BIRTH_DATE,
+  BIRTH_DATE_INVALID,
+  BIRTH_DATE_PLACEHOLDER,
+  BIRTH_DATE_REQUIRED,
+  CONSIDERATIONS,
+  CONSIDERATIONS_PLACEHOLDER,
+  CONSIDERATIONS_REQUIRED,
+  DATE,
+  DATE_INVALID,
+  DATE_REQUIRED,
+  HORSE,
+  HORSE_PLACEHOLDER,
+  HORSE_REQUIRED,
+  METHODOLOGY,
+  METHODOLOGY_PLACEHOLDER,
+  METHODOLOGY_REQUIRED,
+  NAME,
+  NAME_PLACEHOLDER,
+  NAME_REQUIRED,
+  SAVE,
+  EQUIPMENT,
+  EQUIPMENT_PLACEHOLDER,
+  EQUIPMENT_REQUIRED,
+} from '../../strings'
 
 // NOTE: This could be better
 function todaysDate() {
@@ -21,66 +44,77 @@ function todaysDate() {
 }
 
 // FIXME: In order to be used to edit
-function CronogramaEditForm({ schedule, onSave }) {
-  const [ editedSchedule, setEditedSchedule ] = useState(schedule)
+function ScheduleForm({ schedule, onSave }) {
+  if (!schedule) {
+    schedule = createSchedule()
+  }
+  const [editedSchedule, setEditedSchedule] = useState(schedule)
   const [errors, setErrors] = useState({})
-  const [isFormValid, setIsFormValid] = useState(false)
+  const [isFormCompleted, setIsFormCompleted] = useState(false)
+  const [ formSent , setFormSent ] = useState(false)
 
   useEffect(() => {
     console.log(errors)
-    validateForm()
+    if (formSent) {
+      validateForm()
+    }
   }, [editedSchedule])
-  
+
+  const validateCompletedForm = () => {
+    setIsFormCompleted(editedSchedule.name && editedSchedule.birthDate && editedSchedule.methodology && editedSchedule.horse && editedSchedule.equipment && editedSchedule.considerations && editedSchedule.date)
+  }
+
   const validateForm = () => {
     let currentErrors = {}
 
     if (!editedSchedule.name) {
-      currentErrors.name = 'El nombre es requerido.'
+      currentErrors.name = NAME_REQUIRED
     }
 
     if (!editedSchedule.birthDate) {
-      currentErrors.birthDate = 'La fecha de nacimiento es requerida.'
+      currentErrors.birthDate = BIRTH_DATE_REQUIRED
     } else if (
       !/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/.test(
         editedSchedule.birthDate,
       )
     ) {
       currentErrors.birthDate =
-        'La fecha de nacimiento es inválida (dd/mm/aaaa).'
+      currentErrors.birthDate = BIRTH_DATE_INVALID
     }
 
     if (!editedSchedule.methodology) {
-      currentErrors.methodology = 'La metodología es requerida.'
+      currentErrors.methodology = METHODOLOGY_REQUIRED
     }
 
     if (!editedSchedule.horse) {
-      currentErrors.horse = 'El caballo es requerido.'
+      currentErrors.horse = HORSE_REQUIRED
     }
 
     if (!editedSchedule.equipment) {
-      currentErrors.equipment = 'El equipo es requerido.'
+      currentErrors.equipment = EQUIPMENT_REQUIRED
     }
 
     if (!editedSchedule.considerations) {
-      currentErrors.considerations = 'Las consideraciones son requeridas.'
+      currentErrors.considerations = CONSIDERATIONS_REQUIRED
     }
 
     if (!editedSchedule.date) {
-      currentErrors.date = 'La fecha es requerida.'
+      currentErrors.date = DATE_REQUIRED
     } else if (
       !/^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/.test(
         editedSchedule.date,
       )
     ) {
-      currentErrors.date = 'La fecha es inválida (dd/mm/aaaa).'
+      currentErrors.date = DATE_INVALID
     }
 
     setErrors(currentErrors)
-    setIsFormValid(Object.keys(currentErrors).length === 0)
+    return Object.keys(currentErrors).length === 0
   }
 
   const handleSubmit = () => {
-    if (isFormValid) {
+    setFormSent(true)
+    if (validateForm()) {
       onSave(editedSchedule)
     } else {
       // FIXME: Handle errors
@@ -91,20 +125,22 @@ function CronogramaEditForm({ schedule, onSave }) {
 
   const handleInputChange = (key, value) => {
     console.log(editedSchedule)
-
     setEditedSchedule({
       ...editedSchedule,
       [key]: value,
     })
-    validateForm()
+    validateCompletedForm()
+    if (formSent) {
+      validateForm()
+    }
   }
 
   // TODO: i18n
   return (
     <ScrollView style={styles.view}>
       <TextInput
-        label="Nombre"
-        placeholder="Juan Pérez"
+        label={NAME}
+        placeholder={NAME_PLACEHOLDER}
         mode="outlined"
         styles={styles.input}
         value={editedSchedule.name}
@@ -114,8 +150,8 @@ function CronogramaEditForm({ schedule, onSave }) {
         {errors.name}
       </HelperText>
       <TextInput
-        label="Fecha de nacimiento"
-        placeholder="20/10/1998"
+        label={BIRTH_DATE}
+        placeholder={BIRTH_DATE_PLACEHOLDER}
         mode="outlined"
         styles={styles.input}
         value={editedSchedule.birthDate}
@@ -126,20 +162,22 @@ function CronogramaEditForm({ schedule, onSave }) {
       </HelperText>
 
       <TextInput
-        label="Metodología"
-        placeholder="Una metodología" // FIXME: A better placeholder
+        label={METHODOLOGY}
+        placeholder={METHODOLOGY_PLACEHOLDER}
         mode="outlined"
         styles={styles.input}
         value={editedSchedule.methodology}
-        onChangeText={(methodology) => handleInputChange('methodology', methodology)}
+        onChangeText={(methodology) =>
+          handleInputChange('methodology', methodology)
+        }
       />
       <HelperText type="error" visible={errors.methodology}>
         {errors.methodology}
       </HelperText>
 
       <TextInput
-        label="Caballo"
-        placeholder="Tornado"
+        label={HORSE}
+        placeholder={HORSE_PLACEHOLDER}
         mode="outlined"
         styles={styles.input}
         value={editedSchedule.horse}
@@ -150,8 +188,8 @@ function CronogramaEditForm({ schedule, onSave }) {
       </HelperText>
 
       <TextInput
-        label="Equipo"
-        placeholder="Un equipo" // FIXME: A better placeholder
+        label={EQUIPMENT}
+        placeholder={EQUIPMENT_PLACEHOLDER}
         mode="outlined"
         styles={styles.input}
         value={editedSchedule.equipment}
@@ -162,19 +200,21 @@ function CronogramaEditForm({ schedule, onSave }) {
       </HelperText>
 
       <TextInput
-        label="Consideraciones"
-        placeholder="Consideraciones" // FIXME: A better placeholder
+        label={CONSIDERATIONS}
+        placeholder={CONSIDERATIONS_PLACEHOLDER}
         mode="outlined"
         styles={styles.input}
         value={editedSchedule.considerations}
-        onChangeText={(considerations) => handleInputChange('considerations', considerations)}
+        onChangeText={(considerations) =>
+          handleInputChange('considerations', considerations)
+        }
       />
       <HelperText type="error" visible={errors.considerations}>
         {errors.considerations}
       </HelperText>
 
       <TextInput
-        label="Fecha"
+        label={DATE}
         placeholder={todaysDate()}
         mode="outlined"
         styles={styles.input}
@@ -189,18 +229,18 @@ function CronogramaEditForm({ schedule, onSave }) {
         icon="content-save"
         mode="contained"
         buttonColor={PRIMARY_COLOR}
-        style={{ opacity: isFormValid ? 1 : 0.5 }}
-        disabled={!isFormValid}
+        style={{ opacity: isFormCompleted ? 1 : 0.5 }}
+        disabled={!isFormCompleted}
         onPress={handleSubmit}
       >
-        Guardar
+        {SAVE}
       </Button>
       <Text></Text>
     </ScrollView>
   )
 }
 
-CronogramaEditForm.propTypes = {
+ScheduleForm.propTypes = {
   schedule: PropTypes.object,
   onSave: PropTypes.func.isRequired,
 }
@@ -219,4 +259,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CronogramaEditForm
+export default ScheduleForm

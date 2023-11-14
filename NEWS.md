@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### November 14, 2023
+- Major refactoring and linter fixes.
+- Form handles errors after try to send.
+
 ### October 2, 2023
 - Create Cronograma feature added.
 - Replaced navigation prop in every component to useNavigation().

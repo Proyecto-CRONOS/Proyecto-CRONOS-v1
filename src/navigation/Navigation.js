@@ -7,7 +7,7 @@ import {
   NAVIGATION_SCHEDULES_TAB_ICON,
   NAVIGATION_CARDS_TAB_ICON,
 } from '../styles'
-import { SCHEDULES_NAME, CARDS_NAME } from '../strings'
+import { SCHEDULES, CARDS } from '../screens'
 
 import Cronogramas from '../screens/Cronogramas'
 import Cards from '../screens/Cards'
@@ -20,11 +20,11 @@ export default function Navigation() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName
-          if (route.name === SCHEDULES_NAME) {
+          if (route.name === SCHEDULES) {
             iconName = focused
               ? NAVIGATION_SCHEDULES_TAB_ICON
               : `${NAVIGATION_SCHEDULES_TAB_ICON}-outline`
-          } else if (route.name === CARDS_NAME) {
+          } else if (route.name === CARDS) {
             iconName = focused
               ? NAVIGATION_CARDS_TAB_ICON
               : `${NAVIGATION_CARDS_TAB_ICON}-outline`
@@ -36,12 +36,12 @@ export default function Navigation() {
       })}
     >
       <Tab.Screen
-        name={SCHEDULES_NAME}
+        name={SCHEDULES}
         options={{ headerShown: false }}
         component={Cronogramas}
       />
       <Tab.Screen
-        name={CARDS_NAME}
+        name={CARDS}
         options={{ headerShown: false }}
         component={Cards}
       />

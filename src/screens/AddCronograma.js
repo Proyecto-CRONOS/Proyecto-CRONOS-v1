@@ -3,20 +3,22 @@ import { SafeAreaView } from 'react-navigation'
 import { useNavigation } from '@react-navigation/native'
 
 import { saveSchedule, openDatabase } from '../model'
-import { SCHEDULES_LIST } from '../strings'
-import CronogramaForm from '../components/forms/CronogramaForm'
+import { SCHEDULE_SAVED } from '../strings'
+import { SCHEDULES_LIST } from '../screens'
+import ScheduleForm from '../components/forms/ScheduleForm'
 
 function AddCronograma() {
   const navigation = useNavigation()
 
-  const onSave = async (cronograma) => {
+  const onSave = async (editedSchedule) => {
     try {
       const db = openDatabase()
-      await saveSchedule(db, cronograma)
+      saveSchedule(db, editedSchedule)
+      //navigation.navigate(SCHEDULES_LIST)
       navigation.navigate(SCHEDULES_LIST, {
         action: {
           success: true,
-          message: 'Cronograma guardado exitosamente.',
+          message: SCHEDULE_SAVED,
         },
       })
     } catch (error) {
@@ -27,7 +29,7 @@ function AddCronograma() {
 
   return (
     <SafeAreaView>
-      <CronogramaForm onSave={onSave} />
+      <ScheduleForm onSave={onSave} />
     </SafeAreaView>
   )
 }

@@ -5,7 +5,7 @@ import { List, IconButton, Tooltip } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 
 import { PRIMARY_COLOR } from '../styles'
-import { SCHEDULE_DETAIL } from '../strings'
+import { WORK, SCHEDULE_DETAIL } from '../screens'
 
 function description({ horse, date }) {
   return `Fecha: ${date} - Caballo: ${horse}`
@@ -32,13 +32,13 @@ function CronogramaListItem({ id, name, horse, date }) {
       onPress={() => navigation.navigate(SCHEDULE_DETAIL, { id })}
       left={(props) => <List.Icon {...props} icon="calendar" />}
       right={() => (
-        <Tooltip title="TRABAJAR">
+        <Tooltip title={WORK}>
           <IconButton
             icon="horse-human"
             mode="outlined"
             compact="true"
             iconColor={PRIMARY_COLOR}
-            onPress={() => navigation.navigate('TRABAJAR', { id })}
+            onPress={() => navigation.navigate({ WORK }, { id })}
           />
         </Tooltip>
       )}

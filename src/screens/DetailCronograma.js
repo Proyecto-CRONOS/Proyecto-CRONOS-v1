@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
-import { useRoute, useNavigation } from '@react-navigation/native'
+import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native'
 import { View } from 'react-native'
 import { Button, Card, Text } from 'react-native-paper'
-import { useFocusEffect } from '@react-navigation/native'
 
 import { openDatabase, getSchedule } from '../model'
 
+import { SCHEDULE_EDIT, SCHEDULE_CARDS_EDIT } from '../screens'
+import {
+  CARDS,
+  EDIT,
+  METHODOLOGY,
+  DATE,
+  EQUIPMENT,
+  HORSE,
+  BIRTH_DATE,
+  CONSIDERATIONS,
+} from '../strings'
 
 function DetailCronograma() {
   const [schedule, setSchedule] = useState(null)
@@ -29,32 +39,38 @@ function DetailCronograma() {
       <Card>
         <Card.Title title={schedule.name} />
         <Card.Content>
-          <Text>Metodología</Text>
+          <Text>{METHODOLOGY}</Text>
           <Text>{schedule.methodology}</Text>
         </Card.Content>
         <Card.Content>
-          <Text>Fecha</Text>
+          <Text>{DATE}</Text>
           <Text>{schedule.date}</Text>
         </Card.Content>
         <Card.Content>
-          <Text>Equipo</Text>
+          <Text>{EQUIPMENT}</Text>
           <Text>{schedule.equipment}</Text>
         </Card.Content>
         <Card.Content>
-          <Text>Caballo</Text>
+          <Text>{HORSE}</Text>
           <Text>{schedule.horse}</Text>
         </Card.Content>
         <Card.Content>
-          <Text>Fecha de nacimiento</Text>
+          <Text>{BIRTH_DATE}</Text>
           <Text>{schedule.birthDate}</Text>
         </Card.Content>
         <Card.Content>
-          <Text>Consideraciones</Text>
+          <Text>{CONSIDERATIONS}</Text>
           <Text>{schedule.considerations}</Text>
         </Card.Content>
         <Card.Actions>
-          <Button onPress={() => navigation.navigate('Editar', { id })}>Editar</Button>
-          <Button onPress={() => navigation.navigate('EditarTarjetas', { id })}>Tarjetas</Button>
+          <Button onPress={() => navigation.navigate(SCHEDULE_EDIT, { id })}>
+            {EDIT}
+          </Button>
+          <Button
+            onPress={() => navigation.navigate({ SCHEDULE_CARDS_EDIT }, { id })}
+          >
+            {CARDS}
+          </Button>
         </Card.Actions>
       </Card>
     </View>

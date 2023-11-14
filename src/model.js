@@ -6,24 +6,38 @@ const SCHEDULE_TABLE = 'schedules'
 const CARD_TABLE = 'cards'
 const SCHEDULE_CARDS_TABLE = 'schedule_cards'
 
+export function createSchedule(id, name, birthDate, methodology, horse, equipment, considerations, date) {
+  return {
+    id,
+    name,
+    birthDate,
+    methodology,
+    horse,
+    equipment,
+    considerations,
+    date,
+    birth_date: birthDate,
+  }
+}
+
 // NOTE: This will be replaced with typescript structure or expo-sqlite-orm
 function serializeSchedule(data, snakeCase = false) {
   if (Array.isArray(data)) {
     return data.map((schedule) => serializeSchedule(schedule))
   }
-  const schedule = {
-    id: data.id,
-    name: data.name,
-    methodology: data.methodology,
-    horse: data.horse,
-    equipment: data.equipment,
-    considerations: data.considerations,
-    date: data.date,
-  }
+  const schedule = createSchedule(
+    data.id,
+    data.name,
+    data.birthDate || data.birth_date,
+    data.methodology,
+    data.horse,
+    data.equipment,
+    data.considerations,
+    data.date,
+  )
   if (snakeCase) {
-    schedule.birth_date = data.birthDate
-  } else {
-    schedule.birthDate = data.birth_date
+    schedule.birth_date = schedule.birthDate
+    delete schedule.birthDate
   }
   return schedule
 }
@@ -172,6 +186,27 @@ export function getSchedule(db, id, callback) {
     SELECT *
     FROM ${SCHEDULE_TABLE}
     WHERE id = ?
+    LIMIT 1;
+  `
+  const parameters = [
+    id,
+  ]
+  db.transaction((tx) => {
+    tx.executeSql(query, parameters, (_, result) => {
+      const item = resultSetRowListToItem(result)
+      if (!item) {
+        return callback(null)
+      }
+      callback(serializeSchedule(item))
+    })
+  })
+}
+
+export function getLatestSchedule(db, id, callback) {
+  const query = `
+    SELECT *
+    FROM ${SCHEDULE_TABLE}
+    ORDER BY id DESC
     LIMIT 1;
   `
   const parameters = [

@@ -7,10 +7,18 @@ import { SafeAreaView } from 'react-navigation'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Banner } from 'react-native-paper'
 
-import { CARD_CREATE } from '../strings'
 import CreateFAB from '../components/CreateFAB'
-import { openDatabase, getCards, getScheduleCards } from '../model'
 import Card from '../components/Card'
+import { CARD_CREATE } from '../screens'
+import { openDatabase, getCards, getScheduleCards } from '../model'
+import {
+  BACKGROUND_GRADIENT_1,
+  BACKGROUND_GRADIENT_2,
+  SUCCESS_BANNER_BACKGROUND,
+  SUCCESS_BANNER_ELEVATION,
+  SUCCESS_BANNER_ICON,
+} from '../styles'
+import { CLOSE } from '../strings'
 
 function addCardAction(navigation) {
   navigation.navigate(CARD_CREATE)
@@ -47,18 +55,18 @@ function CardList({ scheduleId, seCompleta }) {
     <SafeAreaView>
       {action && (
         <Banner
-          theme={{ colors: { primary: 'green' } }}
-          elevation="4"
+          theme={{ colors: { primary: { SUCCESS_BANNER_BACKGROUND } } }}
+          elevation={SUCCESS_BANNER_ELEVATION}
           visible={bannerVisible}
           actions={[
-            { label: 'Cerrar', onPress: () => setBannerVisible(false) },
+            { label: CLOSE, onPress: () => setBannerVisible(false) },
           ]}
-          icon="check-bold"
+          icon={SUCCESS_BANNER_ICON}
         >
           {action.message}
         </Banner>
       )}
-      <LinearGradient colors={['rgb(219,226,133)', 'rgb(61,111,140)']}>
+      <LinearGradient colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}>
         <ScrollView>
           {cards.map((card, index) => (
             <Card key={index} {...card} seCompleta={seCompleta} />

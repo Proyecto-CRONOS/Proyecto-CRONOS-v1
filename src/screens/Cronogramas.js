@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { SCHEDULES_LIST, SCHEDULE_CREATE } from '../strings'
+import { SCHEDULES_LIST, SCHEDULE_CREATE } from '../screens'
 import CronogramasList from './CronogramasList'
 import AddCronograma from './AddCronograma'
 

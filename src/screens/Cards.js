@@ -1,9 +1,9 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { CARDS_LIST, CARD_CREATE } from '../strings'
-import CardsList from './CardsList'
+import { CARDS_LIST, CARD_CREATE } from '../screens'
 import AddCard from './AddCard'
+import CardsList from './CardsList'
 
 const Stack = createStackNavigator()
 

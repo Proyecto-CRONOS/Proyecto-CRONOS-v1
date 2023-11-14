@@ -10,3 +10,4 @@
 - Success banner could be a component
 - Use Tooltip in icons
 - Review re-rendering
+- Review the use of styles

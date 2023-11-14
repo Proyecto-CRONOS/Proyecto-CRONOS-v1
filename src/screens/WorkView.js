@@ -1,26 +1,24 @@
 import React from 'react'
 import { View } from 'react-native'
-import PropTypes from 'prop-types'
+// FIXME: import { useNavigation, useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 
 import CardList from '../components/CardList'
 
-function WorkView({ route }) {
+function WorkView() {
+  const route = useRoute()
   const { id } = route.params
+  // FIXME: const navigation = useNavigation()
 
   return (
     <View>
       <CardList scheduleId={id} seCompleta={true} />
-      {/* <Button
+      {/* FIXME: <Button
         title="Ayuda"
         onPress={() => navigation.navigate('Informacion')}
       /> */}
     </View>
   )
-}
-
-WorkView.propTypes = {
-  navigation: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
 }
 
 export default WorkView
