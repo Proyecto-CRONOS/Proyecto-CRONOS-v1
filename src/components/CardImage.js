@@ -2,6 +2,7 @@ import React from 'react'
 import { Image } from 'react-native'
 import PropTypes from 'prop-types'
 
+// FIXME: A better way yo handle this constant
 const images = {
   aros: require('../assets/images/AROS.jpg'),
   arreador: require('../assets/images/ARREADOR.jpg'),

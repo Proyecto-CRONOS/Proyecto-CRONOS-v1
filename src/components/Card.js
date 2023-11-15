@@ -13,14 +13,14 @@ import CardAudio from '../components/CardAudio'
 function Card({ id, title, image, seCompleta }) {
   const [marcada, setMarcada] = useState(false)
 
-const handleClick = () => {
-  if (seCompleta) {
-    if (!marcada){
-      playAudio()
+  const handleClick = () => {
+    if (seCompleta) {
+      if (!marcada) {
+        playAudio()
+      }
+      setMarcada(!marcada)
     }
-    setMarcada(!marcada)
   }
-}
 
   const estiloTarjeta = {
     backgroundColor: marcada ? 'green' : 'white',
@@ -38,7 +38,7 @@ const handleClick = () => {
         <Text style={styles.text}>{title.toUpperCase()}</Text>
         {marcada ? (
           <Image
-            source={require('../assets/images/check.png')}
+            source={require('../assets/images/check.png')} // FIXME: A better way yo handle this constant
             style={styles.imageDone}
           />
         ) : (

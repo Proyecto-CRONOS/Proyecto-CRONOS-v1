@@ -2,6 +2,14 @@
 
 ## Changelog
 
+### November 15, 2023
+- Sort schedule cards screen.
+
+### November 14, 2023
+- Major refactoring and linter fixes.
+- Form handles errors after try to send.
+- Removed double header and back buttons.
+
 ### October 2, 2023
 - Create Cronograma feature added.
 - Replaced navigation prop in every component to useNavigation().
