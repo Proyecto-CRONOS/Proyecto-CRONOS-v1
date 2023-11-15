@@ -6,7 +6,16 @@ const SCHEDULE_TABLE = 'schedules'
 const CARD_TABLE = 'cards'
 const SCHEDULE_CARDS_TABLE = 'schedule_cards'
 
-export function createSchedule(id, name, birthDate, methodology, horse, equipment, considerations, date) {
+export function createSchedule(
+  id,
+  name,
+  birthDate,
+  methodology,
+  horse,
+  equipment,
+  considerations,
+  date,
+) {
   return {
     id,
     name,
@@ -66,6 +75,7 @@ function serializeScheduleCard(data, snakeCase = false) {
   const scheduleCard = serializeCard(data)
   scheduleCard.id = data.id
   scheduleCard.status = data.status
+  scheduleCard.order = data.order
   if (snakeCase) {
     scheduleCard.schedule_id = data.scheduleId
     scheduleCard.card_id = data.cardId
@@ -124,6 +134,7 @@ function createTables(db) {
       "status" TEXT NOT NULL,
       "schedule_id"	INTEGER NOT NULL,
       "card_id"	INTEGER NOT NULL,
+      "order" INTEGER NOT NULL,
       PRIMARY KEY("schedule_id","card_id")
     );
   `
@@ -188,9 +199,7 @@ export function getSchedule(db, id, callback) {
     WHERE id = ?
     LIMIT 1;
   `
-  const parameters = [
-    id,
-  ]
+  const parameters = [id]
   db.transaction((tx) => {
     tx.executeSql(query, parameters, (_, result) => {
       const item = resultSetRowListToItem(result)
@@ -209,9 +218,7 @@ export function getLatestSchedule(db, id, callback) {
     ORDER BY id DESC
     LIMIT 1;
   `
-  const parameters = [
-    id,
-  ]
+  const parameters = [id]
   db.transaction((tx) => {
     tx.executeSql(query, parameters, (_, result) => {
       const item = resultSetRowListToItem(result)
@@ -292,7 +299,9 @@ export function getScheduleCards(db, scheduleId, callback) {
     SELECT *
     FROM ${SCHEDULE_CARDS_TABLE}
     LEFT JOIN ${CARD_TABLE} AS card ON card.id = card_id
-    WHERE schedule_id = ?;
+    WHERE schedule_id = ?
+    ORDER BY "order" ASC
+    ;
   `
   const parameters = [scheduleId]
   db.transaction((tx) => {
@@ -308,11 +317,12 @@ export function getScheduleCards(db, scheduleId, callback) {
 
 export function saveScheduleCard(db, scheduleCard) {
   const insertQuery = `
-    INSERT OR REPLACE INTO ${SCHEDULE_CARDS_TABLE} ("status", "schedule_id", "card_id")
-    VALUES (?, ?, ?)
+    INSERT OR REPLACE INTO ${SCHEDULE_CARDS_TABLE} ("status", "order", "schedule_id", "card_id")
+    VALUES (?, ?, ?, ?)
   `
   const parameters = [
     scheduleCard.status,
+    scheduleCard.order,
     scheduleCard.scheduleId,
     scheduleCard.cardId,
   ]

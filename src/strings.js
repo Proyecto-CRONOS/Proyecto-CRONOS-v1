@@ -11,7 +11,8 @@ export const SCHEDULE_SAVED = 'Cronograma guardado exitosamente.'
 export const CARD_SAVED = 'Tarjeta guardada exitosamente.'
 
 export const BIRTH_DATE = 'Fecha de nacimiento'
-export const BIRTH_DATE_INVALID = 'La fecha de nacimiento es inválida (dd/mm/aaaa).'
+export const BIRTH_DATE_INVALID =
+  'La fecha de nacimiento es inválida (dd/mm/aaaa).'
 export const BIRTH_DATE_PLACEHOLDER = '20/10/1998'
 export const BIRTH_DATE_REQUIRED = 'La fecha de nacimiento es requerida.'
 export const CONSIDERATIONS = 'Consideraciones'

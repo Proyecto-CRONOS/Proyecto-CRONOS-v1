@@ -53,9 +53,7 @@ function CronogramasList() {
           theme={{ colors: { primary: SUCCESS_BANNER_BACKGROUND } }}
           elevation={SUCCESS_BANNER_ELEVATION}
           visible={bannerVisible}
-          actions={[
-            { label: CLOSE, onPress: () => setBannerVisible(false) },
-          ]}
+          actions={[{ label: CLOSE, onPress: () => setBannerVisible(false) }]}
           icon={SUCCESS_BANNER_ICON}
         >
           {action.message}

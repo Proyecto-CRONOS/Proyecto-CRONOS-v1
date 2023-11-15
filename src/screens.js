@@ -10,7 +10,8 @@ export const CARD_DETAIL = 'Detalle de Cronograma'.toUpperCase()
 
 export const SCHEDULES = 'Cronogramas'.toUpperCase()
 export const SCHEDULES_LIST = 'Listado de Cronogramas'.toUpperCase()
-export const SCHEDULE_CARDS_EDIT = 'Editar Tarjetas de Cronogramas'.toUpperCase()
+export const SCHEDULE_CARDS_EDIT =
+  'Editar Tarjetas de Cronogramas'.toUpperCase()
 export const SCHEDULE_CREATE = 'Crear Cronograma'.toUpperCase()
 export const SCHEDULE_DETAIL = 'Detalle de Cronograma'.toUpperCase()
 export const SCHEDULE_EDIT = 'Editar Cronograma'.toUpperCase()

@@ -14,6 +14,7 @@ function description({ horse, date }) {
 function CronogramaListItem({ id, name, horse, date }) {
   const navigation = useNavigation()
   // TODO: Editar and Trabajar could go to a i18n file
+
   /*
   <View>
     <IconButton
@@ -38,7 +39,7 @@ function CronogramaListItem({ id, name, horse, date }) {
             mode="outlined"
             compact="true"
             iconColor={PRIMARY_COLOR}
-            onPress={() => navigation.navigate({ WORK }, { id })}
+            onPress={() => navigation.navigate(WORK, { id })}
           />
         </Tooltip>
       )}

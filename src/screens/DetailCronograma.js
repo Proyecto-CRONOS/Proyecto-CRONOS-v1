@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native'
+import {
+  useRoute,
+  useNavigation,
+  useFocusEffect,
+} from '@react-navigation/native'
 import { View } from 'react-native'
 import { Button, Card, Text } from 'react-native-paper'
 
@@ -67,7 +71,7 @@ function DetailCronograma() {
             {EDIT}
           </Button>
           <Button
-            onPress={() => navigation.navigate({ SCHEDULE_CARDS_EDIT }, { id })}
+            onPress={() => navigation.navigate(SCHEDULE_CARDS_EDIT, { id })}
           >
             {CARDS}
           </Button>

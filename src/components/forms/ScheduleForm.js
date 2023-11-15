@@ -51,7 +51,7 @@ function ScheduleForm({ schedule, onSave }) {
   const [editedSchedule, setEditedSchedule] = useState(schedule)
   const [errors, setErrors] = useState({})
   const [isFormCompleted, setIsFormCompleted] = useState(false)
-  const [ formSent , setFormSent ] = useState(false)
+  const [formSent, setFormSent] = useState(false)
 
   useEffect(() => {
     console.log(errors)
@@ -61,7 +61,15 @@ function ScheduleForm({ schedule, onSave }) {
   }, [editedSchedule])
 
   const validateCompletedForm = () => {
-    setIsFormCompleted(editedSchedule.name && editedSchedule.birthDate && editedSchedule.methodology && editedSchedule.horse && editedSchedule.equipment && editedSchedule.considerations && editedSchedule.date)
+    setIsFormCompleted(
+      editedSchedule.name &&
+        editedSchedule.birthDate &&
+        editedSchedule.methodology &&
+        editedSchedule.horse &&
+        editedSchedule.equipment &&
+        editedSchedule.considerations &&
+        editedSchedule.date,
+    )
   }
 
   const validateForm = () => {
@@ -78,8 +86,7 @@ function ScheduleForm({ schedule, onSave }) {
         editedSchedule.birthDate,
       )
     ) {
-      currentErrors.birthDate =
-      currentErrors.birthDate = BIRTH_DATE_INVALID
+      currentErrors.birthDate = currentErrors.birthDate = BIRTH_DATE_INVALID
     }
 
     if (!editedSchedule.methodology) {

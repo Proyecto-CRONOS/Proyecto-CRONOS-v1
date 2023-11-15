@@ -26,6 +26,7 @@ function CardList({ scheduleId, seCompleta }) {
   if (!fontsLoaded) {
     return null
   }
+
   return (
     <LinearGradient
       colors={['rgb(219,226,133)', 'rgb(61,111,140)']}
