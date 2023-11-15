@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### November 15, 2023
+- Sort schedule cards screen.
+
 ### November 14, 2023
 - Major refactoring and linter fixes.
 - Form handles errors after try to send.
