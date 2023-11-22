@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import { useRoute, useFocusEffect } from '@react-navigation/native'
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { openDatabase, getScheduleCards, saveScheduleCard } from '../model'
 import { BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2 } from '../styles'
 import CreateFAB from '../components/CreateFAB'
 import ScheduleCard from '../components/ScheduleCard'
+import { SCHEDULE_ADD_CARD } from '../screens'
+
+function addCardCronogramaAction(navigation) {
+  navigation.navigate(SCHEDULE_ADD_CARD)
+}
 
 function CronogramaCardsList() {
   const [scheduleCards, setScheduleCards] = useState([])
+  const navigation = useNavigation()
   const route = useRoute()
   const { id: scheduleId } = route.params
 
@@ -62,7 +68,7 @@ function CronogramaCardsList() {
           />
         ))}
       </ScrollView>
-      <CreateFAB onPress={() => console.log('Create')} />
+      <CreateFAB onPress={() => addCardCronogramaAction(navigation)} />
     </LinearGradient>
   )
 }
