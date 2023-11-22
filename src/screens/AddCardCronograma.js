@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 
 const items = [
   // this is the parent or 'item'
@@ -38,36 +38,36 @@ const items = [
   },
   
 
-];
+]
 
 export default class AddCardCronograma extends Component {
-    constructor() {
-      super();
-      this.state = {
-        selectedItems: [],
-      };
-    }
-    onSelectedItemsChange = (selectedItems) => {
-      this.setState({ selectedItems });
-    };
-  
-    render() {
-      return (
-        <View>
-          <SectionedMultiSelect
-            items={items}
-            IconRenderer={Icon}
-            uniqueKey="id"
-            subKey="children"
-            selectText="Seleccione una tarjeta..."
-            confirmText="Confirmar"
-            selectedText="Seleccionadas"
-            searchPlaceholderText="Buscar"
-            showDropDowns={true}
-            onSelectedItemsChange={this.onSelectedItemsChange}
-            selectedItems={this.state.selectedItems}
-          />
-        </View>
-      );
+  constructor() {
+    super()
+    this.state = {
+      selectedItems: [],
     }
   }
+  onSelectedItemsChange = (selectedItems) => {
+    this.setState({ selectedItems })
+  }
+  
+  render() {
+    return (
+      <View>
+        <SectionedMultiSelect
+          items={items}
+          IconRenderer={Icon}
+          uniqueKey="id"
+          subKey="children"
+          selectText="Seleccione una tarjeta..."
+          confirmText="Confirmar"
+          selectedText="Seleccionadas"
+          searchPlaceholderText="Buscar"
+          showDropDowns={true}
+          onSelectedItemsChange={this.onSelectedItemsChange}
+          selectedItems={this.state.selectedItems}
+        />
+      </View>
+    )
+  }
+}
