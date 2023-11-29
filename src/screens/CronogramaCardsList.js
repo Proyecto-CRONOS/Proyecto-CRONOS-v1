@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -14,6 +14,7 @@ function addCardCronogramaAction(navigation) {
 
 function CronogramaCardsList() {
   const [scheduleCards, setScheduleCards] = useState([])
+  const [selectedItems, setSelectedItems] = useState([])
   const navigation = useNavigation()
   const route = useRoute()
   const { id: scheduleId } = route.params
@@ -24,6 +25,14 @@ function CronogramaCardsList() {
       getScheduleCards(db, scheduleId, setScheduleCards)
     }, []),
   )
+
+  useEffect(() => {
+    const selected = route.params?.selectedItems;
+    console.log("Seleccionadas", this.selected)
+     if (selected) {
+      setSelectedItems(selected);
+     }
+   }, [route.params?.selectedItems]);
 
   const sortScheduleCards = (scheduleCard, direction) => {
     const data = [...scheduleCards]
