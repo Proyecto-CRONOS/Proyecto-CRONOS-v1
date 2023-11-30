@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -8,13 +8,12 @@ import CreateFAB from '../components/CreateFAB'
 import ScheduleCard from '../components/ScheduleCard'
 import { SCHEDULE_ADD_CARD } from '../screens'
 
-function addCardCronogramaAction(navigation) {
-  navigation.navigate(SCHEDULE_ADD_CARD)
+function addCardCronogramaAction(navigation, scheduleId) {
+  navigation.navigate(SCHEDULE_ADD_CARD, {scheduleId})
 }
 
 function CronogramaCardsList() {
   const [scheduleCards, setScheduleCards] = useState([])
-  const [selectedItems, setSelectedItems] = useState([])
   const navigation = useNavigation()
   const route = useRoute()
   const { id: scheduleId } = route.params
@@ -23,16 +22,9 @@ function CronogramaCardsList() {
     React.useCallback(() => {
       const db = openDatabase()
       getScheduleCards(db, scheduleId, setScheduleCards)
+
     }, []),
   )
-
-  useEffect(() => {
-    const selected = route.params?.selectedItems;
-    console.log("Seleccionadas", this.selected)
-     if (selected) {
-      setSelectedItems(selected);
-     }
-   }, [route.params?.selectedItems]);
 
   const sortScheduleCards = (scheduleCard, direction) => {
     const data = [...scheduleCards]
@@ -42,6 +34,7 @@ function CronogramaCardsList() {
     data[index].order = data[targetIndex].order
     data[targetIndex].order = tempOrder
     data.sort((a, b) => a.order - b.order)
+    console.log("DATA",data)
     setScheduleCards(data)
     saveScheduleCards()
   }
@@ -77,7 +70,7 @@ function CronogramaCardsList() {
           />
         ))}
       </ScrollView>
-      <CreateFAB onPress={() => addCardCronogramaAction(navigation)} />
+      <CreateFAB onPress={() => addCardCronogramaAction(navigation, scheduleId)} />
     </LinearGradient>
   )
 }

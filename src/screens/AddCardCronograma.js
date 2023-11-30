@@ -1,8 +1,20 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select'
 import { SCHEDULE_CARDS_EDIT } from '../screens'
+import { useRoute, useNavigation } from '@react-navigation/native'
+import { openDatabase, getScheduleCards, saveScheduleCard } from '../model'
+import { Banner } from 'react-native-paper'
+import {
+  BACKGROUND_GRADIENT_1,
+  BACKGROUND_GRADIENT_2,
+  SUCCESS_BANNER_BACKGROUND,
+  SUCCESS_BANNER_ELEVATION,
+  SUCCESS_BANNER_ICON,
+} from '../styles'
+import { CLOSE } from '../strings'
+
 
 const items = [
   // this is the parent or 'item'
@@ -255,45 +267,85 @@ const items = [
 
 ]
 
-export default class AddCardCronograma extends Component {
-  constructor() {
-    super()
-    this.state = {
-      selectedItems: [],
-    }
-  }
+function AddCardCronograma() {
+  const route = useRoute()
+  const navigation = useNavigation()
+  const { scheduleId } = route.params
+  const [ selectedItems, setSelectedItems ] = useState([])
+  const [ scheduleCards, setScheduleCards ] = useState([])
+  const [ action, setAction ] = useState({})
+  const [ bannerVisible, setBannerVisible ] = useState(false)
+
+  useEffect(() => {
+    const db = openDatabase()
+    getScheduleCards(db, scheduleId, setScheduleCards)
+  }, [])
+
   onSelectedItemsChange = (selectedItems) => {
-    this.setState({ selectedItems })
+    setSelectedItems(selectedItems)
   }
 
-  SaveCardsToSort = () => {
-    console.log('Guardar tarjetas:', this.state.selectedItems);
-    this.props.navigation.navigate(SCHEDULE_CARDS_EDIT, {
-      selectedItems: this.state.selectedItems,
-    });
+  saveCardsToSort = () => {
+    if (!scheduleId) {
+      console.error('scheduleId is null or undefined')
+      return // Stop execution if scheduleId is not valid
+    }
+    console.log('Guardar tarjetas:', selectedItems)
+    let order = 1
+    console.log(scheduleCards, scheduleCards == false)
+    if (scheduleCards.length) {
+      order = scheduleCards[scheduleCards.length - 1].order + 1
+    }
+    const db = openDatabase()
+    selectedItems.forEach(cardId => {
+      const scheduleCard = {
+        status: "OK", // FIXME: To const file
+        order,
+        cardId,
+        scheduleId,
+      }
+      saveScheduleCard(db, scheduleCard)
+      order++
+    })
+    setSelectedItems([])
+    setAction({
+      message: "Las tarjetas fueron agregadas correctamente." // FIXME: Move to strings
+    })
+    setBannerVisible(true)
   }
-  
-  render() {
-    return (
-      <View>
-        <SectionedMultiSelect
-          items={items}
-          IconRenderer={Icon}
-          uniqueKey="id"
-          subKey="children"
-          selectText="Seleccione una tarjeta..."
-          confirmText="Confirmar Selección"
-          selectedText="Seleccionadas"
-          searchPlaceholderText="Buscar"
-          showDropDowns={false}
-          onSelectedItemsChange={this.onSelectedItemsChange}
-          selectedItems={this.state.selectedItems}
-        />
-        <Button
-          title="Agregar Tarjetas"
-          onPress={this.SaveCardsToSort}
-        />
-      </View>
-    )
-  }
+
+  return (
+    <View>
+      {action && (
+        <Banner
+          theme={{ colors: { primary: SUCCESS_BANNER_BACKGROUND } }}
+          elevation={SUCCESS_BANNER_ELEVATION}
+          visible={bannerVisible}
+          actions={[{ label: CLOSE, onPress: () => setBannerVisible(false) }]}
+          icon={SUCCESS_BANNER_ICON}
+        >
+          {action.message}
+        </Banner>
+      )}
+      <SectionedMultiSelect
+        items={items}
+        IconRenderer={Icon}
+        uniqueKey="id"
+        subKey="children"
+        selectText="Seleccione una tarjeta..."
+        confirmText="Confirmar Selección"
+        selectedText="Seleccionadas"
+        searchPlaceholderText="Buscar"
+        showDropDowns={false}
+        onSelectedItemsChange={onSelectedItemsChange}
+        selectedItems={selectedItems}
+      />
+      <Button
+        title="Agregar Tarjetas"
+        onPress={saveCardsToSort}
+      />
+    </View>
+  )
 }
+
+export default AddCardCronograma;

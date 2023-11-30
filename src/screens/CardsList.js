@@ -55,7 +55,7 @@ function CardList({ scheduleId, seCompleta }) {
     <SafeAreaView>
       {action && (
         <Banner
-          theme={{ colors: { primary: { SUCCESS_BANNER_BACKGROUND } } }}
+          theme={{ colors: { primary: SUCCESS_BANNER_BACKGROUND } }}
           elevation={SUCCESS_BANNER_ELEVATION}
           visible={bannerVisible}
           actions={[{ label: CLOSE, onPress: () => setBannerVisible(false) }]}

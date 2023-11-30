@@ -326,6 +326,11 @@ export function saveScheduleCard(db, scheduleCard) {
     scheduleCard.scheduleId,
     scheduleCard.cardId,
   ]
+  // console.log("SCHEDULE_ID_DB_sched", scheduleCard.scheduleId)
+  // console.log("SCHEDULE_ID_DB_status", scheduleCard.status)
+  // console.log("SCHEDULE_ID_DB_card", scheduleCard.cardId)
+  // console.log("SCHEDULE_ID_DB_order", scheduleCard.order)
+
   db.transaction((tx) => {
     tx.executeSql(
       insertQuery,
