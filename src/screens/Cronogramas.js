@@ -7,7 +7,7 @@ import {
   SCHEDULE_CREATE,
   SCHEDULE_DETAIL,
   SCHEDULE_EDIT,
-  SCHEDULE_ADD_CARD
+  SCHEDULE_ADD_CARD,
 } from '../screens'
 import CronogramasList from './CronogramasList'
 import AddCronograma from './AddCronograma'
@@ -15,7 +15,6 @@ import AddCardCronograma from './AddCardCronograma'
 import DetailCronograma from './DetailCronograma'
 import EditCronograma from './EditCronograma'
 import CronogramaCardsList from './CronogramaCardsList'
-
 
 const Stack = createStackNavigator()
 

@@ -2,19 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Button, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select'
-import { SCHEDULE_CARDS_EDIT } from '../screens'
-import { useRoute, useNavigation } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import { openDatabase, getScheduleCards, saveScheduleCard } from '../model'
 import { Banner } from 'react-native-paper'
 import {
-  BACKGROUND_GRADIENT_1,
-  BACKGROUND_GRADIENT_2,
   SUCCESS_BANNER_BACKGROUND,
   SUCCESS_BANNER_ELEVATION,
   SUCCESS_BANNER_ICON,
 } from '../styles'
 import { CLOSE } from '../strings'
-
 
 const items = [
   // this is the parent or 'item'
@@ -25,267 +21,268 @@ const items = [
     children: [
       {
         id: 1,
-        name: "AROS",
-        description: "Estructura de 1,5 metros de alto, con aro de red en la parte superior que permite embocar pelotas (tanto desde arriba como abajo del caballo).",
-        audio: "Aros.ogg",
-        image: "aros"
+        name: 'AROS',
+        description:
+          'Estructura de 1,5 metros de alto, con aro de red en la parte superior que permite embocar pelotas (tanto desde arriba como abajo del caballo).',
+        audio: 'Aros.ogg',
+        image: 'aros',
       },
       {
         id: 2,
-        name: "ARREADOR",
-        description: " - ",
-        audio: "Arreador.ogg",
-        image: "arreador"
+        name: 'ARREADOR',
+        description: ' - ',
+        audio: 'Arreador.ogg',
+        image: 'arreador',
       },
       {
         id: 3,
-        name: "BAJO MONTURA",
-        description: " - ",
-        audio: "Bajo Montura.ogg",
-        image: "bajomontura"
+        name: 'BAJO MONTURA',
+        description: ' - ',
+        audio: 'Bajo Montura.ogg',
+        image: 'bajomontura',
       },
       {
         id: 4,
-        name: "BANDERA",
-        description: " - ",
-        audio: "Bandera.ogg",
-        image: "bandera"
+        name: 'BANDERA',
+        description: ' - ',
+        audio: 'Bandera.ogg',
+        image: 'bandera',
       },
       {
         id: 5,
-        name: "BOZAL",
-        description: " - ",
-        audio: "Bozal.ogg",
-        image: "bozal"
+        name: 'BOZAL',
+        description: ' - ',
+        audio: 'Bozal.ogg',
+        image: 'bozal',
       },
       {
         id: 6,
-        name: "BROCHES",
-        description: "Elemento plástico, de tamaño pequeño, que al presionar con los dedos índice y pulgar se abre y permite colgarlo (por ejemplo a las crines del caballo), o enganchar hojas, telas.",
-        audio: "Broches.ogg",
-        image: "broches"
+        name: 'BROCHES',
+        description:
+          'Elemento plástico, de tamaño pequeño, que al presionar con los dedos índice y pulgar se abre y permite colgarlo (por ejemplo a las crines del caballo), o enganchar hojas, telas.',
+        audio: 'Broches.ogg',
+        image: 'broches',
       },
       {
         id: 7,
-        name: "CABALLO",
-        description: "El caballo (Yeguaivan) es un mamífero perisodáctilo domesticado de la familia de los équidos.",
-        audio: "Caballo.ogg",
-        image: "caballo"
+        name: 'CABALLO',
+        description:
+          'El caballo (Yeguaivan) es un mamífero perisodáctilo domesticado de la familia de los équidos.',
+        audio: 'Caballo.ogg',
+        image: 'caballo',
       },
       {
         id: 8,
-        name: "CABEZADA",
-        description: " - ",
-        audio: "Cabezada.ogg",
-        image: "cabezada"
+        name: 'CABEZADA',
+        description: ' - ',
+        audio: 'Cabezada.ogg',
+        image: 'cabezada',
       },
       {
         id: 9,
-        name: "CASCO",
-        description: " - ",
-        audio: "Casco.ogg",
-        image: "casco"
+        name: 'CASCO',
+        description: ' - ',
+        audio: 'Casco.ogg',
+        image: 'casco',
       },
       {
         id: 10,
-        name: "CEPILLO",
-        description: " - ",
-        audio: "Cepillo.ogg",
-        image: "cepillo"
+        name: 'CEPILLO',
+        description: ' - ',
+        audio: 'Cepillo.ogg',
+        image: 'cepillo',
       },
       {
         id: 11,
-        name: "CONOS",
-        description: " - ",
-        audio: "Conos.ogg",
-        image: "conos"
+        name: 'CONOS',
+        description: ' - ',
+        audio: 'Conos.ogg',
+        image: 'conos',
       },
       {
         id: 12,
-        name: "CUERDA",
-        description: " - ",
-        audio: "Cuerda.ogg",
-        image: "cuerda"
+        name: 'CUERDA',
+        description: ' - ',
+        audio: 'Cuerda.ogg',
+        image: 'cuerda',
       },
       {
         id: 13,
-        name: "ESCARBA VASOS",
-        description: " - ",
-        audio: "Escarba Vasos.ogg",
-        image: "escarbavasos"
+        name: 'ESCARBA VASOS',
+        description: ' - ',
+        audio: 'Escarba Vasos.ogg',
+        image: 'escarbavasos',
       },
       {
         id: 14,
-        name: "FUSTA",
-        description: " - ",
-        audio: "Fusta.ogg",
-        image: "fusta"
+        name: 'FUSTA',
+        description: ' - ',
+        audio: 'Fusta.ogg',
+        image: 'fusta',
       },
       {
         id: 15,
-        name: "LIMPIEZA",
-        description: " - ",
-        audio: "Limpieza.ogg",
-        image: "limpieza"
+        name: 'LIMPIEZA',
+        description: ' - ',
+        audio: 'Limpieza.ogg',
+        image: 'limpieza',
       },
       {
         id: 16,
-        name: "MATRA",
-        description: " - ",
-        audio: "Matra.ogg",
-        image: "matra"
+        name: 'MATRA',
+        description: ' - ',
+        audio: 'Matra.ogg',
+        image: 'matra',
       },
       {
         id: 17,
-        name: "MONTURA",
-        description: " - ",
-        audio: "Montura.ogg",
-        image: "montura"
+        name: 'MONTURA',
+        description: ' - ',
+        audio: 'Montura.ogg',
+        image: 'montura',
       },
       {
         id: 18,
-        name: "MONTURIN",
-        description: " - ",
-        audio: "Monturin.ogg",
-        image: "monturin"
+        name: 'MONTURIN',
+        description: ' - ',
+        audio: 'Monturin.ogg',
+        image: 'monturin',
       },
       {
         id: 19,
-        name: "PALENQUE",
-        description: " - ",
-        audio: "Palenque.ogg",
-        image: "palenque"
+        name: 'PALENQUE',
+        description: ' - ',
+        audio: 'Palenque.ogg',
+        image: 'palenque',
       },
       {
         id: 20,
-        name: "PASTO",
-        description: " - ",
-        audio: "Pasto.ogg",
-        image: "pasto"
+        name: 'PASTO',
+        description: ' - ',
+        audio: 'Pasto.ogg',
+        image: 'pasto',
       },
       {
         id: 21,
-        name: "PELOTA DE PATO",
-        description: " - ",
-        audio: "Pelota de Pato.ogg",
-        image: "pelotadepato"
+        name: 'PELOTA DE PATO',
+        description: ' - ',
+        audio: 'Pelota de Pato.ogg',
+        image: 'pelotadepato',
       },
       {
         id: 22,
-        name: "PELOTAS",
-        description: " - ",
-        audio: "Pelotas.ogg",
-        image: "pelotas"
+        name: 'PELOTAS',
+        description: ' - ',
+        audio: 'Pelotas.ogg',
+        image: 'pelotas',
       },
       {
         id: 23,
-        name: "PICADERO",
-        description: " - ",
-        audio: "Picadero.ogg",
-        image: "picadero"
+        name: 'PICADERO',
+        description: ' - ',
+        audio: 'Picadero.ogg',
+        image: 'picadero',
       },
       {
         id: 24,
-        name: "PISTA DE ADIESTRAMIENTO",
-        description: " - ",
-        audio: "Pista de Adiestramiento.ogg",
-        image: "pistadeadiestramiento"
+        name: 'PISTA DE ADIESTRAMIENTO',
+        description: ' - ',
+        audio: 'Pista de Adiestramiento.ogg',
+        image: 'pistadeadiestramiento',
       },
       {
         id: 25,
-        name: "RAMPA",
-        description: " - ",
-        audio: "Rampa.ogg",
-        image: "rampa"
+        name: 'RAMPA',
+        description: ' - ',
+        audio: 'Rampa.ogg',
+        image: 'rampa',
       },
       {
         id: 26,
-        name: "RASQUETA",
-        description: " - ",
-        audio: "Rasqueta.ogg",
-        image: "rasqueta"
+        name: 'RASQUETA',
+        description: ' - ',
+        audio: 'Rasqueta.ogg',
+        image: 'rasqueta',
       },
       {
         id: 27,
-        name: "RIENDAS",
-        description: " - ",
-        audio: "Riendas.ogg",
-        image: "riendas"
+        name: 'RIENDAS',
+        description: ' - ',
+        audio: 'Riendas.ogg',
+        image: 'riendas',
       },
       {
         id: 28,
-        name: "SOMBRERITOS",
-        description: " - ",
-        audio: "Sombreritos.ogg",
-        image: "sombreritos"
+        name: 'SOMBRERITOS',
+        description: ' - ',
+        audio: 'Sombreritos.ogg',
+        image: 'sombreritos',
       },
       {
         id: 29,
-        name: "SUDADERA",
-        description: " - ",
-        audio: "Sudadera.ogg",
-        image: "sudadera"
+        name: 'SUDADERA',
+        description: ' - ',
+        audio: 'Sudadera.ogg',
+        image: 'sudadera',
       },
       {
         id: 30,
-        name: "TAMBOR",
-        description: " - ",
-        audio: "Tambor.ogg",
-        image: "tambor"
+        name: 'TAMBOR',
+        description: ' - ',
+        audio: 'Tambor.ogg',
+        image: 'tambor',
       },
       {
         id: 31,
-        name: "TERMINE",
-        description: " - ",
-        audio: "Termine.ogg",
-        image: "termine"
+        name: 'TERMINE',
+        description: ' - ',
+        audio: 'Termine.ogg',
+        image: 'termine',
       },
       {
         id: 32,
-        name: "TRANQUERA",
-        description: " - ",
-        audio: "Tranquera.ogg",
-        image: "tranquera"
+        name: 'TRANQUERA',
+        description: ' - ',
+        audio: 'Tranquera.ogg',
+        image: 'tranquera',
       },
       {
         id: 33,
-        name: "VALLAS",
-        description: " - ",
-        audio: "Vallas.ogg",
-        image: "vallas"
+        name: 'VALLAS',
+        description: ' - ',
+        audio: 'Vallas.ogg',
+        image: 'vallas',
       },
       {
         id: 34,
-        name: "ZANAHORIA",
-        description: " - ",
-        audio: "Zanahoria.ogg",
-        image: "zanahoria"
+        name: 'ZANAHORIA',
+        description: ' - ',
+        audio: 'Zanahoria.ogg',
+        image: 'zanahoria',
       },
     ],
   },
-  
-
 ]
 
 function AddCardCronograma() {
   const route = useRoute()
-  const navigation = useNavigation()
+  //const navigation = useNavigation()
   const { scheduleId } = route.params
-  const [ selectedItems, setSelectedItems ] = useState([])
-  const [ scheduleCards, setScheduleCards ] = useState([])
-  const [ action, setAction ] = useState({})
-  const [ bannerVisible, setBannerVisible ] = useState(false)
+  const [selectedItems, setSelectedItems] = useState([])
+  const [scheduleCards, setScheduleCards] = useState([])
+  const [action, setAction] = useState({})
+  const [bannerVisible, setBannerVisible] = useState(false)
 
   useEffect(() => {
     const db = openDatabase()
     getScheduleCards(db, scheduleId, setScheduleCards)
   }, [])
 
-  onSelectedItemsChange = (selectedItems) => {
+  const onSelectedItemsChange = (selectedItems) => {
     setSelectedItems(selectedItems)
   }
 
-  saveCardsToSort = () => {
+  const saveCardsToSort = () => {
     if (!scheduleId) {
       console.error('scheduleId is null or undefined')
       return // Stop execution if scheduleId is not valid
@@ -297,9 +294,9 @@ function AddCardCronograma() {
       order = scheduleCards[scheduleCards.length - 1].order + 1
     }
     const db = openDatabase()
-    selectedItems.forEach(cardId => {
+    selectedItems.forEach((cardId) => {
       const scheduleCard = {
-        status: "OK", // FIXME: To const file
+        status: 'OK', // FIXME: To const file
         order,
         cardId,
         scheduleId,
@@ -309,7 +306,7 @@ function AddCardCronograma() {
     })
     setSelectedItems([])
     setAction({
-      message: "Las tarjetas fueron agregadas correctamente." // FIXME: Move to strings
+      message: 'Las tarjetas fueron agregadas correctamente.', // FIXME: Move to strings
     })
     setBannerVisible(true)
   }
@@ -340,12 +337,9 @@ function AddCardCronograma() {
         onSelectedItemsChange={onSelectedItemsChange}
         selectedItems={selectedItems}
       />
-      <Button
-        title="Agregar Tarjetas"
-        onPress={saveCardsToSort}
-      />
+      <Button title="Agregar Tarjetas" onPress={saveCardsToSort} />
     </View>
   )
 }
 
-export default AddCardCronograma;
+export default AddCardCronograma

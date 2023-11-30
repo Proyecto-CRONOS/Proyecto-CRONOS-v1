@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native'
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { openDatabase, getScheduleCards, saveScheduleCard } from '../model'
 import { BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2 } from '../styles'
@@ -9,7 +13,7 @@ import ScheduleCard from '../components/ScheduleCard'
 import { SCHEDULE_ADD_CARD } from '../screens'
 
 function addCardCronogramaAction(navigation, scheduleId) {
-  navigation.navigate(SCHEDULE_ADD_CARD, {scheduleId})
+  navigation.navigate(SCHEDULE_ADD_CARD, { scheduleId })
 }
 
 function CronogramaCardsList() {
@@ -22,7 +26,6 @@ function CronogramaCardsList() {
     React.useCallback(() => {
       const db = openDatabase()
       getScheduleCards(db, scheduleId, setScheduleCards)
-
     }, []),
   )
 
@@ -34,7 +37,7 @@ function CronogramaCardsList() {
     data[index].order = data[targetIndex].order
     data[targetIndex].order = tempOrder
     data.sort((a, b) => a.order - b.order)
-    console.log("DATA",data)
+    console.log('DATA', data)
     setScheduleCards(data)
     saveScheduleCards()
   }
@@ -70,7 +73,9 @@ function CronogramaCardsList() {
           />
         ))}
       </ScrollView>
-      <CreateFAB onPress={() => addCardCronogramaAction(navigation, scheduleId)} />
+      <CreateFAB
+        onPress={() => addCardCronogramaAction(navigation, scheduleId)}
+      />
     </LinearGradient>
   )
 }
