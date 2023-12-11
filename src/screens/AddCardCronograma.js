@@ -121,7 +121,7 @@ function AddCardCronograma() {
         mode="contained"
         buttonColor={PRIMARY_COLOR}
         style={{ opacity: 1  }}
-        onPress={{saveCardsToSort}}
+        onPress={saveCardsToSort}
       >
         {ADD_CARDS}
       </Button>  
