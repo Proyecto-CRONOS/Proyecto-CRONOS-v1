@@ -33,6 +33,12 @@ function Home() {
             onPress={() => navigation.navigate(NAVIGATION)}
           />
         </View>
+        <View >
+          <Image
+            source={require('../assets/images/identidad/cedica_info.png')} // FIXME: A better way yo handle this constant
+            style={styles.imageHome}
+          />
+        </View>
       </LinearGradient>
     </View>
   )
@@ -63,6 +69,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     marginTop: 50,
+  },
+  imageHome: {
+    width: 410,
+    height: 60,
+    marginTop: 20,
   },
 })
 

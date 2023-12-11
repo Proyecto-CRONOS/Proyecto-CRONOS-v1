@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
-import { ScrollView, StyleSheet, Text } from 'react-native'
+import { ScrollView, View, StyleSheet, Text } from 'react-native'
 import { TextInput, Button, Divider, HelperText } from 'react-native-paper'
-
+import { LinearGradient } from 'expo-linear-gradient'
 import { createSchedule } from '../../model'
-import { PRIMARY_COLOR } from '../../styles'
+import { BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2, PRIMARY_COLOR} from '../../styles'
 import {
   BIRTH_DATE,
   BIRTH_DATE_INVALID,
@@ -30,6 +30,7 @@ import {
   EQUIPMENT,
   EQUIPMENT_PLACEHOLDER,
   EQUIPMENT_REQUIRED,
+  TITLE_SCHEDULE,
 } from '../../strings'
 
 // NOTE: This could be better
@@ -144,106 +145,109 @@ function ScheduleForm({ schedule, onSave }) {
 
   // TODO: i18n
   return (
-    <ScrollView style={styles.view}>
-      <TextInput
-        label={NAME}
-        placeholder={NAME_PLACEHOLDER}
-        mode="outlined"
-        styles={styles.input}
-        value={editedSchedule.name}
-        onChangeText={(name) => handleInputChange('name', name)}
-      />
-      <HelperText type="error" visible={errors.name}>
-        {errors.name}
-      </HelperText>
-      <TextInput
-        label={BIRTH_DATE}
-        placeholder={BIRTH_DATE_PLACEHOLDER}
-        mode="outlined"
-        styles={styles.input}
-        value={editedSchedule.birthDate}
-        onChangeText={(birthDate) => handleInputChange('birthDate', birthDate)}
-      />
-      <HelperText type="error" visible={errors.birthDate}>
-        {errors.birthDate}
-      </HelperText>
-
-      <TextInput
-        label={METHODOLOGY}
-        placeholder={METHODOLOGY_PLACEHOLDER}
-        mode="outlined"
-        styles={styles.input}
-        value={editedSchedule.methodology}
-        onChangeText={(methodology) =>
-          handleInputChange('methodology', methodology)
-        }
-      />
-      <HelperText type="error" visible={errors.methodology}>
-        {errors.methodology}
-      </HelperText>
-
-      <TextInput
-        label={HORSE}
-        placeholder={HORSE_PLACEHOLDER}
-        mode="outlined"
-        styles={styles.input}
-        value={editedSchedule.horse}
-        onChangeText={(horse) => handleInputChange('horse', horse)}
-      />
-      <HelperText type="error" visible={errors.horse}>
-        {errors.horse}
-      </HelperText>
-
-      <TextInput
-        label={EQUIPMENT}
-        placeholder={EQUIPMENT_PLACEHOLDER}
-        mode="outlined"
-        styles={styles.input}
-        value={editedSchedule.equipment}
-        onChangeText={(equipment) => handleInputChange('equipment', equipment)}
-      />
-      <HelperText type="error" visible={errors.equipment}>
-        {errors.equipment}
-      </HelperText>
-
-      <TextInput
-        label={CONSIDERATIONS}
-        placeholder={CONSIDERATIONS_PLACEHOLDER}
-        mode="outlined"
-        styles={styles.input}
-        value={editedSchedule.considerations}
-        onChangeText={(considerations) =>
-          handleInputChange('considerations', considerations)
-        }
-      />
-      <HelperText type="error" visible={errors.considerations}>
-        {errors.considerations}
-      </HelperText>
-
-      <TextInput
-        label={DATE}
-        placeholder={todaysDate()}
-        mode="outlined"
-        styles={styles.input}
-        value={editedSchedule.date}
-        onChangeText={(date) => handleInputChange('date', date)}
-      />
-      <HelperText type="error" visible={errors.date}>
-        {errors.date}
-      </HelperText>
-      <Divider style={styles.divider} />
-      <Button
-        icon="content-save"
-        mode="contained"
-        buttonColor={PRIMARY_COLOR}
-        style={{ opacity: isFormCompleted ? 1 : 0.5 }}
-        disabled={!isFormCompleted}
-        onPress={handleSubmit}
-      >
-        {SAVE}
-      </Button>
-      <Text></Text>
-    </ScrollView>
+    <LinearGradient
+      colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}
+      style={styles.container}
+    >
+      <View style={styles.view}>
+        <Text>{TITLE_SCHEDULE}</Text>
+        <ScrollView style={styles.view}>
+          <TextInput
+            label={NAME}
+            placeholder={NAME_PLACEHOLDER}
+            mode="outlined"
+            styles={styles.input}
+            value={editedSchedule.name}
+            onChangeText={(name) => handleInputChange('name', name)}
+          />
+          <HelperText type="error" visible={errors.name}>
+            {errors.name}
+          </HelperText>
+          <TextInput
+            label={BIRTH_DATE}
+            placeholder={BIRTH_DATE_PLACEHOLDER}
+            mode="outlined"
+            styles={styles.input}
+            value={editedSchedule.birthDate}
+            onChangeText={(birthDate) => handleInputChange('birthDate', birthDate)}
+          />
+          <HelperText type="error" visible={errors.birthDate}>
+            {errors.birthDate}
+          </HelperText>
+          <TextInput
+            label={METHODOLOGY}
+            placeholder={METHODOLOGY_PLACEHOLDER}
+            mode="outlined"
+            styles={styles.input}
+            value={editedSchedule.methodology}
+            onChangeText={(methodology) =>
+              handleInputChange('methodology', methodology)
+            }
+          />
+          <HelperText type="error" visible={errors.methodology}>
+            {errors.methodology}
+          </HelperText>
+          <TextInput
+            label={HORSE}
+            placeholder={HORSE_PLACEHOLDER}
+            mode="outlined"
+            styles={styles.input}
+            value={editedSchedule.horse}
+            onChangeText={(horse) => handleInputChange('horse', horse)}
+          />
+          <HelperText type="error" visible={errors.horse}>
+            {errors.horse}
+          </HelperText>
+          <TextInput
+            label={EQUIPMENT}
+            placeholder={EQUIPMENT_PLACEHOLDER}
+            mode="outlined"
+            styles={styles.input}
+            value={editedSchedule.equipment}
+            onChangeText={(equipment) => handleInputChange('equipment', equipment)}
+          />
+          <HelperText type="error" visible={errors.equipment}>
+            {errors.equipment}
+          </HelperText>
+          <TextInput
+            label={CONSIDERATIONS}
+            placeholder={CONSIDERATIONS_PLACEHOLDER}
+            mode="outlined"
+            styles={styles.input}
+            value={editedSchedule.considerations}
+            onChangeText={(considerations) =>
+              handleInputChange('considerations', considerations)
+            }
+          />
+          <HelperText type="error" visible={errors.considerations}>
+            {errors.considerations}
+          </HelperText>
+          <TextInput
+            label={DATE}
+            placeholder={todaysDate()}
+            mode="outlined"
+            styles={styles.input}
+            value={editedSchedule.date}
+            onChangeText={(date) => handleInputChange('date', date)}
+          />
+          <HelperText type="error" visible={errors.date}>
+            {errors.date}
+          </HelperText>
+          <Divider style={styles.divider} />
+          <Button
+            icon="content-save"
+            mode="contained"
+            buttonColor={PRIMARY_COLOR}
+            style={{ opacity: isFormCompleted ? 1 : 0.5 }}
+            disabled={!isFormCompleted}
+            onPress={handleSubmit}
+          >
+            {SAVE}
+          </Button>
+          <Text></Text>
+        </ScrollView>
+      </View>
+    </LinearGradient>
   )
 }
 
@@ -253,16 +257,22 @@ ScheduleForm.propTypes = {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   button: {
     marginTop: 20,
     marginBottom: 20,
   },
   view: {
-    paddingHorizontal: 10,
-    paddingVertical: -30,
+    backgroundColor: '#E6E4E9',
+    padding: 20,
   },
   divider: {
-    marginBottom: 15,
+    marginBottom: 32,
+    marginTop: 20,
   },
 })
 
