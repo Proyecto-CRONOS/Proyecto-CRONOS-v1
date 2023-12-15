@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, SafeAreaView } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useFonts } from 'expo-font'
-import { SafeAreaView } from 'react-navigation'
+//import { SafeAreaView } from 'react-navigation'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Banner } from 'react-native-paper'
 

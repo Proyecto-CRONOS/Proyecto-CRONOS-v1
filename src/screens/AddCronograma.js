@@ -1,7 +1,7 @@
 import React from 'react'
-import { SafeAreaView } from 'react-navigation'
-import { useNavigation } from '@react-navigation/native'
-
+//import { SafeAreaView } from 'react-navigation'
+import { useNavigation, NavigationContainer } from '@react-navigation/native'
+import { SafeAreaView } from 'react-native';
 import { saveSchedule, openDatabase } from '../model'
 import { SCHEDULE_SAVED } from '../strings'
 import { SCHEDULES_LIST } from '../screens'
