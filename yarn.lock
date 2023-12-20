@@ -5369,11 +5369,6 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lightningcss-win32-x64-msvc@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.19.0.tgz"
-  integrity sha512-C+VuUTeSUOAaBZZOPT7Etn/agx/MatzJzGRkeV+zEABmPuntv1zihncsi+AyGmjkkzq3wVedEy7h0/4S84mUtg==
-
 lightningcss@~1.19.0:
   version "1.19.0"
   resolved "https://registry.npmjs.org/lightningcss/-/lightningcss-1.19.0.tgz"
@@ -6780,10 +6775,10 @@ react-native-paper@^5.10.6:
     color "^3.1.2"
     use-latest-callback "^0.1.5"
 
-react-native-safe-area-context@*, "react-native-safe-area-context@>= 0.6.0", "react-native-safe-area-context@>= 3.0.0":
-  version "4.3.1"
-  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.3.1.tgz"
-  integrity sha512-cEr7fknJCToTrSyDCVNg0GRdRMhyLeQa2NZwVCuzEQcWedOw/59ExomjmzCE4rxrKXs6OJbyfNtFRNyewDaHuA==
+react-native-safe-area-context@*, "react-native-safe-area-context@>= 0.6.0", "react-native-safe-area-context@>= 3.0.0", react-native-safe-area-context@4.6.3:
+  version "4.6.3"
+  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.6.3.tgz"
+  integrity sha512-3CeZM9HFXkuqiU9HqhOQp1yxhXw6q99axPWrT+VJkITd67gnPSU03+U27Xk2/cr9XrLUnakM07kj7H0hdPnFiQ==
 
 react-native-safe-area-view@^0.14.9:
   version "0.14.9"
@@ -6792,10 +6787,10 @@ react-native-safe-area-view@^0.14.9:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
-"react-native-screens@>= 3.0.0", "react-native-screens@>=1.0.0 || >= 2.0.0-alpha.0 || >= 2.0.0-beta.0 || >= 2.0.0":
-  version "3.15.0"
-  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.15.0.tgz"
-  integrity sha512-ezC5TibsUYyqPuuHpZoM3iEl6bRzCVBMJeGaFkn7xznuOt1VwkZVub0BvafIEYR/+AQC/RjxzMSQPs1qal0+wA==
+"react-native-screens@>= 3.0.0", "react-native-screens@>=1.0.0 || >= 2.0.0-alpha.0 || >= 2.0.0-beta.0 || >= 2.0.0", react-native-screens@~3.22.0:
+  version "3.22.1"
+  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.22.1.tgz"
+  integrity sha512-ffzwUdVKf+iLqhWSzN5DXBm0s2w5sN0P+TaHHPAx42LT7+DT0g8PkHT1QDvxpR5vCEPSS1i3EswyVK4HCuhTYg==
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
