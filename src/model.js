@@ -16,16 +16,30 @@ export function createSchedule(
   considerations,
   date,
 ) {
+
   return {
     id,
     name,
-    birthDate,
+    birthDate: (birthDate) ? new Date(birthDate) : new Date(),
     methodology,
     horse,
     equipment,
     considerations,
-    date,
-    birth_date: birthDate,
+    date: (date) ? new Date(date) : new Date(),
+  }
+}
+
+export function createScheduleCard(
+  scheduleId,
+  cardId,
+  order,
+  status,
+) {
+  return {
+    scheduleId,
+    cardId,
+    order,
+    status,
   }
 }
 
@@ -109,12 +123,12 @@ function createTables(db) {
   const scheduleQuery = `
     CREATE TABLE IF NOT EXISTS ${SCHEDULE_TABLE} (
       "name"	TEXT NOT NULL,
-      "birth_date"	TEXT NOT NULL,
+      "birth_date"	DATETIME NOT NULL,
       "methodology"	TEXT NOT NULL,
       "horse"	TEXT NOT NULL,
       "equipment"	TEXT NOT NULL,
       "considerations"	TEXT NOT NULL,
-      "date"	NUMERIC NOT NULL,
+      "date"	DATETIME NOT NULL,
       "id"	INTEGER NOT NULL,
       PRIMARY KEY("id" AUTOINCREMENT)
     );
@@ -146,6 +160,12 @@ function createTables(db) {
       (_, error) => console.log(error), // TODO: Handle error
     )
     tx.executeSql(
+      scheduleQuery,
+      null,
+      null,
+      (_, error) => console.log(error), // TODO: Handle error
+    )
+    tx.executeSql(
       scheduleCardsQuery,
       null,
       null,
@@ -170,7 +190,7 @@ export function initializeDatabase(db) {
   createTables(db)
 
   schedules.forEach((schedule) => {
-    saveSchedule(db, schedule)
+    saveSchedule(db, serializeSchedule(schedule))
   })
   cards.forEach((card) => {
     saveCard(db, card)
@@ -239,12 +259,12 @@ export function saveSchedule(db, schedule) {
   const parameters = [
     schedule.id,
     schedule.name,
-    schedule.birthDate,
+    schedule.birthDate.toISOString(),
     schedule.methodology,
     schedule.horse,
     schedule.equipment,
     schedule.considerations,
-    schedule.date,
+    schedule.date.toISOString(),
   ]
   db.transaction((tx) => {
     tx.executeSql(
@@ -257,6 +277,7 @@ export function saveSchedule(db, schedule) {
 }
 
 export function getCards(db, callback) {
+  console.log('getCards')
   const query = `
     SELECT *
     FROM ${CARD_TABLE};
@@ -265,7 +286,9 @@ export function getCards(db, callback) {
     tx.executeSql(
       query,
       null,
-      (_, result) => callback(serializeCard(resultSetRowListToArray(result))),
+      (_, result) => {
+        callback(serializeCard(resultSetRowListToArray(result)))
+      },
       (_, error) => console.log(error), // TODO: Handle error
     )
   })
@@ -326,14 +349,27 @@ export function saveScheduleCard(db, scheduleCard) {
     scheduleCard.scheduleId,
     scheduleCard.cardId,
   ]
-  // console.log("SCHEDULE_ID_DB_sched", scheduleCard.scheduleId)
-  // console.log("SCHEDULE_ID_DB_status", scheduleCard.status)
-  // console.log("SCHEDULE_ID_DB_card", scheduleCard.cardId)
-  // console.log("SCHEDULE_ID_DB_order", scheduleCard.order)
 
   db.transaction((tx) => {
     tx.executeSql(
       insertQuery,
+      parameters,
+      null,
+      (_, error) => console.log(error), // TODO: Handle error
+    )
+  })
+}
+
+export function deleteScheduleCard(db, scheduleCard) {
+  const deleteQuery = `DELETE FROM ${SCHEDULE_CARDS_TABLE} WHERE schedule_id = ? AND card_id = ?;`
+  const parameters = [
+    scheduleCard.scheduleId,
+    scheduleCard.cardId,
+  ]
+
+  db.transaction((tx) => {
+    tx.executeSql(
+      deleteQuery,
       parameters,
       null,
       (_, error) => console.log(error), // TODO: Handle error

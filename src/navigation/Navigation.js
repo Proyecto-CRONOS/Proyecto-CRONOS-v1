@@ -9,7 +9,7 @@ import {
 } from '../styles'
 import { SCHEDULES, CARDS } from '../screens'
 
-import Cronogramas from '../screens/Cronogramas'
+import Schedules from '../screens/Schedules'
 import Cards from '../screens/Cards'
 
 const Tab = createBottomTabNavigator()
@@ -38,7 +38,7 @@ export default function Navigation() {
       <Tab.Screen
         name={SCHEDULES}
         options={{ headerShown: false }}
-        component={Cronogramas}
+        component={Schedules}
       />
       <Tab.Screen
         name={CARDS}

@@ -9,6 +9,7 @@ export const SELECT_IMAGE = 'Seleccionar imagen'.toUpperCase()
 export const SELECT_AUDIO = 'Seleccionar audio'.toUpperCase()
 export const SCHEDULE_SAVED = 'Cronograma guardado exitosamente.'
 export const CARD_SAVED = 'Tarjeta guardada exitosamente.'
+export const SCHEDULE_CARDS_SAVED = 'Tarjetas guardadas exitosamente.'
 export const BIRTH_DATE = 'Fecha de nacimiento'.toUpperCase()
 export const BIRTH_DATE_INVALID =
   'La fecha de nacimiento es inválida (dd/mm/aaaa).'
@@ -43,3 +44,4 @@ export const TITLE = 'Título'.toUpperCase()
 export const DESCRIPTION = 'Descripción'.toUpperCase()
 export const IMAGE = 'Imagen'.toUpperCase()
 export const AUDIO = 'Audio'.toUpperCase()
+export const SELECT_CARDS = 'Seleccionar tarjetas'.toUpperCase()
