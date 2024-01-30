@@ -4,7 +4,7 @@
 - Review re-rendering in useFocusEffect
 - Show empty cards in ScheduleCardList and ScheduleList
 - Navigate to SCHEDULE_CARDS_LIST instead SCHEDULE_DETAIL in ScheduleCardsAdd
-
+- Migrate react-navigation to new ways and upgrade dependencies
 
 - Review styles and strings
 - Dependencies: 7 moderate severity vulnerabilities
