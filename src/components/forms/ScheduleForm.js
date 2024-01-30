@@ -97,7 +97,7 @@ function ScheduleForm({ schedule, onSave }) {
     }
 
     setErrors(currentErrors)
-    console.log("currentErrors: ", currentErrors)
+    console.log('currentErrors: ', currentErrors)
     return Object.keys(currentErrors).length === 0
   }
 
