@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "cronos-appV1",
-    "slug": "cronos-appV1",
+    "slug": "cronos",
     "version": "1.0.0",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0035965b-f466-4752-b561-56d17fa13e82"
+      }
+    },
+    "owner": "adanmauri"
   }
 }
