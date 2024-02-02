@@ -3,6 +3,7 @@ import { Image, StyleSheet, View, Text, TextInput } from 'react-native'
 import { Divider, Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
+import * as DocumentPicker from 'expo-document-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { LinearGradient } from 'expo-linear-gradient'
 
@@ -30,6 +31,7 @@ import {
 function AddCard() {
   const navigation = useNavigation()
   const [image, setImage] = useState(null)
+  const [audio, setAudio] = useState(null)
   const [title, setTitle] = useState(null)
   const [description, setDescription] = useState(null)
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions()
@@ -50,6 +52,23 @@ function AddCard() {
     }
   }
 
+  const onPressAudio = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        mimeType: 'audio/*',
+        copyToCacheDirectory: false,
+      })
+      console.log('RESULT', result)
+      console.log('ahhhhh')
+      if (!result.canceled) {
+        setAudio(result.assets[0].uri)
+      }
+      console.log('ahhhhh2')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const onPressSave = async () => {
     if (!permissionResponse?.granted) {
       console.log('Sorry, we need media permissions')
@@ -60,13 +79,27 @@ function AddCard() {
       // Request device storage access permission
       const { status } = await MediaLibrary.requestPermissionsAsync()
       if (status === 'granted') {
-        const asset = await MediaLibrary.createAssetAsync(image)
+        let imageAsset, audioAsset
+        if (image) {
+          imageAsset = await MediaLibrary.createAssetAsync(image);
+        }
+        console.log('AUDIO', audio)
+        if (audio) {
+          audioAsset = {
+            uri: audio,
+            
+          };
+        }
         const db = openDatabase()
         const card = {
           title: title,
           description: description,
-          audio: '',
-          image: asset.uri,
+          audio: audioAsset ? audioAsset.uri : '',
+          image: imageAsset ? imageAsset.uri : '',
+        }
+        if (audio === null) {
+          console.log('Por favor, selecciona un archivo de audio.')
+          return
         }
         saveCard(db, card)
         // FIXME: Show something to the user
@@ -77,6 +110,7 @@ function AddCard() {
           },
         })
         console.log('Image successfully saved')
+        console.log('CARD', card)
       }
     } catch (error) {
       console.log(error)
@@ -125,7 +159,7 @@ function AddCard() {
           mode="contained"
           buttonColor={PRIMARY_COLOR}
           style={{ opacity: 1  }}
-          onPress={onPressImage}
+          onPress={onPressAudio}
         >
           {SELECT_AUDIO}
         </Button>      
