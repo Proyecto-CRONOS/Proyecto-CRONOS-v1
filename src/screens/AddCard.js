@@ -6,6 +6,8 @@ import * as ImagePicker from 'expo-image-picker'
 import * as DocumentPicker from 'expo-document-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { LinearGradient } from 'expo-linear-gradient'
+import * as FileSystem from 'expo-file-system';
+import { Audio } from 'expo-av';
 
 import { saveCard, openDatabase } from '../model'
 import {
@@ -35,7 +37,8 @@ function AddCard() {
   const [title, setTitle] = useState(null)
   const [description, setDescription] = useState(null)
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions()
-
+  const [audioFile, setAudioFile] = useState(null);
+  const [sound, setSound] = useState();
   useEffect(() => {
     requestPermission()
   }, [requestPermission])
@@ -52,24 +55,22 @@ function AddCard() {
     }
   }
 
-  const onPressAudio = async () => {
+  const pickAudio = async () => {
+    console.log("PIK")
     try {
-      const result = await DocumentPicker.getDocumentAsync({
-        mimeType: 'audio/*',
-        copyToCacheDirectory: false,
-      })
-      console.log('RESULT', result)
-      console.log('ahhhhh')
-      if (!result.canceled) {
-        setAudio(result.assets[0].uri)
+      const result = await DocumentPicker.getDocumentAsync({ type: 'audio/*' });
+      console.log("RESULT", result)
+      if (!result.canceled ) {
+        setAudioFile(result)
+        console.log("RESULT2", result)
       }
-      console.log('ahhhhh2')
     } catch (error) {
-      console.error(error)
+      console.error('Error picking audio file:', error)
     }
   }
 
   const onPressSave = async () => {
+    console.log("SAVE")
     if (!permissionResponse?.granted) {
       console.log('Sorry, we need media permissions')
       return
@@ -83,24 +84,49 @@ function AddCard() {
         if (image) {
           imageAsset = await MediaLibrary.createAssetAsync(image);
         }
-        console.log('AUDIO', audio)
-        if (audio) {
+        const fileName = audioFile.assets[0].name;
+        const fileUri = audioFile.assets[0].uri;
+        const savePath = `${FileSystem.documentDirectory}${fileName}`;
+        // AUDIO
+        console.log('AUDIO', audioFile)
+        if (audioFile) {
           audioAsset = {
-            uri: audio,
+            uri: audioFile.assets[0].uri,
             
           };
         }
+        console.log("AUDIO FILE", audioFile)
+        if (!audioFile.canceled ) {
+          try {
+            //const fileName = audioFile.assets[0].name;
+            //const fileUri = audioFile.assets[0].uri;
+            console.log("FILE NAME", fileName)
+            console.log("URI", fileUri)
+            //const savePath = `${FileSystem.documentDirectory}${fileName}`;
+            console.log("PATH", savePath)
+            await FileSystem.copyAsync({ from: fileUri, to: savePath })
+
+            console.log('Audio file saved to:', savePath)
+          }catch (error) {
+            console.error('Error saving audio file:', error)
+          }
+        }
+        // FIN AUDIO
+        console.log("BASE DE DATOS")
         const db = openDatabase()
         const card = {
           title: title,
           description: description,
-          audio: audioAsset ? audioAsset.uri : '',
+          //audio: fileUri,
+          audio: savePath,
           image: imageAsset ? imageAsset.uri : '',
         }
-        if (audio === null) {
+
+        if (!card.audio) {
           console.log('Por favor, selecciona un archivo de audio.')
           return
         }
+        console.log("AUDIOO:", card.audio)
         saveCard(db, card)
         // FIXME: Show something to the user
         navigation.navigate(CARDS_LIST, {
@@ -109,14 +135,33 @@ function AddCard() {
             message: CARD_SAVED,
           },
         })
-        console.log('Image successfully saved')
+        console.log('Image and audio successfully saved')
         console.log('CARD', card)
       }
-    } catch (error) {
+    }catch (error) {
       console.log(error)
     }
   }
 
+  const playAudio = async () => {
+    console.log("PLAY")
+    try {
+      const audioPath = await onPressSave()
+  
+      if (audioPath) {
+        const { sound } = await Audio.Sound.createAsync(
+          { uri: audioPath },
+          { shouldPlay: true }
+        );
+        setSound(sound);
+      } else {
+        console.error('Error: Audio path is null')
+      }
+    } catch (error) {
+      console.error('Error playing audio:', error)
+    }
+  }
+  
   return (
     <LinearGradient
       colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]} // FIXME: Replace for
@@ -159,10 +204,24 @@ function AddCard() {
           mode="contained"
           buttonColor={PRIMARY_COLOR}
           style={{ opacity: 1  }}
-          onPress={onPressAudio}
+          onPress={pickAudio}
         >
           {SELECT_AUDIO}
-        </Button>      
+        </Button>  
+        {audioFile && (
+          <Text>
+            Audio seleccionado: {audioFile.assets[0].name}
+          </Text>
+        )}
+        <Button
+          mode="contained"
+          buttonColor={PRIMARY_COLOR}
+          style={{ opacity: 1  }}
+          title="Reproducir Audio"
+          onPress={playAudio}
+        >
+          Play audio
+        </Button>    
         <Text></Text>
         <Divider style={styles.divider} />
         <Button

@@ -36,7 +36,7 @@ function Card({ id, title, image, audio, seCompleta }) {
 
   const handleAudioPlay = async () => {
     try {
-      const audioUri = audio.uri
+      const audioUri = audio
       const soundObject = new Audio.Sound()
       soundObject.setOnPlaybackStatusUpdate()
       await soundObject.loadAsync({uri: audioUri});
