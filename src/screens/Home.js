@@ -1,13 +1,14 @@
 import React from 'react'
-import { View, Image, StyleSheet, Button } from 'react-native'
+import { Image, StyleSheet, SafeAreaView, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { Button } from 'react-native-paper'
 
 import { LinearGradient } from 'expo-linear-gradient'
 import { NAVIGATION } from '../screens'
 import {
-  BACKGROUND_GRADIENT_1,
-  BACKGROUND_GRADIENT_2,
   PRIMARY_BUTTON_COLOR,
+  STYLES,
+  LINEAR_GRADIENT_BACKGROUND,
 } from '../styles'
 import { LOGIN } from '../strings'
 
@@ -15,65 +16,79 @@ function Home() {
   const navigation = useNavigation()
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={STYLES.safeAreaView}>
       <LinearGradient
-        colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}
-        style={styles.gradientContainer}
+        style={STYLES.linearGradient}
+        colors={LINEAR_GRADIENT_BACKGROUND}
       >
-        <Image
-          source={require('../assets/images/identidad/logo.png')} // FIXME: A better way yo handle this constant
-          style={styles.image}
-          resizeMode="cover"
-        />
-        <View style={styles.buttonContainer}>
-          <Button
-            title={LOGIN}
-            color={PRIMARY_BUTTON_COLOR}
-            accessibilityLabel="Learn more about this purple button"
-            onPress={() => navigation.navigate(NAVIGATION)}
-          />
-        </View>
-        <View >
+        <View style={styles.container}>
           <Image
-            source={require('../assets/images/identidad/cedica_info.png')} // FIXME: A better way yo handle this constant
-            style={styles.imageHome}
+            source={require('../assets/images/branding/logo.png')} // FIXME: A better way yo handle this constant
+            style={styles.logo}
+            resizeMode="cover"
           />
+          <View style={styles.buttonContainer}>
+            <Button
+              style={STYLES.button}
+              buttonColor="#FFFFFF"
+              textColor={PRIMARY_BUTTON_COLOR}
+              onPress={() => navigation.navigate(NAVIGATION)}
+            >
+              {LOGIN}
+            </Button>
+          </View>
+          <View style={styles.imageContainer}>
+            <Image
+              source={require('../assets/images/branding/cedica.png')} // FIXME: A better way yo handle this constant
+              style={styles.image}
+            />
+            <View style={styles.separator}></View>
+            <Image
+              source={require('../assets/images/branding/info.png')} // FIXME: A better way yo handle this constant
+              style={styles.image}
+            />
+            <View style={styles.separator}></View>
+            <Image
+              source={require('../assets/images/branding/unlp.png')} // FIXME: A better way yo handle this constant
+              style={styles.image}
+            />
+          </View>
         </View>
       </LinearGradient>
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingTop: 50,
+    paddingBottom: 40,
   },
-  gradientContainer: {
-    flex: 1,
-    width: '100%',
-    justifyContent: 'center',
+  logo: {
+    width: 225,
+    height: 450,
+  },
+  imageContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  text: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    marginBottom: 70,
-    color: '#000',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   image: {
-    width: 300,
-    height: 600,
+    width: 90,
+    height: 90,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginTop: 50,
-  },
-  imageHome: {
-    width: 410,
-    height: 60,
-    marginTop: 20,
+  separator: {
+    width: 1,
+    backgroundColor: '#FFF',
+    height: 50,
+    marginLeft: 15,
+    marginRight: 15,
   },
 })
 
