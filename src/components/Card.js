@@ -6,11 +6,16 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from 'react-native'
+import {
+  PRIMARY_COLOR,
+} from '../styles'
+import { IconButton } from 'react-native-paper'
 import PropTypes from 'prop-types'
 import CardImage from '../components/CardImage'
 import CardAudio from '../components/CardAudio'
+import { Audio } from 'expo-av'
 
-function Card({ id, title, image, seCompleta }) {
+function Card({ id, title, image, audio, seCompleta }) {
   const [marcada, setMarcada] = useState(false)
 
   const handleClick = () => {
@@ -32,6 +37,18 @@ function Card({ id, title, image, seCompleta }) {
     await audioPlayer.playSound()
   }
 
+  const handleAudioPlay = async () => {
+    try {
+      const audioUri = audio
+      const soundObject = new Audio.Sound()
+      soundObject.setOnPlaybackStatusUpdate()
+      await soundObject.loadAsync({uri: audioUri})
+      await soundObject.playAsync()
+    } catch (error) {
+      console.error('Error al cargar y reproducir el audio', error)
+    }
+  }
+
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <View key={id} style={[estiloTarjeta, styles.tarjeta]}>
@@ -43,6 +60,13 @@ function Card({ id, title, image, seCompleta }) {
           />
         ) : (
           <View style={styles.imageContainer}>
+            <IconButton 
+              icon="music" 
+              size={30}
+              iconColor={PRIMARY_COLOR}
+              mode="contained"
+              title="Reproducir Audio" 
+              onPress={handleAudioPlay} />
             <CardImage name={image} style={styles.image} />
           </View>
         )}
@@ -72,6 +96,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 26,
+    marginRight: 10,
   },
   tarjeta: {
     margin: 25,

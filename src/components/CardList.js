@@ -11,7 +11,7 @@ function CardList({ scheduleId, seCompleta }) {
   const [cards, setCards] = useState([])
   // const [isHorizontal, setIsHorizontal] = useState(false) // FIXME: Where setIsHorizontal is used?
   const isHorizontal = false // FIXME: Above line is commented, so this line is added
-
+  
   useEffect(() => {
     const db = openDatabase()
     if (scheduleId) {

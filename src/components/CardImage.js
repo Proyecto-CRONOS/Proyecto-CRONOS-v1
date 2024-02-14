@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 const images = {
   aros: require('../assets/images/AROS.jpg'),
   arreador: require('../assets/images/ARREADOR.jpg'),
-  bajo_montura: require('../assets/images/BAJO MONTURA.jpg'),
+  bajo_montura: require('../assets/images/BAJOMONTURA.jpg'),
   bandera: require('../assets/images/BANDERA.jpg'),
   bozal: require('../assets/images/BOZAL.jpg'),
   broches: require('../assets/images/BROCHES.jpg'),
@@ -16,7 +16,7 @@ const images = {
   cepillo: require('../assets/images/CEPILLO.jpg'),
   conos: require('../assets/images/CONOS.jpg'),
   cuerda: require('../assets/images/CUERDA.jpg'),
-  escarba_vasos: require('../assets/images/ESCARBA VASOS.jpg'),
+  escarba_vasos: require('../assets/images/ESCARBAVASOS.jpg'),
   fusta: require('../assets/images/FUSTA.jpg'),
   limpieza: require('../assets/images/LIMPIEZA.jpg'),
   matra: require('../assets/images/MATRA.jpg'),
