@@ -15,16 +15,16 @@
   },
   {
     "id": 3,
-    "title": "PELOTAS",
-    "description": " - ",
-    "audio": "pelotas.ogg",
-    "image": "pelotas"
-  },
-  {
-    "id": 4,
     "title": "BANDERA",
     "description": " - ",
     "audio": "Bandera.ogg",
     "image": "bandera"
+  },
+  {
+    "id": 4,
+    "title": "PELOTAS",
+    "description": " - ",
+    "audio": "pelotas.ogg",
+    "image": "pelotas"
   }
 ]
