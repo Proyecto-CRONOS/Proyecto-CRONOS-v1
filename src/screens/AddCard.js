@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Image, StyleSheet, View, Text, TextInput } from 'react-native'
+import { Image, View, Text, TextInput } from 'react-native'
 import { Divider, Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
-import * as DocumentPicker from 'expo-document-picker';
+import * as DocumentPicker from 'expo-document-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as FileSystem from 'expo-file-system'
@@ -26,6 +26,7 @@ import {
 import { CARDS_LIST } from '../screens'
 import {
   STYLES,
+  THEMES,
   BACKGROUND_GRADIENT_1,
   BACKGROUND_GRADIENT_2,
   PRIMARY_COLOR,
@@ -131,21 +132,21 @@ function AddCard() {
   return (
     <LinearGradient
       colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]} // FIXME: Replace for
-      style={styles.container}
+      style={STYLES.container}
     >
-      <View style={styles.view}>
+      <View style={[STYLES.card, STYLES.form]}>
         <Text>{TITLE_CARDS}</Text>
         <Text></Text>
         <Text>{TITLE}</Text>
         <TextInput
-          style={styles.input}
+          style={STYLES.input}
           onChangeText={setTitle}
           value={title}
           placeholder={ENTER_TITLE}
         />
         <Text>{DESCRIPTION}</Text>
         <TextInput
-          style={styles.input}
+          style={STYLES.input}
           onChangeText={setDescription}
           value={description}
           placeholder={ENTER_DESCRIPTION}
@@ -176,12 +177,12 @@ function AddCard() {
         </Button>      
         <Text></Text>
         {audioFile && (
-            <Text>
-              AUDIO SELECCIONADO: {audioFile.assets[0].name}
-            </Text>
+          <Text>
+            AUDIO SELECCIONADO: {audioFile.assets[0].name}
+          </Text>
         )}
         <Text></Text>
-        <Divider style={styles.divider} />
+        <Divider theme={THEMES.divider} style={STYLES.divider} />
         <Button
           icon="content-save"
           mode="contained"
@@ -196,29 +197,5 @@ function AddCard() {
     </LinearGradient>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  view: {
-    backgroundColor: '#E6E4E9',
-    padding: 30,
-  },
-  input: {
-    height: 50,
-    margin: 12,
-    borderWidth: 0.8,
-    padding: 10,
-    backgroundColor: '#FFFFFF',
-  },
-  divider: {
-    marginBottom: 32,
-    marginTop: 20,
-  },
-})
 
 export default AddCard

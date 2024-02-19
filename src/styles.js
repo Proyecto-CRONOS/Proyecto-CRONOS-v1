@@ -71,6 +71,20 @@ export const STYLES = StyleSheet.create({
   form: {
     padding: 10,
   },
+  input: {
+    height: 50,
+    margin: 12,
+    borderWidth: 0.8,
+    padding: 10,
+    backgroundColor: '#FFFFFF',
+  },
+  container: {
+    flex: 1,
+    padding: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
 })
 
 export const THEMES = {
@@ -78,7 +92,3 @@ export const THEMES = {
     colors: {outlineVariant: '#bbb'}
   }
 }
-<<<<<<< HEAD
-  
-=======
->>>>>>> main
