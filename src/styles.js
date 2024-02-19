@@ -78,4 +78,7 @@ export const THEMES = {
     colors: {outlineVariant: '#bbb'}
   }
 }
+<<<<<<< HEAD
   
+=======
+>>>>>>> main

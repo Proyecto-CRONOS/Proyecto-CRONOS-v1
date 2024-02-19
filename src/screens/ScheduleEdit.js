@@ -5,13 +5,15 @@ import {
   useNavigation,
   useFocusEffect,
 } from '@react-navigation/native'
+import { LinearGradient } from 'expo-linear-gradient'
 
 import { openDatabase, getSchedule, saveSchedule } from '../model'
 import { SCHEDULE_DETAIL } from '../screens'
 import { SCHEDULE_SAVED } from '../strings'
 import ScheduleForm from '../components/forms/ScheduleForm'
+import { STYLES, LINEAR_GRADIENT_BACKGROUND } from '../styles'
 
-function EditCronograma() {
+function ScheduleEdit() {
   const [schedule, setSchedule] = useState(null)
   const route = useRoute()
   const { id } = route.params
@@ -21,7 +23,7 @@ function EditCronograma() {
     React.useCallback(() => {
       const db = openDatabase()
       getSchedule(db, id, setSchedule)
-    }, null),
+    }, []),
   )
 
   const onSave = async (editedSchedule) => {
@@ -32,7 +34,7 @@ function EditCronograma() {
         id: editedSchedule.id,
         action: {
           success: true,
-          message: { SCHEDULE_SAVED },
+          message: SCHEDULE_SAVED,
         },
       })
     } catch (error) {
@@ -42,10 +44,15 @@ function EditCronograma() {
   }
 
   return (
-    <SafeAreaView>
-      {schedule && <ScheduleForm schedule={schedule} onSave={onSave} />}
+    <SafeAreaView style={STYLES.safeAreaView}>
+      <LinearGradient
+        colors={LINEAR_GRADIENT_BACKGROUND}
+        style={STYLES.linearGradient}
+      >
+        {schedule && <ScheduleForm schedule={schedule} onSave={onSave} />}
+      </LinearGradient>
     </SafeAreaView>
   )
 }
 
-export default EditCronograma
+export default ScheduleEdit

@@ -1,15 +1,16 @@
 import { List, IconButton, Tooltip } from 'react-native-paper'
 import PropTypes from 'prop-types'
-import { StyleSheet } from 'react-native'
 
-function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
+import { STYLES } from '../styles'
+
+function ScheduleCardItem({ scheduleCard, total, leftAction, rightAction }) {
   const leftDisabled = scheduleCard.order === 1
   const rightDisabled = scheduleCard.order === total
 
   return (
     <List.Item
       title={scheduleCard.title}
-      style={styles.item}
+      style={STYLES.card}
       left={() =>
         leftAction && (
           <Tooltip>
@@ -19,13 +20,14 @@ function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
               compact="true"
               disabled={leftDisabled}
               onPress={() => (!leftDisabled ? leftAction(scheduleCard) : null)}
+              style={{ marginLeft: 20 }}
             />
           </Tooltip>
         )
       }
       right={() =>
         rightAction && (
-          <Tooltip>
+          <Tooltip style={{}}>
             <IconButton
               icon="chevron-double-down"
               mode="outlined"
@@ -34,6 +36,7 @@ function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
               onPress={() =>
                 !rightDisabled ? rightAction(scheduleCard) : null
               }
+              style={{ marginRight: 0 }}
             />
           </Tooltip>
         )
@@ -42,7 +45,7 @@ function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
   )
 }
 
-ScheduleCard.propTypes = {
+ScheduleCardItem.propTypes = {
   scheduleCard: PropTypes.shape({
     title: PropTypes.string.isRequired,
     order: PropTypes.number.isRequired,
@@ -52,14 +55,4 @@ ScheduleCard.propTypes = {
   rightAction: PropTypes.func,
 }
 
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: '#dfdfdf', // FIXME: Move to styles
-    borderColor: '#ccc', // FIXME: Move to styles
-    borderWidth: 0, // FIXME: Move to styles
-    borderBottomWidth: 1, // FIXME: Move to styles
-    marginBottom: 10,
-  },
-})
-
-export default ScheduleCard
+export default ScheduleCardItem

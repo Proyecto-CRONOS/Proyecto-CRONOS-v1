@@ -15,4 +15,4 @@ export const SCHEDULE_CARDS_EDIT =
 export const SCHEDULE_CREATE = 'Crear Cronograma'.toUpperCase()
 export const SCHEDULE_DETAIL = 'Detalle de Cronograma'.toUpperCase()
 export const SCHEDULE_EDIT = 'Editar Cronograma'.toUpperCase()
-export const SCHEDULE_ADD_CARD = 'Agregar tarjetas al Cronograma'.toUpperCase()
+export const SCHEDULE_CARDS_ADD = 'Agregar tarjetas al Cronograma'.toUpperCase()

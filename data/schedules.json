@@ -2,11 +2,11 @@
     {
         "id": 1,
         "name": "Amazona_ejemplo",
-        "birth_date": "27/12/1998",
+        "birth_date": "1998-12-27T00:00:00.000Z",
         "methodology": "Hipoterapia",
         "horse": "Tordillo",
         "equipment": "Montura",
         "considerations": "Algo",
-        "date": "19/09/2023"
+        "date": "2024-01-19T02:59:59.000Z"
     }
 ]

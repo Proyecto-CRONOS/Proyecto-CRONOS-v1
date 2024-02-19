@@ -16,9 +16,9 @@ Before you begin, ensure that you have the following prerequisites installed on 
 To install the project dependencies, run the following command in your project's root directory:
 
 ```bash
-npm install
+$ npm install
 # or if using Yarn
-yarn
+$ yarn
 ```
 
 ## How to Run
@@ -26,8 +26,22 @@ yarn
 Once you've successfully installed the dependencies, you can run the React Native application on either an Android or iOS emulator or a physical device. Use the following commands:
 
 ```bash
-npm run start
+$ npm run start
 ```
+
+## Build
+
+### Requirements
+Before you build, ensure that you have the following prerequisites installed on your system:
+
+ - eas-cli
+
+### Android
+```bash
+$ eas build -p android --profile preview
+
+```
+
 
 ## News
 

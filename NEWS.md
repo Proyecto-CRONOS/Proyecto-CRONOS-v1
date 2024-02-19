@@ -2,6 +2,41 @@
 
 ## Changelog
 
+### January 18, 2024
+ - Renamed components:
+   - CronogramaListItem to ScheduleListItem
+   - CronogramaList to ScheduleList
+   - DetailCronograma to ScheduleDetail
+   - EditCronograma to ScheduleEdit
+   - AddCronograma to ScheduleCreate
+   - CronogramaCardsList to ScheduleCardsList
+   - ScheduleCard to ScheduleCardList
+   - AddCardCronograma to ScheduleCardsAdd
+   - Cronogramas to Schedules
+ - Improved styles in:
+   - ScheduleCardItem
+   - ScheduleListItem
+   - Home
+   - ScheduleCardsAdd
+   - ScheduleCardList
+   - ScheduleCreate
+   - ScheduleDetail
+   - ScheduleEdit
+   - ScheduleList
+   ScheduleForm.
+ - Refactored Home with new logos
+ - Refactored and improved general styles, moving components styles to styles file.
+ - DatePicker in ScheduleForm
+ - Success Banner replaced by Toasts
+ - Toast for ScheduleEdit added
+ - Bug fixed: Infinite rendering in ScheduleEdit
+ - Bug fixed: ScheduleCardsAdd was not deleting and sorting properly
+ - Bug fixed: ScheduleCardsAdd was not current cards
+ - ScheduleCardsAdd redirects to ScheduleDetails after save
+ - ScheduleCardsList and ScheduleDetails shows a toast when the cards where updated
+ - Created EditFAB
+ - ScheduleDetails change the FAB to EditFAB
+
 ### November 15, 2023
 - Sort schedule cards screen.
 
