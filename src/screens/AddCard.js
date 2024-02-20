@@ -17,7 +17,6 @@ import {
   SELECT_IMAGE,
   SELECT_AUDIO,
   CARD_SAVED,
-  TITLE_CARDS,
   TITLE,
   DESCRIPTION,
   IMAGE,
@@ -135,8 +134,6 @@ function AddCard() {
       style={STYLES.container}
     >
       <View style={[STYLES.card, STYLES.form]}>
-        <Text>{TITLE_CARDS}</Text>
-        <Text></Text>
         <Text>{TITLE}</Text>
         <TextInput
           style={STYLES.input}
@@ -152,7 +149,6 @@ function AddCard() {
           placeholder={ENTER_DESCRIPTION}
         />
         <Text>{IMAGE}</Text>
-        <Text></Text>
         <Button
           mode="contained"
           buttonColor={PRIMARY_COLOR}
@@ -164,9 +160,7 @@ function AddCard() {
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
-        <Text></Text>
         <Text>{AUDIO}</Text>
-        <Text></Text>
         <Button
           mode="contained"
           buttonColor={PRIMARY_COLOR}
@@ -175,13 +169,11 @@ function AddCard() {
         >
           {SELECT_AUDIO}
         </Button>      
-        <Text></Text>
         {audioFile && (
           <Text>
             AUDIO SELECCIONADO: {audioFile.assets[0].name}
           </Text>
         )}
-        <Text></Text>
         <Divider theme={THEMES.divider} style={STYLES.divider} />
         <Button
           icon="content-save"
@@ -191,8 +183,7 @@ function AddCard() {
           onPress={() => onPressSave()}
         >
           {SAVE}
-        </Button>  
-        
+        </Button>      
       </View>
     </LinearGradient>
   )

@@ -1,12 +1,23 @@
 [
     {
         "id": 1,
-        "name": "Amazona_ejemplo",
+        "name": "Amazona Ana",
         "birth_date": "1998-12-27T00:00:00.000Z",
         "methodology": "Hipoterapia",
         "horse": "Tordillo",
         "equipment": "Montura",
-        "considerations": "Algo",
+        "considerations": "Escribe aquí algunas consideraciones a tener en cuenta",
+        "date": "2024-01-19T02:59:59.000Z"
+    },
+    {
+        "id": 2,
+        "name": "Jinete Juan",
+        "birth_date": "1998-12-27T00:00:00.000Z",
+        "methodology": "Monta Terapéutica",
+        "horse": "Tordillo",
+        "equipment": "Caballo",
+        "considerations": "Escribe aquí algunas consideraciones a tener en cuenta",
         "date": "2024-01-19T02:59:59.000Z"
     }
+
 ]

@@ -7,7 +7,7 @@ import {
 import { SafeAreaView, ToastAndroid } from 'react-native'
 import { Button, Card, Text, Divider } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient'
-
+import { Avatar } from 'react-native-paper';
 import { openDatabase, getSchedule } from '../model'
 import { SCHEDULE_EDIT, SCHEDULE_CARDS_EDIT } from '../screens'
 import {
@@ -61,6 +61,7 @@ function ScheduleDetail() {
         style={STYLES.linearGradient}
       >
         <Card style={STYLES.card} mode={CARD_MODE}>
+          <Avatar.Image size={60} source={require('../assets/images/avatar.png')} />
           <Card.Title titleVariant="titleLarge" title={schedule.name} />
           <Card.Content>
             <Text>
