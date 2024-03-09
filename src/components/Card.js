@@ -14,6 +14,7 @@ import PropTypes from 'prop-types'
 import CardImage from '../components/CardImage'
 import CardAudio from '../components/CardAudio'
 import { Audio } from 'expo-av'
+import * as FileSystem from 'expo-file-system'
 
 function Card({ id, title, image, audio, seCompleta }) {
   const [marcada, setMarcada] = useState(false)
@@ -38,9 +39,19 @@ function Card({ id, title, image, audio, seCompleta }) {
   }
 
   const handleAudioPlay = async () => {
+    const fileUri = audio
+    const savePath = `${FileSystem.documentDirectory}${audio}`
+    
+    console.log("SAVE Path", savePath )
     try {
-      const audioUri = audio
+
+      if(audio)
+        
+      console.log("AUDIO", audio)
+      const audioUri = savePath
+      console.log("AUDIOURI", audioUri)
       const soundObject = new Audio.Sound()
+      console.log("sound object", soundObject)
       soundObject.setOnPlaybackStatusUpdate()
       await soundObject.loadAsync({uri: audioUri})
       await soundObject.playAsync()
@@ -80,6 +91,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   seCompleta: PropTypes.bool,
+  audio: PropTypes.string.isRequired
 }
 
 const styles = StyleSheet.create({

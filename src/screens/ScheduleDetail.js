@@ -7,7 +7,7 @@ import {
 import { SafeAreaView, ToastAndroid } from 'react-native'
 import { Button, Card, Text, Divider } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Avatar } from 'react-native-paper';
+import { Avatar } from 'react-native-paper'
 import { openDatabase, getSchedule } from '../model'
 import { SCHEDULE_EDIT, SCHEDULE_CARDS_EDIT } from '../screens'
 import {
