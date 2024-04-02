@@ -4,22 +4,29 @@ import {
   useNavigation,
   useFocusEffect,
 } from '@react-navigation/native'
-import { View, StyleSheet } from 'react-native'
-import { Button, Card, Text } from 'react-native-paper'
-import { BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2, PRIMARY_COLOR } from '../styles'
-import { openDatabase, getSchedule } from '../model'
+import { SafeAreaView, ToastAndroid } from 'react-native'
+import { Button, Card, Text, Divider } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient'
+
+import { openDatabase, getSchedule } from '../model'
 import { SCHEDULE_EDIT, SCHEDULE_CARDS_EDIT } from '../screens'
 import {
+  BIRTH_DATE,
   CARDS,
-  EDIT,
-  METHODOLOGY,
+  CONSIDERATIONS,
   DATE,
+  EDIT,
   EQUIPMENT,
   HORSE,
-  BIRTH_DATE,
-  CONSIDERATIONS,
+  METHODOLOGY,
 } from '../strings'
+import {
+  CARD_MODE,
+  LINEAR_GRADIENT_BACKGROUND,
+  PRIMARY_COLOR,
+  STYLES,
+  THEMES,
+} from '../styles'
 
 function DetailCronograma() {
   const [schedule, setSchedule] = useState(null)
@@ -30,53 +37,69 @@ function DetailCronograma() {
   useFocusEffect(
     React.useCallback(() => {
       const db = openDatabase()
-      getSchedule(db, id, setSchedule)
-    }, null),
+      if (id) {
+        getSchedule(db, id, setSchedule)
+      }
+      if (route.params?.action?.message) {
+        showToast(route.params.action.message)
+      }
+    }, [id, setSchedule, route.params?.action?.message]),
   )
 
   if (!schedule) {
     return null
   }
 
+  const showToast = (message) => {
+    ToastAndroid.show(message, ToastAndroid.SHORT)
+  }
+
   return (
-    <LinearGradient
-      colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}
-      style={styles.container}
-    >
-      <View >
-        <Card>
-          <Card.Title title={schedule.name} />
+    <SafeAreaView style={STYLES.safeAreaView}>
+      <LinearGradient
+        colors={LINEAR_GRADIENT_BACKGROUND}
+        style={STYLES.linearGradient}
+      >
+        <Card style={STYLES.card} mode={CARD_MODE}>
+          <Card.Title titleVariant="titleLarge" title={schedule.name} />
           <Card.Content>
-            <Text>{METHODOLOGY}</Text>
-            <Text>{schedule.methodology}</Text>
+            <Text>
+              <Text style={STYLES.textBold}>{METHODOLOGY}:</Text>{' '}
+              {schedule.methodology}
+            </Text>
+            <Text>
+              <Text style={STYLES.textBold}>{DATE}:</Text>{' '}
+              {schedule.date.toLocaleDateString('es-AR')}
+            </Text>
+            <Text>
+              <Text style={STYLES.textBold}>{EQUIPMENT}:</Text>{' '}
+              {schedule.equipment}
+            </Text>
+            <Text>
+              <Text style={STYLES.textBold}>{HORSE}:</Text> {schedule.horse}
+            </Text>
+            <Text>
+              <Text style={STYLES.textBold}>{BIRTH_DATE}:</Text>{' '}
+              {schedule.birthDate.toLocaleDateString('es-AR')}
+            </Text>
+            <Text>
+              <Text style={STYLES.textBold}>{CONSIDERATIONS}:</Text>{' '}
+              {schedule.considerations}
+            </Text>
           </Card.Content>
-          <Card.Content>
-            <Text>{DATE}</Text>
-            <Text>{schedule.date}</Text>
-          </Card.Content>
-          <Card.Content>
-            <Text>{EQUIPMENT}</Text>
-            <Text>{schedule.equipment}</Text>
-          </Card.Content>
-          <Card.Content>
-            <Text>{HORSE}</Text>
-            <Text>{schedule.horse}</Text>
-          </Card.Content>
-          <Card.Content>
-            <Text>{BIRTH_DATE}</Text>
-            <Text>{schedule.birthDate}</Text>
-          </Card.Content>
-          <Card.Content>
-            <Text>{CONSIDERATIONS}</Text>
-            <Text>{schedule.considerations}</Text>
-          </Card.Content>
-          <Card.Actions>
-            <Button 
+
+          <Divider style={STYLES.divider} theme={THEMES.divider} />
+
+          <Card.Actions style={STYLES.card.actions}>
+            <Button
+              style={STYLES.button}
               textColor={PRIMARY_COLOR}
-              onPress={() => navigation.navigate(SCHEDULE_EDIT, { id })}>
+              onPress={() => navigation.navigate(SCHEDULE_EDIT, { id })}
+            >
               {EDIT}
             </Button>
             <Button
+              style={STYLES.button}
               buttonColor={PRIMARY_COLOR}
               onPress={() => navigation.navigate(SCHEDULE_CARDS_EDIT, { id })}
             >
@@ -84,18 +107,9 @@ function DetailCronograma() {
             </Button>
           </Card.Actions>
         </Card>
-      </View>
-    </LinearGradient>
+      </LinearGradient>
+    </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-})
 
 export default DetailCronograma
