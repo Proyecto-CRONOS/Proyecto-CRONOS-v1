@@ -134,8 +134,6 @@ function AddCard() {
       style={styles.container}
     >
       <View style={styles.view}>
-        <Text>{TITLE_CARDS}</Text>
-        <Text></Text>
         <Text>{TITLE}</Text>
         <TextInput
           style={styles.input}
@@ -151,7 +149,6 @@ function AddCard() {
           placeholder={ENTER_DESCRIPTION}
         />
         <Text>{IMAGE}</Text>
-        <Text></Text>
         <Button
           mode="contained"
           buttonColor={PRIMARY_COLOR}
@@ -161,11 +158,9 @@ function AddCard() {
           {SELECT_IMAGE}
         </Button> 
         {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+          <Image source={{ uri: image }} style={{ width: 150, height: 100 }} />
         )}
-        <Text></Text>
         <Text>{AUDIO}</Text>
-        <Text></Text>
         <Button
           mode="contained"
           buttonColor={PRIMARY_COLOR}
@@ -174,13 +169,11 @@ function AddCard() {
         >
           {SELECT_AUDIO}
         </Button>      
-        <Text></Text>
         {audioFile && (
             <Text>
               AUDIO SELECCIONADO: {audioFile.assets[0].name}
             </Text>
         )}
-        <Text></Text>
         <Divider style={styles.divider} />
         <Button
           icon="content-save"
@@ -212,7 +205,7 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 12,
     borderWidth: 0.8,
-    padding: 10,
+    padding: 5,
     backgroundColor: '#FFFFFF',
   },
   divider: {
