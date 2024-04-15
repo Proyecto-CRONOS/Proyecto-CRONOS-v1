@@ -1,55 +1,74 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, SafeAreaView } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import SectionedMultiSelect from 'react-native-sectioned-multi-select'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { openDatabase, getScheduleCards, getCards, saveScheduleCard } from '../model'
-import { Button, Banner } from 'react-native-paper'
+import { Button, Divider } from 'react-native-paper'
 import {
-  SUCCESS_BANNER_BACKGROUND,
-  SUCCESS_BANNER_ELEVATION,
-  SUCCESS_BANNER_ICON,
+  openDatabase,
+  getScheduleCards,
+  getCards,
+  saveScheduleCard,
+  deleteScheduleCard,
+  createScheduleCard,
+} from '../model'
+import { SCHEDULE_DETAIL } from '../screens'
+import {
   PRIMARY_COLOR,
-  BACKGROUND_GRADIENT_1, 
-  BACKGROUND_GRADIENT_2
+  LINEAR_GRADIENT_BACKGROUND,
+  STYLES,
+  THEMES,
 } from '../styles'
-import { 
-  CLOSE,
-  ADD_CARDS,
+import {
+  SAVE,
   SELECT_TEXT,
   SELECTED_TEXT,
   CONFIRM_TEXT,
-  SEARCH_PLACEHOLDER_TEXT } from '../strings'
-
+  SEARCH_PLACEHOLDER_TEXT,
+  SELECT_CARDS,
+  SCHEDULE_CARDS_SAVED,
+} from '../strings'
 
 function AddCardCronograma() {
+  const navigation = useNavigation()
   const route = useRoute()
   const { scheduleId } = route.params
   const [selectedItems, setSelectedItems] = useState([])
   const [scheduleCards, setScheduleCards] = useState([])
   const [cards, setCards] = useState([])
-  const [action, setAction] = useState({})
-  const [bannerVisible, setBannerVisible] = useState(false)
-  const items = [
-    {
-      name: 'SELECCIONAR TARJETAS',
-      id: 0,
-      children: cards.map(card => ({
-        id: card.id,
-        name: card.title,
-        description: card.description,
-        audio: card.audio,
-        image: card.image,
-      })),
-    },
-  ]
+ 
   useEffect(() => {
-    const db = openDatabase()
-    getScheduleCards(db, scheduleId, setScheduleCards)
-    getCards(db, setCards)
+    const fetchData = () => {
+      const db = openDatabase()
+      getScheduleCards(db, scheduleId, (scheduleCards) => {
+        setScheduleCards(scheduleCards)
+        setSelectedItems(
+          scheduleCards.map((scheduleCard) => scheduleCard.cardId),
+        )
+      })
+      getCards(db, (data) => {
+        setCards(data)
+      })
+    }
+    fetchData()
   }, [])
 
+  const formatCards = (cards) => {
+    return [
+      {
+        name: SELECT_CARDS,
+        id: 0,
+        children: cards.map((card) => ({
+          id: card.id,
+          name: card.title,
+          description: card.description,
+          audio: card.audio,
+          image: card.image,
+        })),
+      },
+    ]
+  }
   
   const onSelectedItemsChange = (selectedItems) => {
     setSelectedItems(selectedItems)
@@ -60,85 +79,85 @@ function AddCardCronograma() {
       console.error('scheduleId is null or undefined')
       return // Stop execution if scheduleId is not valid
     }
-    console.log('Guardar tarjetas:', selectedItems)
-    let order = 1
-    console.log(scheduleCards, scheduleCards == false)
-    if (scheduleCards.length) {
-      order = scheduleCards[scheduleCards.length - 1].order + 1
-    }
-    const db = openDatabase()
-    selectedItems.forEach((cardId) => {
-      const scheduleCard = {
-        status: 'OK', // FIXME: To const file
-        order,
-        cardId,
-        scheduleId,
+    
+    let sortedScheduleCards = [...scheduleCards].sort(
+      (a, b) => a.order - b.order,
+    )
+    const deletedScheduleCards = sortedScheduleCards.filter(
+      (scheduleCard) => !selectedItems.includes(scheduleCard.cardId),
+    )
+    sortedScheduleCards = sortedScheduleCards.filter((scheduleCard) =>
+      selectedItems.includes(scheduleCard.cardId),
+    )
+    const missingItems = selectedItems.filter(
+      (itemId) => !scheduleCards.some((card) => card.cardId === itemId),
+    )
+
+    missingItems.forEach((itemId) => {
+      const cardData = cards.find((card) => card.id === itemId)
+      if (cardData) {
+        sortedScheduleCards.push(
+          createScheduleCard(scheduleId, cardData.id, 0, 'OK'),
+        )
       }
+    })
+    sortedScheduleCards.forEach(
+      (scheduleCard, index) => (scheduleCard.order = index + 1),
+    )
+
+    const db = openDatabase()
+   deletedScheduleCards.forEach((scheduleCard) => {
+      deleteScheduleCard(db, scheduleCard)
+    })
+    sortedScheduleCards.forEach((scheduleCard) => {
       saveScheduleCard(db, scheduleCard)
-      order++
     })
-    setSelectedItems([])
-    setAction({
-      message: 'Las tarjetas fueron agregadas correctamente.', // FIXME: Move to strings
+    navigation.navigate(SCHEDULE_DETAIL, {
+      id: scheduleId,
+      action: { success: true, message: SCHEDULE_CARDS_SAVED },
     })
-    setBannerVisible(true)
   }
 
   return (
-    <LinearGradient
-      colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]} // FIXME: Replace for
-      style={styles.container}
-    >
-      <View style={styles.view}>
-        {action && (
-          <Banner
-            theme={{ colors: { primary: SUCCESS_BANNER_BACKGROUND } }}
-            elevation={SUCCESS_BANNER_ELEVATION}
-            visible={bannerVisible}
-            actions={[{ label: CLOSE, onPress: () => setBannerVisible(false) }]}
-            icon={SUCCESS_BANNER_ICON}
-          >
-            {action.message}
-          </Banner>
-        )}
-        <SectionedMultiSelect
-          items={items}
-          IconRenderer={Icon}
-          uniqueKey="id"
-          subKey="children"
-          selectText={SELECT_TEXT}
-          confirmText={CONFIRM_TEXT}
-          selectedText={SELECTED_TEXT}
-          searchPlaceholderText={SEARCH_PLACEHOLDER_TEXT}
-          showDropDowns={false}
-          onSelectedItemsChange={onSelectedItemsChange}
-          selectedItems={selectedItems}
-          primary= "#3D6F8C"
-        />
-      </View>
-      <Button
-        icon="content-save"
-        mode="contained"
-        buttonColor={PRIMARY_COLOR}
-        style={{ opacity: 1  }}
-        onPress={saveCardsToSort}
+    <SafeAreaView style={STYLES.safeAreaView}>
+      <LinearGradient
+        colors={LINEAR_GRADIENT_BACKGROUND}
+        style={STYLES.linearGradient}
       >
-        {ADD_CARDS}
-      </Button>  
-
-    </LinearGradient>
+        <View style={[STYLES.card, styles.container]}>
+          <SectionedMultiSelect
+            items={formatCards(cards)}
+            IconRenderer={Icon}
+            uniqueKey="id"
+            subKey="children"
+            selectText={SELECT_TEXT}
+            confirmText={CONFIRM_TEXT}
+            selectedText={SELECTED_TEXT}
+            searchPlaceholderText={SEARCH_PLACEHOLDER_TEXT}
+            showDropDowns={false}
+            onSelectedItemsChange={onSelectedItemsChange}
+            selectedItems={selectedItems}
+            primary="#3D6F8C"
+          />
+          <Divider theme={THEMES.divider} style={STYLES.divider} />
+          <Button
+            icon="content-save"
+            mode="contained"
+            buttonColor={PRIMARY_COLOR}
+            style={STYLES.button}
+            onPress={saveCardsToSort}
+          >
+            {SAVE}
+          </Button>
+        </View>
+      </LinearGradient>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingBottom: 10,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  view: {
-    backgroundColor: '#FFFFFF',
+    padding: 18,
   },
 })
 

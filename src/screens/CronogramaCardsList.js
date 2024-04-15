@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { ScrollView, SafeAreaView, ToastAndroid } from 'react-native'
 import {
   useNavigation,
   useRoute,
@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { openDatabase, getScheduleCards, saveScheduleCard } from '../model'
-import { BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2 } from '../styles'
+import { STYLES, LINEAR_GRADIENT_BACKGROUND } from '../styles'
 import CreateFAB from '../components/CreateFAB'
 import ScheduleCard from '../components/ScheduleCard'
 import { SCHEDULE_ADD_CARD } from '../screens'
@@ -26,8 +26,15 @@ function CronogramaCardsList() {
     React.useCallback(() => {
       const db = openDatabase()
       getScheduleCards(db, scheduleId, setScheduleCards)
-    }, []),
+      if (route.params?.action) {
+        showToast(route.params?.action?.message)
+      }
+    }, [scheduleId]),
   )
+
+  const showToast = (message) => {
+    ToastAndroid.show(message, ToastAndroid.SHORT)
+  }
 
   const sortScheduleCards = (scheduleCard, direction) => {
     const data = [...scheduleCards]
@@ -37,7 +44,6 @@ function CronogramaCardsList() {
     data[index].order = data[targetIndex].order
     data[targetIndex].order = tempOrder
     data.sort((a, b) => a.order - b.order)
-    console.log('DATA', data)
     setScheduleCards(data)
     saveScheduleCards()
   }
@@ -58,9 +64,10 @@ function CronogramaCardsList() {
   }
 
   return (
-    <LinearGradient
-      colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}
-      style={styles.container}
+    <SafeAreaView style={STYLES.safeAreaView}>
+      <LinearGradient
+      colors={LINEAR_GRADIENT_BACKGROUND}
+      style={STYLES.linearGradient}
     >
       <ScrollView>
         {scheduleCards.map((scheduleCard, index) => (
@@ -77,13 +84,8 @@ function CronogramaCardsList() {
         onPress={() => addCardCronogramaAction(navigation, scheduleId)}
       />
     </LinearGradient>
+    </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
 
 export default CronogramaCardsList
