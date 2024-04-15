@@ -1,40 +1,32 @@
-import React, { useState } from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ScrollView, SafeAreaView, ToastAndroid } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
 import {
   useNavigation,
   useRoute,
   useFocusEffect,
 } from '@react-navigation/native'
-import { Banner } from 'react-native-paper'
-import { LinearGradient } from 'expo-linear-gradient'
 
 import { openDatabase, getSchedules } from '../model'
 import { SCHEDULE_CREATE } from '../screens'
-import {
-  BACKGROUND_GRADIENT_1,
-  BACKGROUND_GRADIENT_2,
-  SUCCESS_BANNER_BACKGROUND,
-  SUCCESS_BANNER_ELEVATION,
-  SUCCESS_BANNER_ICON,
-} from '../styles'
-import { CLOSE } from '../strings'
+import { LINEAR_GRADIENT_BACKGROUND, STYLES } from '../styles'
 import CreateFAB from '../components/CreateFAB'
 import CronogramaListItem from '../components/CronogramaListItem'
 
-function addCronogramaAction(navigation) {
-  navigation.navigate(SCHEDULE_CREATE)
-}
-
 function CronogramasList() {
   const [schedules, setSchedules] = useState([])
-  const [bannerVisible, setBannerVisible] = useState(true)
   const navigation = useNavigation()
   const route = useRoute()
-  let action = false
 
-  if (route.params && route.params.action) {
-    action = route.params.action
-  }
+  useEffect(() => {
+    const db = openDatabase()
+    getSchedules(db, setSchedules)
+
+    if (route.params?.action) {
+      showToast(route.params?.action?.message)
+    }
+
+  }, [route.params])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -43,36 +35,25 @@ function CronogramasList() {
     }, []),
   )
 
+  const showToast = (message) => {
+    ToastAndroid.show(message, ToastAndroid.SHORT)
+  }
+
   return (
-    <LinearGradient
-      colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}
-      style={styles.container}
-    >
-      {action && (
-        <Banner
-          theme={{ colors: { primary: SUCCESS_BANNER_BACKGROUND } }}
-          elevation={SUCCESS_BANNER_ELEVATION}
-          visible={bannerVisible}
-          actions={[{ label: CLOSE, onPress: () => setBannerVisible(false) }]}
-          icon={SUCCESS_BANNER_ICON}
-        >
-          {action.message}
-        </Banner>
-      )}
-      <ScrollView>
-        {schedules.map((schedule, index) => (
-          <CronogramaListItem key={index} {...schedule} />
-        ))}
-      </ScrollView>
-      <CreateFAB onPress={() => addCronogramaAction(navigation)} />
-    </LinearGradient>
+    <SafeAreaView style={STYLES.safeAreaView}>
+      <LinearGradient
+        style={STYLES.linearGradient}
+        colors={LINEAR_GRADIENT_BACKGROUND}
+      >
+        <ScrollView>
+          {schedules.map((schedule, index) => (
+            <CronogramaListItem key={index} {...schedule} />
+          ))}
+        </ScrollView>
+        <CreateFAB onPress={() => navigation.navigate(SCHEDULE_CREATE)} />
+      </LinearGradient>
+    </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
 
 export default CronogramasList
