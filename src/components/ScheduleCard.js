@@ -1,6 +1,7 @@
 import { List, IconButton, Tooltip } from 'react-native-paper'
 import PropTypes from 'prop-types'
-import { StyleSheet } from 'react-native'
+
+import { STYLES } from '../styles'
 
 function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
   const leftDisabled = scheduleCard.order === 1
@@ -9,7 +10,7 @@ function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
   return (
     <List.Item
       title={scheduleCard.title}
-      style={styles.item}
+      style={STYLES.card}
       left={() =>
         leftAction && (
           <Tooltip>
@@ -19,6 +20,7 @@ function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
               compact="true"
               disabled={leftDisabled}
               onPress={() => (!leftDisabled ? leftAction(scheduleCard) : null)}
+              style={{ marginLeft: 20 }}
             />
           </Tooltip>
         )
@@ -34,6 +36,7 @@ function ScheduleCard({ scheduleCard, total, leftAction, rightAction }) {
               onPress={() =>
                 !rightDisabled ? rightAction(scheduleCard) : null
               }
+              style={{ marginRight: 0 }}
             />
           </Tooltip>
         )
@@ -51,15 +54,5 @@ ScheduleCard.propTypes = {
   leftAction: PropTypes.func,
   rightAction: PropTypes.func,
 }
-
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: '#dfdfdf', // FIXME: Move to styles
-    borderColor: '#ccc', // FIXME: Move to styles
-    borderWidth: 0, // FIXME: Move to styles
-    borderBottomWidth: 1, // FIXME: Move to styles
-    marginBottom: 10,
-  },
-})
 
 export default ScheduleCard

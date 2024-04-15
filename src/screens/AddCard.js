@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text, TextInput } from 'react-native'
 import { Divider, Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
-import * as DocumentPicker from 'expo-document-picker';
+import * as DocumentPicker from 'expo-document-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as FileSystem from 'expo-file-system'
@@ -17,7 +17,6 @@ import {
   SELECT_IMAGE,
   SELECT_AUDIO,
   CARD_SAVED,
-  TITLE_CARDS,
   TITLE,
   DESCRIPTION,
   IMAGE,
@@ -25,7 +24,6 @@ import {
 } from '../strings'
 import { CARDS_LIST } from '../screens'
 import {
-  STYLES,
   BACKGROUND_GRADIENT_1,
   BACKGROUND_GRADIENT_2,
   PRIMARY_COLOR,
@@ -170,9 +168,9 @@ function AddCard() {
           {SELECT_AUDIO}
         </Button>      
         {audioFile && (
-            <Text>
-              AUDIO SELECCIONADO: {audioFile.assets[0].name}
-            </Text>
+          <Text>
+            AUDIO SELECCIONADO: {audioFile.assets[0].name}
+          </Text>
         )}
         <Divider style={styles.divider} />
         <Button

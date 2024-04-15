@@ -66,24 +66,24 @@ function CronogramaCardsList() {
   return (
     <SafeAreaView style={STYLES.safeAreaView}>
       <LinearGradient
-      colors={LINEAR_GRADIENT_BACKGROUND}
-      style={STYLES.linearGradient}
-    >
-      <ScrollView>
-        {scheduleCards.map((scheduleCard, index) => (
-          <ScheduleCard
-            key={index}
-            total={scheduleCards.length}
-            scheduleCard={scheduleCard}
-            leftAction={leftAction}
-            rightAction={rightAction}
-          />
-        ))}
-      </ScrollView>
-      <CreateFAB
-        onPress={() => addCardCronogramaAction(navigation, scheduleId)}
-      />
-    </LinearGradient>
+        colors={LINEAR_GRADIENT_BACKGROUND}
+        style={STYLES.linearGradient}
+      >
+        <ScrollView>
+          {scheduleCards.map((scheduleCard, index) => (
+            <ScheduleCard
+              key={index}
+              total={scheduleCards.length}
+              scheduleCard={scheduleCard}
+              leftAction={leftAction}
+              rightAction={rightAction}
+            />
+          ))}
+        </ScrollView>
+        <CreateFAB
+          onPress={() => addCardCronogramaAction(navigation, scheduleId)}
+        />
+      </LinearGradient>
     </SafeAreaView>
   )
 }

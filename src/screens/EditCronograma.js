@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //import { SafeAreaView } from 'react-navigation'
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native'
 import {
   useRoute,
   useNavigation,

@@ -277,7 +277,6 @@ export function saveSchedule(db, schedule) {
 }
 
 export function getCards(db, callback) {
-  console.log('getCards')
   const query = `
     SELECT *
     FROM ${CARD_TABLE};

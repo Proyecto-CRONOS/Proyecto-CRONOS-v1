@@ -17,7 +17,7 @@ function CreateFAB({ onPress }) {
   return (
     <FAB
       style={styles.fab}
-      icon="plus"
+      icon="pencil"
       color="white"
       onPress={() => onPress()}
     />

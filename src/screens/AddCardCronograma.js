@@ -106,7 +106,7 @@ function AddCardCronograma() {
     )
 
     const db = openDatabase()
-   deletedScheduleCards.forEach((scheduleCard) => {
+    deletedScheduleCards.forEach((scheduleCard) => {
       deleteScheduleCard(db, scheduleCard)
     })
     sortedScheduleCards.forEach((scheduleCard) => {
