@@ -44,7 +44,7 @@ function Card({ id, title, image, audio, seCompleta, onDelete }) {
     const db = openDatabase()
     deleteCard(db, id, () => {
       ToastAndroid.show('Tarjeta eliminada correctamente', ToastAndroid.SHORT)
-      if (onDelete) onDelete()
+      if (onDelete) onDelete() //mando a llamar el evento del padre
     })
   }
   const handleAudioPlay = async () => {
@@ -125,6 +125,7 @@ function Card({ id, title, image, audio, seCompleta, onDelete }) {
                   onPress={() => handleDeleteCard(id)}
                 />
               )}
+              {/* El !seCompleta lo utilizo para que en la view de WorkView no aparezca el boton */}
             </View>
             {/* Reutilizo el mismo flag */}
 

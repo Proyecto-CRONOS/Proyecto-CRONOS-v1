@@ -21,6 +21,7 @@ function CardList({ scheduleId, seCompleta }) {
       getCards(db, setCards)
     }
   }
+
   useEffect(() => {
     loadCards()
   }, [])
@@ -45,12 +46,7 @@ function CardList({ scheduleId, seCompleta }) {
             showsVerticalScrollIndicator={isHorizontal ? false : true}
           >
             {cards.map((card, index) => (
-              <Card
-                key={index}
-                {...card}
-                seCompleta={seCompleta}
-                onDelete={loadCards} //vuelva a cargar las cards una vez que se elimina
-              />
+              <Card key={card.id} {...card} seCompleta={seCompleta} />
             ))}
           </ScrollView>
           <StatusBar style="auto" />

@@ -34,13 +34,16 @@ function CardList({ scheduleId, seCompleta }) {
   if (route.params && route.params.action) {
     action = route.params.action
   }
-  useEffect(() => {
+  const loadCards = () => {
     const db = openDatabase()
     if (scheduleId) {
       getScheduleCards(db, scheduleId, setCards)
     } else {
       getCards(db, setCards)
     }
+  }
+  useEffect(() => {
+    loadCards()
   }, [])
 
   const [fontsLoaded] = useFonts({
@@ -67,7 +70,12 @@ function CardList({ scheduleId, seCompleta }) {
       <LinearGradient colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}>
         <ScrollView>
           {cards.map((card, index) => (
-            <Card key={index} {...card} seCompleta={seCompleta} />
+            <Card
+              key={index}
+              {...card}
+              seCompleta={seCompleta}
+              onDelete={loadCards}
+            /> //vuelva a cargar las cards una vez que se elimina/>
           ))}
         </ScrollView>
         <CreateFAB onPress={() => addCardAction(navigation)} />

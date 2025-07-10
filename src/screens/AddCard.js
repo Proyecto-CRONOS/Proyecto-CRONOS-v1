@@ -209,14 +209,6 @@ function AddCard() {
         <Text></Text>
         <Text>{AUDIO}</Text>
         <Text></Text>
-        <Button
-          mode="contained"
-          buttonColor={PRIMARY_COLOR}
-          style={{ opacity: 1 }}
-          onPress={pickAudio}
-        >
-          {SELECT_AUDIO}
-        </Button>
         {audioFile && (
           <Text>Audio seleccionado: {audioFile.assets[0].name}</Text>
         )}
