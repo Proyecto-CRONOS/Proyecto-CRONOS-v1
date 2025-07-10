@@ -45,7 +45,6 @@ function AddCard() {
   const [description, setDescription] = useState(null)
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions()
   const [audioFile, setAudioFile] = useState(null)
-  const [sound, setSound] = useState()
   useEffect(() => {
     requestPermission()
   }, [requestPermission])
@@ -152,25 +151,6 @@ function AddCard() {
     }
   }
 
-  const playAudio = async () => {
-    console.log('PLAY')
-    try {
-      const audioPath = await onPressSave()
-
-      if (audioPath) {
-        const { sound } = await Audio.Sound.createAsync(
-          { uri: audioPath },
-          { shouldPlay: true },
-        )
-        setSound(sound)
-      } else {
-        console.error('Error: Audio path is null')
-      }
-    } catch (error) {
-      console.error('Error playing audio:', error)
-    }
-  }
-
   return (
     <LinearGradient
       colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]} // FIXME: Replace for
@@ -209,18 +189,15 @@ function AddCard() {
         <Text></Text>
         <Text>{AUDIO}</Text>
         <Text></Text>
-        {audioFile && (
-          <Text>Audio seleccionado: {audioFile.assets[0].name}</Text>
-        )}
         <Button
           mode="contained"
           buttonColor={PRIMARY_COLOR}
           style={{ opacity: 1 }}
-          title="Reproducir Audio"
-          onPress={playAudio}
+          onPress={pickAudio}
         >
-          Play audio
+          {SELECT_AUDIO}
         </Button>
+
         <Text></Text>
         <Divider style={styles.divider} />
         <Button
