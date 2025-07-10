@@ -6,12 +6,19 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from 'react-native'
+import { PRIMARY_COLOR } from '../styles'
+import { IconButton } from 'react-native-paper'
 import PropTypes from 'prop-types'
 import CardImage from '../components/CardImage'
 import CardAudio from '../components/CardAudio'
+import { Audio } from 'expo-av'
+import * as FileSystem from 'expo-file-system'
 
-function Card({ id, title, image, seCompleta }) {
+function Card({ id, title, image, audio, seCompleta }) {
   const [marcada, setMarcada] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [sound, setSound] = useState(null)
+  //Sound y setSound state los utilizo para manejar el pausado del sonido y el condicional del boton
 
   const handleClick = () => {
     if (seCompleta) {
@@ -32,6 +39,40 @@ function Card({ id, title, image, seCompleta }) {
     await audioPlayer.playSound()
   }
 
+  const handleAudioPlay = async () => {
+    try {
+      if (!audio) return
+
+      const { sound: newSound } = await Audio.Sound.createAsync({ uri: audio })
+
+      setSound(newSound)
+      await newSound.playAsync()
+      setIsPlaying(true)
+
+      newSound.setOnPlaybackStatusUpdate((status) => {
+        if (status.didJustFinish) {
+          newSound.unloadAsync()
+          setSound(null)
+          setIsPlaying(false)
+        }
+      })
+    } catch (err) {
+      console.error('Error al reproducir audio:', err)
+    }
+  }
+
+  const handleStopAudio = async () => {
+    try {
+      if (sound) {
+        await sound.stopAsync()
+        await sound.unloadAsync()
+        setSound(null)
+        setIsPlaying(false)
+      }
+    } catch (err) {
+      console.error('Error al detener audio:', err)
+    }
+  }
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <View key={id} style={[estiloTarjeta, styles.tarjeta]}>
@@ -43,6 +84,25 @@ function Card({ id, title, image, seCompleta }) {
           />
         ) : (
           <View style={styles.imageContainer}>
+            {audio.startsWith('file:///') &&
+              (!isPlaying ? (
+                <IconButton
+                  icon="music"
+                  size={30}
+                  iconColor={PRIMARY_COLOR}
+                  mode="contained"
+                  onPress={handleAudioPlay}
+                />
+              ) : (
+                <IconButton
+                  icon="pause"
+                  size={30}
+                  iconColor={PRIMARY_COLOR}
+                  mode="contained"
+                  onPress={handleStopAudio}
+                />
+              ))}
+
             <CardImage name={image} style={styles.image} />
           </View>
         )}
@@ -56,6 +116,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   seCompleta: PropTypes.bool,
+  audio: PropTypes.string.isRequired,
 }
 
 const styles = StyleSheet.create({
@@ -72,6 +133,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 26,
+    marginRight: 10,
   },
   tarjeta: {
     margin: 25,

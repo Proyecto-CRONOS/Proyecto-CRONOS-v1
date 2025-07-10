@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { Image, StyleSheet, View, Text, TextInput } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+} from 'react-native'
 import { Divider, Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
+import * as DocumentPicker from 'expo-document-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { LinearGradient } from 'expo-linear-gradient'
+import * as FileSystem from 'expo-file-system'
+import { Audio } from 'expo-av'
 
 import { saveCard, openDatabase } from '../model'
 import {
@@ -30,10 +40,12 @@ import {
 function AddCard() {
   const navigation = useNavigation()
   const [image, setImage] = useState(null)
+  const [audio, setAudio] = useState(null)
   const [title, setTitle] = useState(null)
   const [description, setDescription] = useState(null)
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions()
-
+  const [audioFile, setAudioFile] = useState(null)
+  const [sound, setSound] = useState()
   useEffect(() => {
     requestPermission()
   }, [requestPermission])
@@ -50,7 +62,25 @@ function AddCard() {
     }
   }
 
+  const pickAudio = async () => {
+    console.log('PIK')
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: 'audio/*',
+        copyToCacheDirectory: true,
+      })
+
+      if (!result.canceled) {
+        setAudioFile(result)
+        console.log('RESULT2', result)
+      }
+    } catch (error) {
+      console.error('Error picking audio file:', error)
+    }
+  }
+
   const onPressSave = async () => {
+    console.log('SAVE')
     if (!permissionResponse?.granted) {
       console.log('Sorry, we need media permissions')
       return
@@ -60,14 +90,52 @@ function AddCard() {
       // Request device storage access permission
       const { status } = await MediaLibrary.requestPermissionsAsync()
       if (status === 'granted') {
-        const asset = await MediaLibrary.createAssetAsync(image)
+        let imageAsset, audioAsset
+        if (image) {
+          imageAsset = await MediaLibrary.createAssetAsync(image)
+        }
+        const fileName = audioFile.assets[0].name
+        const fileUri = audioFile.assets[0].uri
+        const savePath = `${FileSystem.documentDirectory}${fileName}`
+        // AUDIO
+        console.log('AUDIO', audioFile)
+        if (audioFile) {
+          audioAsset = {
+            uri: audioFile.assets[0].uri,
+          }
+        }
+        console.log('AUDIO FILE', audioFile)
+        if (!audioFile.canceled) {
+          try {
+            //const fileName = audioFile.assets[0].name;
+            //const fileUri = audioFile.assets[0].uri;
+            console.log('FILE NAME', fileName)
+            console.log('URI', fileUri)
+            //const savePath = `${FileSystem.documentDirectory}${fileName}`;
+            console.log('PATH', savePath)
+            await FileSystem.copyAsync({ from: fileUri, to: savePath })
+
+            console.log('Audio file saved to:', savePath)
+          } catch (error) {
+            console.error('Error saving audio file:', error)
+          }
+        }
+        // FIN AUDIO
+        console.log('BASE DE DATOS')
         const db = openDatabase()
         const card = {
           title: title,
           description: description,
-          audio: '',
-          image: asset.uri,
+          //audio: fileUri,
+          audio: savePath,
+          image: imageAsset ? imageAsset.uri : '',
         }
+
+        if (!card.audio) {
+          console.log('Por favor, selecciona un archivo de audio.')
+          return
+        }
+        console.log('AUDIOO:', card.audio)
         saveCard(db, card)
         // FIXME: Show something to the user
         navigation.navigate(CARDS_LIST, {
@@ -76,10 +144,30 @@ function AddCard() {
             message: CARD_SAVED,
           },
         })
-        console.log('Image successfully saved')
+        console.log('Image and audio successfully saved')
+        console.log('CARD', card)
       }
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const playAudio = async () => {
+    console.log('PLAY')
+    try {
+      const audioPath = await onPressSave()
+
+      if (audioPath) {
+        const { sound } = await Audio.Sound.createAsync(
+          { uri: audioPath },
+          { shouldPlay: true },
+        )
+        setSound(sound)
+      } else {
+        console.error('Error: Audio path is null')
+      }
+    } catch (error) {
+      console.error('Error playing audio:', error)
     }
   }
 
@@ -88,7 +176,7 @@ function AddCard() {
       colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]} // FIXME: Replace for
       style={styles.container}
     >
-      <View style={styles.view}>
+      <ScrollView contentContainerStyle={styles.view}>
         <Text>{TITLE_CARDS}</Text>
         <Text></Text>
         <Text>{TITLE}</Text>
@@ -110,11 +198,11 @@ function AddCard() {
         <Button
           mode="contained"
           buttonColor={PRIMARY_COLOR}
-          style={{ opacity: 1  }}
+          style={{ opacity: 1 }}
           onPress={onPressImage}
         >
           {SELECT_IMAGE}
-        </Button> 
+        </Button>
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
@@ -124,24 +212,35 @@ function AddCard() {
         <Button
           mode="contained"
           buttonColor={PRIMARY_COLOR}
-          style={{ opacity: 1  }}
-          onPress={onPressImage}
+          style={{ opacity: 1 }}
+          onPress={pickAudio}
         >
           {SELECT_AUDIO}
-        </Button>      
+        </Button>
+        {audioFile && (
+          <Text>Audio seleccionado: {audioFile.assets[0].name}</Text>
+        )}
+        <Button
+          mode="contained"
+          buttonColor={PRIMARY_COLOR}
+          style={{ opacity: 1 }}
+          title="Reproducir Audio"
+          onPress={playAudio}
+        >
+          Play audio
+        </Button>
         <Text></Text>
         <Divider style={styles.divider} />
         <Button
           icon="content-save"
           mode="contained"
           buttonColor={PRIMARY_COLOR}
-          style={{ opacity: 1  }}
+          style={{ opacity: 1 }}
           onPress={() => onPressSave()}
         >
           {SAVE}
-        </Button>  
-        
-      </View>
+        </Button>
+      </ScrollView>
     </LinearGradient>
   )
 }

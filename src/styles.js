@@ -13,7 +13,8 @@ export const ITEM_BACKGROUND_COLOR = '#FFFFFF99'
 export const ITEM_BORDER_COLOR = '#FFFFFF55'
 export const ITEM_BORDER_WIDTH = 0
 export const ITEM_BORDER_BOTTOM_WIDTH = 1
-export const ITEM_MARGIN = 10
+// export const ITEM_MARGIN = 10
+export const ITEM_MARGIN = 5 //--> Schedule Detail Button
 export const BORDER_RADIUS = 15
 
 export const CARD_MODE = 'contained'
