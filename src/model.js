@@ -380,3 +380,29 @@ export function deleteSchedule(db, scheduleId, callback) {
     })
   })
 }
+
+export function deleteCard(db, cardId, callback) {
+  console.log('Eliminando card con ID:', cardId)
+
+  const deleteScheduleCardsQuery = `DELETE FROM schedule_cards WHERE card_id = ?`
+  const deleteCardQuery = `DELETE FROM cards WHERE id = ?`
+
+  db.transaction((tx) => {
+    // Primero se eliminan las referencias en schedule_cards
+    tx.executeSql(deleteScheduleCardsQuery, [cardId], null, (_, error) => {
+      console.error('Error al eliminar de schedule_cards:', error)
+    })
+
+    // Luego la card
+    tx.executeSql(
+      deleteCardQuery,
+      [cardId],
+      (_, result) => {
+        if (callback) callback()
+      },
+      (_, error) => {
+        console.error('Error al eliminar de cards:', error)
+      },
+    )
+  })
+}

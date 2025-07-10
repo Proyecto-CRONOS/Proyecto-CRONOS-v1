@@ -5,16 +5,17 @@ import {
   View,
   TouchableWithoutFeedback,
   Image,
+  ToastAndroid,
 } from 'react-native'
-import { PRIMARY_COLOR } from '../styles'
+import { DELETE_BACKGROUND_COLOR, PRIMARY_COLOR } from '../styles'
 import { IconButton } from 'react-native-paper'
 import PropTypes from 'prop-types'
 import CardImage from '../components/CardImage'
 import CardAudio from '../components/CardAudio'
 import { Audio } from 'expo-av'
-import * as FileSystem from 'expo-file-system'
+import { deleteCard, openDatabase } from '../model'
 
-function Card({ id, title, image, audio, seCompleta }) {
+function Card({ id, title, image, audio, seCompleta, onDelete }) {
   const [marcada, setMarcada] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [sound, setSound] = useState(null)
@@ -39,6 +40,13 @@ function Card({ id, title, image, audio, seCompleta }) {
     await audioPlayer.playSound()
   }
 
+  const handleDeleteCard = () => {
+    const db = openDatabase()
+    deleteCard(db, id, () => {
+      ToastAndroid.show('Tarjeta eliminada correctamente', ToastAndroid.SHORT)
+      if (onDelete) onDelete()
+    })
+  }
   const handleAudioPlay = async () => {
     try {
       if (!audio) return
@@ -84,24 +92,41 @@ function Card({ id, title, image, audio, seCompleta }) {
           />
         ) : (
           <View style={styles.imageContainer}>
-            {audio.startsWith('file:///') &&
-              (!isPlaying ? (
-                <IconButton
-                  icon="music"
-                  size={30}
-                  iconColor={PRIMARY_COLOR}
-                  mode="contained"
-                  onPress={handleAudioPlay}
-                />
+            <View style={styles.iconsInLine}>
+              {audio.startsWith('file:///') ? (
+                !isPlaying ? (
+                  <IconButton
+                    icon="music"
+                    size={30}
+                    iconColor={PRIMARY_COLOR}
+                    mode="contained"
+                    onPress={handleAudioPlay}
+                  />
+                ) : (
+                  <IconButton
+                    icon="pause"
+                    size={30}
+                    iconColor={PRIMARY_COLOR}
+                    mode="contained"
+                    onPress={handleStopAudio}
+                  />
+                )
               ) : (
+                <IconButton></IconButton>
+                // Lo utilizo para que me quede siempre el boton de eliminar a la derecha
+              )}
+              {!seCompleta && (
                 <IconButton
-                  icon="pause"
+                  style={styles.iconsInLine}
+                  icon="delete"
                   size={30}
-                  iconColor={PRIMARY_COLOR}
+                  iconColor={DELETE_BACKGROUND_COLOR}
                   mode="contained"
-                  onPress={handleStopAudio}
+                  onPress={() => handleDeleteCard(id)}
                 />
-              ))}
+              )}
+            </View>
+            {/* Reutilizo el mismo flag */}
 
             <CardImage name={image} style={styles.image} />
           </View>
@@ -116,6 +141,8 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   seCompleta: PropTypes.bool,
+  onDelete: PropTypes.func,
+
   audio: PropTypes.string.isRequired,
 }
 
@@ -140,6 +167,11 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 25,
     flex: 1,
+    alignItems: 'center',
+  },
+  iconsInLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
 })
