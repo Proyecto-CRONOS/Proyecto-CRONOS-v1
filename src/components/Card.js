@@ -14,6 +14,8 @@ import CardImage from '../components/CardImage'
 import CardAudio from '../components/CardAudio'
 import { Audio } from 'expo-av'
 import { deleteCard, openDatabase } from '../model'
+import { useNavigation } from '@react-navigation/native'
+import { CARD_EDIT } from '../screens'
 
 function Card({ id, title, image, audio, seCompleta, onDelete }) {
   const [marcada, setMarcada] = useState(false)
@@ -21,6 +23,7 @@ function Card({ id, title, image, audio, seCompleta, onDelete }) {
   const [sound, setSound] = useState(null)
   //Sound y setSound state los utilizo para manejar el pausado del sonido y el condicional del boton
 
+  const navigation = useNavigation()
   const handleClick = () => {
     if (seCompleta) {
       if (!marcada) {
@@ -93,40 +96,53 @@ function Card({ id, title, image, audio, seCompleta, onDelete }) {
         ) : (
           <View style={styles.imageContainer}>
             <View style={styles.iconsInLine}>
-              {audio.startsWith('file:///') ? (
-                !isPlaying ? (
-                  <IconButton
-                    icon="music"
-                    size={30}
-                    iconColor={PRIMARY_COLOR}
-                    mode="contained"
-                    onPress={handleAudioPlay}
-                  />
+              <View style={{ flexDirection: 'row' }}>
+                {audio.startsWith('file:///') ? (
+                  !isPlaying ? (
+                    <IconButton
+                      icon="music"
+                      size={30}
+                      iconColor={PRIMARY_COLOR}
+                      mode="contained"
+                      onPress={handleAudioPlay}
+                    />
+                  ) : (
+                    <IconButton
+                      icon="pause"
+                      size={30}
+                      iconColor={PRIMARY_COLOR}
+                      mode="contained"
+                      onPress={handleStopAudio}
+                    />
+                  )
                 ) : (
-                  <IconButton
-                    icon="pause"
-                    size={30}
-                    iconColor={PRIMARY_COLOR}
-                    mode="contained"
-                    onPress={handleStopAudio}
-                  />
-                )
-              ) : (
-                <IconButton></IconButton>
-                // Lo utilizo para que me quede siempre el boton de eliminar a la derecha
-              )}
-              {!seCompleta && (
-                <IconButton
-                  style={styles.iconsInLine}
-                  icon="delete"
-                  size={30}
-                  iconColor={DELETE_BACKGROUND_COLOR}
-                  mode="contained"
-                  onPress={() => handleDeleteCard(id)}
-                />
-              )}
-              {/* El !seCompleta lo utilizo para que en la view de WorkView no aparezca el boton */}
+                  <IconButton disabled />
+                )}
+              </View>
+
+              <View style={{ flexDirection: 'row' }}>
+                {!seCompleta && (
+                  <>
+                    <IconButton
+                      icon="delete"
+                      size={30}
+                      iconColor={DELETE_BACKGROUND_COLOR}
+                      mode="contained"
+                      onPress={() => handleDeleteCard(id)}
+                    />
+                    <IconButton
+                      icon="pencil"
+                      size={30}
+                      iconColor={PRIMARY_COLOR}
+                      mode="contained"
+                      onPress={() => navigation.navigate(CARD_EDIT, { id })}
+                    />
+                  </>
+                )}
+              </View>
             </View>
+
+            {/* El !seCompleta lo utilizo para que en la view de WorkView no aparezca el boton */}
             {/* Reutilizo el mismo flag */}
 
             <CardImage name={image} style={styles.image} />

@@ -368,7 +368,7 @@ export function deleteScheduleCard(db, scheduleCard) {
 }
 
 export function deleteSchedule(db, scheduleId, callback) {
-  console.log('Eliminando cronograma con ID:', scheduleId) // 👈 DEBUG
+  console.log('Eliminando cronograma con ID:', scheduleId)
 
   const deleteScheduleCardsQuery = `DELETE FROM schedule_cards WHERE schedule_id = ?`
   const deleteScheduleQuery = `DELETE FROM schedules WHERE id = ?`
@@ -395,6 +395,23 @@ export function deleteCard(db, cardId, callback) {
     },
     () => {
       console.log('Tarjeta eliminada correctamente.')
+      if (callback) callback()
+    },
+  )
+}
+
+export function updateCardAudio(db, cardId, newAudioPath, callback) {
+  const updateAudioCardQuery = `UPDATE cards SET audio = ? WHERE id = ?`
+
+  db.transaction(
+    (tx) => {
+      tx.executeSql(updateAudioCardQuery, [newAudioPath, cardId])
+    },
+    (error) => {
+      console.error('Error al actualizar el audio de la tarjeta:', error)
+    },
+    () => {
+      console.log('Audio de la tarjeta actualizado correctamente.')
       if (callback) callback()
     },
   )

@@ -7,6 +7,7 @@ export const CARDS = 'Tarjetas'.toUpperCase()
 export const CARDS_LIST = 'Listado de Tarjetas'.toUpperCase()
 export const CARD_CREATE = 'Crear Tarjeta'.toUpperCase()
 export const CARD_DETAIL = 'Detalle de Cronograma'.toUpperCase()
+export const CARD_EDIT = 'Editar Tarjeta'.toUpperCase()
 
 export const SCHEDULES = 'Cronogramas'.toUpperCase()
 export const SCHEDULES_LIST = 'Listado de Cronogramas'.toUpperCase()

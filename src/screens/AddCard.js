@@ -14,7 +14,6 @@ import * as DocumentPicker from 'expo-document-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as FileSystem from 'expo-file-system'
-import { Audio } from 'expo-av'
 
 import { saveCard, openDatabase } from '../model'
 import {
