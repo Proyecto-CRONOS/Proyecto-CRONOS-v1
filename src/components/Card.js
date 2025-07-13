@@ -14,7 +14,7 @@ import CardImage from '../components/CardImage'
 import CardAudio from '../components/CardAudio'
 import { Audio } from 'expo-av'
 import { deleteCard, openDatabase } from '../model'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { CARD_EDIT } from '../screens'
 
 function Card({ id, title, image, audio, seCompleta, onDelete }) {
@@ -23,6 +23,13 @@ function Card({ id, title, image, audio, seCompleta, onDelete }) {
   const [sound, setSound] = useState(null)
   //Sound y setSound state los utilizo para manejar el pausado del sonido y el condicional del boton
 
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        handleStopAudio()
+      }
+    }, [sound]),
+  )
   const navigation = useNavigation()
   const handleClick = () => {
     if (seCompleta) {
@@ -55,7 +62,6 @@ function Card({ id, title, image, audio, seCompleta, onDelete }) {
       if (!audio) return
 
       const { sound: newSound } = await Audio.Sound.createAsync({ uri: audio })
-
       setSound(newSound)
       await newSound.playAsync()
       setIsPlaying(true)
@@ -75,10 +81,13 @@ function Card({ id, title, image, audio, seCompleta, onDelete }) {
   const handleStopAudio = async () => {
     try {
       if (sound) {
-        await sound.stopAsync()
-        await sound.unloadAsync()
-        setSound(null)
-        setIsPlaying(false)
+        const status = await sound.getStatusAsync()
+        if (status.isLoaded) {
+          await sound.stopAsync()
+          await sound.unloadAsync()
+          setSound(null)
+          setIsPlaying(false)
+        }
       }
     } catch (err) {
       console.error('Error al detener audio:', err)

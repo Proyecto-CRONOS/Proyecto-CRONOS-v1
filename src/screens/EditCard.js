@@ -56,7 +56,6 @@ export function EditCard() {
       const savePath = `${FileSystem.documentDirectory}${fileName}`
 
       await FileSystem.copyAsync({ from: fileUri, to: savePath })
-      console.log('Audio guardado en:', savePath)
 
       const db = openDatabase()
 

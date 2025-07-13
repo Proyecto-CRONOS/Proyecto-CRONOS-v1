@@ -196,8 +196,12 @@ function AddCard() {
         >
           {SELECT_AUDIO}
         </Button>
+        {audioFile && (
+          <View style={styles.audioInfo}>
+            <Text>🎵 {audioFile.assets[0].name}</Text>
+          </View>
+        )}
 
-        <Text></Text>
         <Divider style={styles.divider} />
         <Button
           icon="content-save"
@@ -234,6 +238,10 @@ const styles = StyleSheet.create({
   divider: {
     marginBottom: 32,
     marginTop: 20,
+  },
+  audioInfo: {
+    marginTop: 12,
+    borderRadius: 5,
   },
 })
 
