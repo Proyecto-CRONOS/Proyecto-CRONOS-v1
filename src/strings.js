@@ -1,6 +1,7 @@
 export const CARDS = 'Tarjetas'.toUpperCase()
 export const CLOSE = 'Cerrar'.toUpperCase()
 export const EDIT = 'Editar'.toUpperCase()
+export const DELETE = 'Eliminar'.toUpperCase()
 export const ENTER_DESCRIPTION = 'Ingrese una descripción'
 export const ENTER_TITLE = 'Ingrese el título'
 export const LOGIN = 'Ingresar'.toUpperCase()
@@ -38,8 +39,10 @@ export const SELECT_TEXT = 'Seleccione tarjetas...'.toUpperCase()
 export const SELECTED_TEXT = 'Seleccionadas'.toUpperCase()
 export const CONFIRM_TEXT = 'Confirmar'
 export const SEARCH_PLACEHOLDER_TEXT = 'Buscar'.toUpperCase()
-export const TITLE_SCHEDULE = 'Complete los siguientes campos para agregar un cronograma.'
-export const TITLE_CARDS = 'Complete los siguientes campos para agregar una tarjeta.'
+export const TITLE_SCHEDULE =
+  'Complete los siguientes campos para agregar un cronograma.'
+export const TITLE_CARDS =
+  'Complete los siguientes campos para agregar una tarjeta.'
 export const TITLE = 'Título'.toUpperCase()
 export const DESCRIPTION = 'Descripción'.toUpperCase()
 export const IMAGE = 'Imagen'.toUpperCase()

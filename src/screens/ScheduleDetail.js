@@ -8,13 +8,14 @@ import { SafeAreaView, ToastAndroid } from 'react-native'
 import { Button, Card, Text, Divider } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { openDatabase, getSchedule } from '../model'
-import { SCHEDULE_EDIT, SCHEDULE_CARDS_EDIT } from '../screens'
+import { openDatabase, getSchedule, deleteSchedule } from '../model'
+import { SCHEDULE_EDIT, SCHEDULE_CARDS_EDIT, SCHEDULES_LIST } from '../screens'
 import {
   BIRTH_DATE,
   CARDS,
   CONSIDERATIONS,
   DATE,
+  DELETE,
   EDIT,
   EQUIPMENT,
   HORSE,
@@ -22,6 +23,7 @@ import {
 } from '../strings'
 import {
   CARD_MODE,
+  DELETE_BACKGROUND_COLOR,
   LINEAR_GRADIENT_BACKGROUND,
   PRIMARY_COLOR,
   STYLES,
@@ -34,6 +36,16 @@ function ScheduleDetail() {
   const { id } = route.params
   const navigation = useNavigation()
 
+  const handleDelete = (scheduleId) => {
+    const db = openDatabase()
+    deleteSchedule(db, scheduleId, () => {
+      ToastAndroid.show(
+        'Cronograma eliminado correctamente',
+        ToastAndroid.SHORT,
+      )
+      navigation.navigate(SCHEDULES_LIST)
+    })
+  }
   useFocusEffect(
     React.useCallback(() => {
       const db = openDatabase()
@@ -104,6 +116,13 @@ function ScheduleDetail() {
               onPress={() => navigation.navigate(SCHEDULE_CARDS_EDIT, { id })}
             >
               {CARDS}
+            </Button>
+            <Button
+              style={STYLES.button}
+              buttonColor={DELETE_BACKGROUND_COLOR}
+              onPress={() => handleDelete(id)}
+            >
+              {DELETE}
             </Button>
           </Card.Actions>
         </Card>

@@ -4,13 +4,17 @@ export const PRIMARY_COLOR = '#3D6F8C' // FIXME: Primary color
 
 export const BACKGROUND_GRADIENT_1 = 'rgb(219,226,133)'
 export const BACKGROUND_GRADIENT_2 = 'rgb(61,111,140)'
-export const LINEAR_GRADIENT_BACKGROUND = ['rgb(219,226,133)', 'rgb(61,111,140)']
-
+export const LINEAR_GRADIENT_BACKGROUND = [
+  'rgb(219,226,133)',
+  'rgb(61,111,140)',
+]
+export const DELETE_BACKGROUND_COLOR = '#c03314'
 export const ITEM_BACKGROUND_COLOR = '#FFFFFF99'
 export const ITEM_BORDER_COLOR = '#FFFFFF55'
 export const ITEM_BORDER_WIDTH = 0
 export const ITEM_BORDER_BOTTOM_WIDTH = 1
-export const ITEM_MARGIN = 10
+// export const ITEM_MARGIN = 10
+export const ITEM_MARGIN = 5 //--> Schedule Detail Button
 export const BORDER_RADIUS = 15
 
 export const CARD_MODE = 'contained'
@@ -59,7 +63,7 @@ export const STYLES = StyleSheet.create({
     actions: {
       paddingTop: 0,
       marginBottom: 5,
-    }
+    },
   },
   button: {
     borderRadius: BORDER_RADIUS,
@@ -75,6 +79,6 @@ export const STYLES = StyleSheet.create({
 
 export const THEMES = {
   divider: {
-    colors: {outlineVariant: '#bbb'}
-  }
+    colors: { outlineVariant: '#bbb' },
+  },
 }

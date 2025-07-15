@@ -16,25 +16,19 @@ export function createSchedule(
   considerations,
   date,
 ) {
-
   return {
     id,
     name,
-    birthDate: (birthDate) ? new Date(birthDate) : new Date(),
+    birthDate: birthDate ? new Date(birthDate) : new Date(),
     methodology,
     horse,
     equipment,
     considerations,
-    date: (date) ? new Date(date) : new Date(),
+    date: date ? new Date(date) : new Date(),
   }
 }
 
-export function createScheduleCard(
-  scheduleId,
-  cardId,
-  order,
-  status,
-) {
+export function createScheduleCard(scheduleId, cardId, order, status) {
   return {
     scheduleId,
     cardId,
@@ -361,10 +355,7 @@ export function saveScheduleCard(db, scheduleCard) {
 
 export function deleteScheduleCard(db, scheduleCard) {
   const deleteQuery = `DELETE FROM ${SCHEDULE_CARDS_TABLE} WHERE schedule_id = ? AND card_id = ?;`
-  const parameters = [
-    scheduleCard.scheduleId,
-    scheduleCard.cardId,
-  ]
+  const parameters = [scheduleCard.scheduleId, scheduleCard.cardId]
 
   db.transaction((tx) => {
     tx.executeSql(
@@ -374,4 +365,54 @@ export function deleteScheduleCard(db, scheduleCard) {
       (_, error) => console.log(error), // TODO: Handle error
     )
   })
+}
+
+export function deleteSchedule(db, scheduleId, callback) {
+  console.log('Eliminando cronograma con ID:', scheduleId)
+
+  const deleteScheduleCardsQuery = `DELETE FROM schedule_cards WHERE schedule_id = ?`
+  const deleteScheduleQuery = `DELETE FROM schedules WHERE id = ?`
+
+  db.transaction((tx) => {
+    tx.executeSql(deleteScheduleCardsQuery, [scheduleId])
+    tx.executeSql(deleteScheduleQuery, [scheduleId], (_, result) => {
+      if (callback) callback()
+    })
+  })
+}
+
+export function deleteCard(db, cardId, callback) {
+  const deleteScheduleCardsQuery = `DELETE FROM schedule_cards WHERE card_id = ?`
+  const deleteCardQuery = `DELETE FROM cards WHERE id = ?`
+
+  db.transaction(
+    (tx) => {
+      tx.executeSql(deleteScheduleCardsQuery, [cardId])
+      tx.executeSql(deleteCardQuery, [cardId])
+    },
+    (error) => {
+      console.error('Error al eliminar la tarjeta:', error)
+    },
+    () => {
+      console.log('Tarjeta eliminada correctamente.')
+      if (callback) callback()
+    },
+  )
+}
+
+export function updateCardAudio(db, cardId, newAudioPath, callback) {
+  const updateAudioCardQuery = `UPDATE cards SET audio = ? WHERE id = ?`
+
+  db.transaction(
+    (tx) => {
+      tx.executeSql(updateAudioCardQuery, [newAudioPath, cardId])
+    },
+    (error) => {
+      console.error('Error al actualizar el audio de la tarjeta:', error)
+    },
+    () => {
+      console.log('Audio de la tarjeta actualizado correctamente.')
+      if (callback) callback()
+    },
+  )
 }

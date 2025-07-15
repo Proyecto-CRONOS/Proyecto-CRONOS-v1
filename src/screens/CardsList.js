@@ -4,7 +4,11 @@ import { ScrollView } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useFonts } from 'expo-font'
 import { SafeAreaView } from 'react-navigation'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
 import { Banner } from 'react-native-paper'
 
 import CreateFAB from '../components/CreateFAB'
@@ -24,7 +28,6 @@ function addCardAction(navigation) {
   navigation.navigate(CARD_CREATE)
 }
 
-// NOTE: What is seCompleta?
 function CardList({ scheduleId, seCompleta }) {
   const [cards, setCards] = useState([])
   const [bannerVisible, setBannerVisible] = useState(true)
@@ -34,15 +37,20 @@ function CardList({ scheduleId, seCompleta }) {
   if (route.params && route.params.action) {
     action = route.params.action
   }
-  useEffect(() => {
+  const loadCards = () => {
     const db = openDatabase()
     if (scheduleId) {
       getScheduleCards(db, scheduleId, setCards)
     } else {
       getCards(db, setCards)
     }
-  }, [])
+  }
 
+  useFocusEffect(
+    React.useCallback(() => {
+      loadCards()
+    }, [scheduleId]),
+  )
   const [fontsLoaded] = useFonts({
     Roboto: require('../assets/fonts/Roboto/Roboto-Regular.ttf'), // FIXME: A better way yo handle this constant
   })
@@ -67,7 +75,12 @@ function CardList({ scheduleId, seCompleta }) {
       <LinearGradient colors={[BACKGROUND_GRADIENT_1, BACKGROUND_GRADIENT_2]}>
         <ScrollView>
           {cards.map((card, index) => (
-            <Card key={index} {...card} seCompleta={seCompleta} />
+            <Card
+              key={index}
+              {...card}
+              seCompleta={seCompleta}
+              onDelete={loadCards}
+            /> //vuelva a cargar las cards una vez que se elimina/>
           ))}
         </ScrollView>
         <CreateFAB onPress={() => addCardAction(navigation)} />
