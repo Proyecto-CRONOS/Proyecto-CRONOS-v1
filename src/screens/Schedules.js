@@ -8,6 +8,7 @@ import {
   SCHEDULE_DETAIL,
   SCHEDULE_EDIT,
   SCHEDULE_CARDS_ADD,
+  WORK,
 } from '../screens'
 import ScheduleList from './ScheduleList'
 import ScheduleCreate from './ScheduleCreate'
@@ -15,6 +16,7 @@ import ScheduleCardsAdd from './ScheduleCardsAdd'
 import ScheduleDetail from './ScheduleDetail'
 import ScheduleEdit from './ScheduleEdit'
 import ScheduleCardsList from './ScheduleCardsList'
+import WorkView from './WorkView'
 
 const Stack = createStackNavigator()
 
@@ -26,10 +28,8 @@ function Schedules() {
       <Stack.Screen name={SCHEDULE_CARDS_ADD} component={ScheduleCardsAdd} />
       <Stack.Screen name={SCHEDULE_DETAIL} component={ScheduleDetail} />
       <Stack.Screen name={SCHEDULE_EDIT} component={ScheduleEdit} />
-      <Stack.Screen
-        name={SCHEDULE_CARDS_EDIT}
-        component={ScheduleCardsList}
-      />
+      <Stack.Screen name={SCHEDULE_CARDS_EDIT} component={ScheduleCardsList} />
+      <Stack.Screen name={WORK} component={WorkView} />
     </Stack.Navigator>
   )
 }

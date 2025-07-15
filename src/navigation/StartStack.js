@@ -18,7 +18,7 @@ function StartStack() {
       <Stack.Screen name={HOME} component={Home} />
       <Stack.Screen name={NAVIGATION} component={Navigation} />
       <Stack.Screen name={TUTORIAL} component={Tutorial} />
-      <Stack.Screen name={WORK} component={WorkView} />
+      {/* <Stack.Screen name={WORK} component={WorkView} /> */}
     </Stack.Navigator>
   )
 }

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, View, StatusBar, Text } from 'react-native'
+import { useEffect, useState } from 'react'
+import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useFonts } from 'expo-font'
 
 import { openDatabase, getCards, getScheduleCards } from '../model'
-import Card from './Card'
+import { CarouselCard } from './CarouselCard'
 
 function CardList({ scheduleId, seCompleta }) {
   const [cards, setCards] = useState([])
@@ -38,21 +38,11 @@ function CardList({ scheduleId, seCompleta }) {
       style={styles.gradientContainer}
     >
       {cards.length > 0 ? (
-        <View style={styles.cards}>
-          <ScrollView
-            horizontal={isHorizontal}
-            contentContainerStyle={styles.scrollViewContainer}
-            showsHorizontalScrollIndicator={!isHorizontal}
-            showsVerticalScrollIndicator={isHorizontal ? false : true}
-          >
-            {cards.map((card, index) => (
-              <Card key={card.id} {...card} seCompleta={seCompleta} />
-            ))}
-          </ScrollView>
-          <StatusBar style="auto" />
+        <View>
+          <CarouselCard cards={cards} />
         </View>
       ) : (
-        <View style={styles.noCardsContainer}>
+        <View>
           <Text>No hay tarjetas cargadas.</Text>
         </View>
       )}
@@ -67,18 +57,15 @@ CardList.propTypes = {
 
 const styles = StyleSheet.create({
   gradientContainer: {
-    flex: 1, // necesario para ocupar todo
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cards: {
     flex: 1,
   },
   scrollViewContainer: {
     paddingBottom: 20,
-  },
-  noCardsContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 })
 
