@@ -2,7 +2,11 @@ import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { StartStack } from './src/navigation/StartStack'
 
-import { initializeDatabase, openDatabase } from './src/model'
+import {
+  deleteDatabaseFile,
+  initializeDatabase,
+  openDatabase,
+} from './src/model'
 
 function App() {
   useEffect(() => {

@@ -25,6 +25,7 @@ function CardList({ scheduleId, seCompleta }) {
   useEffect(() => {
     loadCards()
   }, [])
+
   const [fontsLoaded] = useFonts({
     Roboto: require('../assets/fonts/Roboto/Roboto-Regular.ttf'), // FIXME: A better way yo handle this constant
   })

@@ -8,6 +8,7 @@ import CardList from '../components/CardList'
 function WorkView() {
   const route = useRoute()
   const { id } = route.params
+
   // FIXME: const navigation = useNavigation()
 
   return (

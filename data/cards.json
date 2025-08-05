@@ -1,240 +1,31 @@
 [
   {
     "id": 1,
-    "title": "AROS",
-    "description": "Estructura de 1,5 metros de alto, con aro de red en la parte superior que permite embocar pelotas (tanto desde arriba como abajo del caballo).",
-    "audio": "Aros.ogg",
-    "image": "aros"
-  },
-  {
-    "id": 2,
     "title": "ARREADOR",
     "description": " - ",
     "audio": "Arreador.ogg",
     "image": "arreador"
   },
   {
-    "id": 3,
-    "title": "BAJO MONTURA",
-    "description": " - ",
-    "audio": "Bajo Montura.ogg",
-    "image": "bajomontura"
-  },
-  {
-    "id": 4,
+    "id": 2,
     "title": "BANDERA",
     "description": " - ",
     "audio": "Bandera.ogg",
     "image": "bandera"
   },
   {
-    "id": 5,
-    "title": "BOZAL",
-    "description": " - ",
-    "audio": "Bozal.ogg",
-    "image": "bozal"
-  },
-  {
-    "id": 6,
-    "title": "BROCHES",
-    "description": "Elemento plástico, de tamaño pequeño, que al presionar con los dedos índice y pulgar se abre y permite colgarlo (por ejemplo a las crines del caballo), o enganchar hojas, telas.",
-    "audio": "Broches.ogg",
-    "image": "broches"
-  },
-  {
-    "id": 7,
+    "id": 3,
     "title": "CABALLO",
     "description": "El caballo (Yeguaivan) es un mamífero perisodáctilo domesticado de la familia de los équidos.",
     "audio": "Caballo.ogg",
     "image": "caballo"
   },
+
   {
-    "id": 8,
-    "title": "CABEZADA",
-    "description": " - ",
-    "audio": "Cabezada.ogg",
-    "image": "cabezada"
-  },
-  {
-    "id": 9,
-    "title": "CASCO",
-    "description": " - ",
-    "audio": "Casco.ogg",
-    "image": "casco"
-  },
-  {
-    "id": 10,
-    "title": "CEPILLO",
-    "description": " - ",
-    "audio": "Cepillo.ogg",
-    "image": "cepillo"
-  },
-  {
-    "id": 11,
-    "title": "CONOS",
-    "description": " - ",
-    "audio": "Conos.ogg",
-    "image": "conos"
-  },
-  {
-    "id": 12,
-    "title": "CUERDA",
-    "description": " - ",
-    "audio": "Cuerda.ogg",
-    "image": "cuerda"
-  },
-  {
-    "id": 13,
-    "title": "ESCARBA VASOS",
-    "description": " - ",
-    "audio": "Escarba Vasos.ogg",
-    "image": "escarbavasos"
-  },
-  {
-    "id": 14,
-    "title": "FUSTA",
-    "description": " - ",
-    "audio": "Fusta.ogg",
-    "image": "fusta"
-  },
-  {
-    "id": 15,
-    "title": "LIMPIEZA",
-    "description": " - ",
-    "audio": "Limpieza.ogg",
-    "image": "limpieza"
-  },
-  {
-    "id": 16,
-    "title": "MATRA",
-    "description": " - ",
-    "audio": "Matra.ogg",
-    "image": "matra"
-  },
-  {
-    "id": 17,
+    "id": 4,
     "title": "MONTURA",
     "description": " - ",
     "audio": "Montura.ogg",
     "image": "montura"
-  },
-  {
-    "id": 18,
-    "title": "MONTURIN",
-    "description": " - ",
-    "audio": "Monturin.ogg",
-    "image": "monturin"
-  },
-  {
-    "id": 19,
-    "title": "PALENQUE",
-    "description": " - ",
-    "audio": "Palenque.ogg",
-    "image": "palenque"
-  },
-  {
-    "id": 20,
-    "title": "PASTO",
-    "description": " - ",
-    "audio": "Pasto.ogg",
-    "image": "pasto"
-  },
-  {
-    "id": 21,
-    "title": "PELOTA DE PATO",
-    "description": " - ",
-    "audio": "Pelota de Pato.ogg",
-    "image": "pelotadepato"
-  },
-  {
-    "id": 22,
-    "title": "PELOTAS",
-    "description": " - ",
-    "audio": "Pelotas.ogg",
-    "image": "pelotas"
-  },
-  {
-    "id": 23,
-    "title": "PICADERO",
-    "description": " - ",
-    "audio": "Picadero.ogg",
-    "image": "picadero"
-  },
-  {
-    "id": 24,
-    "title": "PISTA DE ADIESTRAMIENTO",
-    "description": " - ",
-    "audio": "Pista de Adiestramiento.ogg",
-    "image": "pistadeadiestramiento"
-  },
-  {
-    "id": 25,
-    "title": "RAMPA",
-    "description": " - ",
-    "audio": "Rampa.ogg",
-    "image": "rampa"
-  },
-  {
-    "id": 26,
-    "title": "RASQUETA",
-    "description": " - ",
-    "audio": "Rasqueta.ogg",
-    "image": "rasqueta"
-  },
-  {
-    "id": 27,
-    "title": "RIENDAS",
-    "description": " - ",
-    "audio": "Riendas.ogg",
-    "image": "riendas"
-  },
-  {
-    "id": 28,
-    "title": "SOMBRERITOS",
-    "description": " - ",
-    "audio": "Sombreritos.ogg",
-    "image": "sombreritos"
-  },
-  {
-    "id": 29,
-    "title": "SUDADERA",
-    "description": " - ",
-    "audio": "Sudadera.ogg",
-    "image": "sudadera"
-  },
-  {
-    "id": 30,
-    "title": "TAMBOR",
-    "description": " - ",
-    "audio": "Tambor.ogg",
-    "image": "tambor"
-  },
-  {
-    "id": 31,
-    "title": "TERMINE",
-    "description": " - ",
-    "audio": "Termine.ogg",
-    "image": "termine"
-  },
-  {
-    "id": 32,
-    "title": "TRANQUERA",
-    "description": " - ",
-    "audio": "Tranquera.ogg",
-    "image": "tranquera"
-  },
-  {
-    "id": 33,
-    "title": "VALLAS",
-    "description": " - ",
-    "audio": "Vallas.ogg",
-    "image": "vallas"
-  },
-  {
-    "id": 34,
-    "title": "ZANAHORIA",
-    "description": " - ",
-    "audio": "Zanahoria.ogg",
-    "image": "zanahoria"
   }
 ]
