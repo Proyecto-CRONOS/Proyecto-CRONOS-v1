@@ -1,20 +1,13 @@
 [
   {
     "id": 1,
-    "title": "ARREADOR",
-    "description": " - ",
-    "audio": "Arreador.ogg",
-    "image": "arreador"
-  },
-  {
-    "id": 2,
     "title": "BANDERA",
     "description": " - ",
     "audio": "Bandera.ogg",
     "image": "bandera"
   },
   {
-    "id": 3,
+    "id": 2,
     "title": "CABALLO",
     "description": "El caballo (Yeguaivan) es un mamífero perisodáctilo domesticado de la familia de los équidos.",
     "audio": "Caballo.ogg",
@@ -22,7 +15,7 @@
   },
 
   {
-    "id": 4,
+    "id": 3,
     "title": "MONTURA",
     "description": " - ",
     "audio": "Montura.ogg",

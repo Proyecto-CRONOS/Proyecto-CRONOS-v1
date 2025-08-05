@@ -116,48 +116,60 @@ export function openDatabase() {
 function createTables(db) {
   const scheduleQuery = `
     CREATE TABLE IF NOT EXISTS ${SCHEDULE_TABLE} (
-      "name" TEXT NOT NULL,
-      "birth_date" DATETIME NOT NULL,
-      "methodology" TEXT NOT NULL,
-      "horse" TEXT NOT NULL,
-      "equipment" TEXT NOT NULL,
-      "considerations" TEXT NOT NULL,
-      "date" DATETIME NOT NULL,
-      "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+      "name"	TEXT NOT NULL,
+      "birth_date"	DATETIME NOT NULL,
+      "methodology"	TEXT NOT NULL,
+      "horse"	TEXT NOT NULL,
+      "equipment"	TEXT NOT NULL,
+      "considerations"	TEXT NOT NULL,
+      "date"	DATETIME NOT NULL,
+      "id"	INTEGER NOT NULL,
+      PRIMARY KEY("id" AUTOINCREMENT)
     );
   `
-
   const cardQuery = `
     CREATE TABLE IF NOT EXISTS ${CARD_TABLE} (
-      "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-      "title" TEXT NOT NULL,
-      "description" TEXT NOT NULL,
-      "audio" TEXT NOT NULL,
-      "image" TEXT NOT NULL
+      "id"	INTEGER NOT NULL,
+      "title"	TEXT NOT NULL,
+      "description"	TEXT NOT NULL,
+      "audio"	TEXT NOT NULL,
+      "image"	TEXT NOT NULL,
+      PRIMARY KEY("id" AUTOINCREMENT)
     );
   `
-
   const scheduleCardsQuery = `
     CREATE TABLE IF NOT EXISTS ${SCHEDULE_CARDS_TABLE} (
       "status" TEXT NOT NULL,
-      "schedule_id" INTEGER NOT NULL,
-      "card_id" INTEGER NOT NULL,
+      "schedule_id"	INTEGER NOT NULL,
+      "card_id"	INTEGER NOT NULL,
       "order" INTEGER NOT NULL,
-      PRIMARY KEY("schedule_id", "card_id"),
-      FOREIGN KEY("schedule_id") REFERENCES ${SCHEDULE_TABLE}(id),
-      FOREIGN KEY("card_id") REFERENCES ${CARD_TABLE}(id)
+      PRIMARY KEY("schedule_id","card_id")
     );
   `
-
   db.transaction((tx) => {
-    tx.executeSql(scheduleQuery, [], null, (_, error) =>
-      console.log(' scheduleQuery', error),
+    tx.executeSql(
+      scheduleQuery,
+      null,
+      null,
+      (_, error) => console.log(error), // TODO: Handle error
     )
-    tx.executeSql(cardQuery, [], null, (_, error) =>
-      console.log(' cardQuery', error),
+    tx.executeSql(
+      scheduleQuery,
+      null,
+      null,
+      (_, error) => console.log(error), // TODO: Handle error
     )
-    tx.executeSql(scheduleCardsQuery, [], null, (_, error) =>
-      console.log(' scheduleCardsQuery', error),
+    tx.executeSql(
+      scheduleCardsQuery,
+      null,
+      null,
+      (_, error) => console.log(error), // TODO: Handle error
+    )
+    tx.executeSql(
+      cardQuery,
+      null,
+      null,
+      (_, error) => console.log(error), // TODO: Handle error
     )
   })
 }
