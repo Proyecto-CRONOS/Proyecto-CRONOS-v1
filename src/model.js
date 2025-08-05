@@ -161,11 +161,6 @@ function createTables(db) {
     )
   })
 }
-function clearCards(db) {
-  db.transaction((tx) => {
-    tx.executeSql('DELETE FROM cards')
-  })
-}
 
 export function initializeDatabase(db) {
   const schedules = serializeSchedule(require('../data/schedules.json'))
@@ -174,7 +169,6 @@ export function initializeDatabase(db) {
     require('../data/schedule_cards.json'),
   )
 
-  clearCards(db)
   createTables(db)
 
   schedules.forEach((schedule) => {
